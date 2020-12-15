@@ -44,7 +44,8 @@ protected:
 	void UpdateAnimation();
 
 	/** Called for side to side input */
-	void MoveRight(float Value);
+	void MoveVertical(float Value);
+	void MoveHorizontal(float Value);
 
 	void UpdateCharacter();
 

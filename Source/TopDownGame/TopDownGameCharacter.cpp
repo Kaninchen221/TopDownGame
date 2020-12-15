@@ -17,10 +17,12 @@ DEFINE_LOG_CATEGORY_STATIC(SideScrollerCharacter, Log, All);
 
 ATopDownGameCharacter::ATopDownGameCharacter()
 {
+	
+
 	// Use only Yaw from the controller and ignore the rest of the rotation.
-	bUseControllerRotationPitch = false;
+	bUseControllerRotationPitch = true;
 	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = false;
+	bUseControllerRotationRoll = true;
 
 	// Set the size of our collision capsule.
 	GetCapsuleComponent()->SetCapsuleHalfHeight(96.0f);
@@ -43,22 +45,21 @@ ATopDownGameCharacter::ATopDownGameCharacter()
 	SideViewCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 
 	// Prevent all automatic rotation behavior on the camera, character, and camera component
-	CameraBoom->SetUsingAbsoluteRotation(true);
-	SideViewCameraComponent->bUsePawnControlRotation = false;
-	SideViewCameraComponent->bAutoActivate = true;
-	GetCharacterMovement()->bOrientRotationToMovement = false;
+	//CameraBoom->SetUsingAbsoluteRotation(true);
+	//SideViewCameraComponent->bUsePawnControlRotation = false;
+	//SideViewCameraComponent->bAutoActivate = true;
+	//GetCharacterMovement()->bOrientRotationToMovement = false;
 
 	// Configure character movement
-	GetCharacterMovement()->GravityScale = 2.0f;
-	GetCharacterMovement()->AirControl = 0.80f;
-	GetCharacterMovement()->JumpZVelocity = 1000.f;
-	GetCharacterMovement()->GroundFriction = 3.0f;
-	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+	GetCharacterMovement()->GravityScale = 0.0f;
+	GetCharacterMovement()->AirControl = 0.30f;
+	GetCharacterMovement()->GroundFriction = 8.0f;
 	GetCharacterMovement()->MaxFlySpeed = 600.0f;
+	GetCharacterMovement()->BrakingDecelerationFlying = 1200.0f;
 
 	// Lock character motion onto the XZ plane, so the character can't move in or out of the screen
-	GetCharacterMovement()->bConstrainToPlane = true;
-	GetCharacterMovement()->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
+	//GetCharacterMovement()->bConstrainToPlane = true;
+	//GetCharacterMovement()->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 
 	// Behave like a traditional 2D platformer character, with a flat bottom instead of a curved capsule bottom
 	// Note: This can cause a little floating when going up inclines; you can choose the tradeoff between better
@@ -105,21 +106,19 @@ void ATopDownGameCharacter::Tick(float DeltaSeconds)
 
 void ATopDownGameCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	// Note: the 'Jump' action and the 'MoveRight' axis are bound to actual keys/buttons/sticks in DefaultInput.ini (editable from Project Settings..Input)
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAxis("MoveRight", this, &ATopDownGameCharacter::MoveRight);
-
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &ATopDownGameCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &ATopDownGameCharacter::TouchStopped);
+	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownGameCharacter::MoveVertical);
+	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATopDownGameCharacter::MoveHorizontal);
 }
 
-void ATopDownGameCharacter::MoveRight(float Value)
+void ATopDownGameCharacter::MoveVertical(float Value)
 {
-	/*UpdateChar();*/
+	
+	AddMovementInput(FVector(0.0f, 0.0f, Value), 1.f, false);
+}
 
-	// Apply the input to the character motion
-	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
+void ATopDownGameCharacter::MoveHorizontal(float Value)
+{
+	AddMovementInput(FVector(Value, 0.0f, 0.0f), 1.f, false);
 }
 
 void ATopDownGameCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
