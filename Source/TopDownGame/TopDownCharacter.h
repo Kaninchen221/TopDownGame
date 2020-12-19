@@ -8,18 +8,31 @@
 
 class UPaperFlipbookComponent;
 class UCapsuleComponent;
+class USpringArmComponent;
+class UCameraComponent;
+class UPawnMovementComponent;
 
 UCLASS()
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
 {
 	GENERATED_BODY()
 
-	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Category = Capsule, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UCapsuleComponent* CapsuleComponent;
 
-	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Category = Animation, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UPaperFlipbookComponent* MainAnimationComponent;
 
+	UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* CameraArmComponent;
+
+	UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UCameraComponent* SideViewCameraComponent;
+
+	UPROPERTY(Category = Movement, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPawnMovementComponent* PawnMovementComponent;
+
+	virtual void Tick(float DeltaSeconds) override;
 
 public:
 
@@ -32,16 +45,29 @@ protected:
 	void InitializeMainAnimationComponent();
 	void PostInitializeMainAnimationComponent();
 
+	void InitializeCameraArmComponent();
+
+	void InitializeCameraComponent();
+
+	void InitializeCharacterMovementProperties();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
 	class UPaperFlipbook* RunningAnimation;
 
 	virtual void BeginPlay() override;
+
+	void MoveVertical(float Value);
+	void MoveHorizontal(float Value);
 
 public:
 
 	virtual void PostInitializeComponents() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
+
+	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraArmComponent; }
 
 private:
 

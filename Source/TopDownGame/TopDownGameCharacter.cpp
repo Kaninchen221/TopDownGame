@@ -20,9 +20,9 @@ ATopDownGameCharacter::ATopDownGameCharacter()
 	
 
 	// Use only Yaw from the controller and ignore the rest of the rotation.
-	bUseControllerRotationPitch = true;
+	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = true;
+	bUseControllerRotationRoll = false;
 
 	// Set the size of our collision capsule.
 	GetCapsuleComponent()->SetCapsuleHalfHeight(96.0f);
@@ -45,10 +45,10 @@ ATopDownGameCharacter::ATopDownGameCharacter()
 	SideViewCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 
 	// Prevent all automatic rotation behavior on the camera, character, and camera component
-	//CameraBoom->SetUsingAbsoluteRotation(true);
-	//SideViewCameraComponent->bUsePawnControlRotation = false;
-	//SideViewCameraComponent->bAutoActivate = true;
-	//GetCharacterMovement()->bOrientRotationToMovement = false;
+	CameraBoom->SetUsingAbsoluteRotation(true);
+	SideViewCameraComponent->bUsePawnControlRotation = false;
+	SideViewCameraComponent->bAutoActivate = true;
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 
 	// Configure character movement
 	GetCharacterMovement()->GravityScale = 0.0f;
