@@ -10,7 +10,7 @@ class UPaperFlipbookComponent;
 class UCapsuleComponent;
 class USpringArmComponent;
 class UCameraComponent;
-class UPawnMovementComponent;
+class UFloatingPawnMovement;
 
 UCLASS()
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
@@ -30,7 +30,7 @@ class TOPDOWNGAME_API ATopDownCharacter : public APawn
 	UCameraComponent* SideViewCameraComponent;
 
 	UPROPERTY(Category = Movement, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UPawnMovementComponent* PawnMovementComponent;
+	UFloatingPawnMovement* FloatingPawnMovement;
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -49,15 +49,16 @@ protected:
 
 	void InitializeCameraComponent();
 
-	void InitializeCharacterMovementProperties();
+	void InitializeFloatingPawnMovement();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
-	class UPaperFlipbook* RunningAnimation;
 
 	virtual void BeginPlay() override;
 
 	void MoveVertical(float Value);
 	void MoveHorizontal(float Value);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
+	class UPaperFlipbook* RunningAnimation;
 
 public:
 

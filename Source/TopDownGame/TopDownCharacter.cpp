@@ -6,8 +6,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"	
+#include "GameFramework/FloatingPawnMovement.h"
 
 #include "Engine/CollisionProfile.h"
 
@@ -27,18 +27,7 @@ ATopDownCharacter::ATopDownCharacter()
 	InitializeCameraArmComponent();
 	InitializeCameraComponent();
 
-	InitializeCharacterMovementProperties();
-
-	//PawnMovementComponent->bConstrainToPlane = true;
-	//PawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
-
-	//auto Rotation = FQuat(0.f, 0.f, 0.f, 0.f);
-	//
-	//CapsuleComponent->SetWorldRotation(Rotation);
-	//CapsuleComponent->SetRelativeRotation(Rotation);
-	//
-	//SideViewCameraComponent->SetWorldRotation(Rotation);
-	//SideViewCameraComponent->SetRelativeRotation(Rotation);
+	InitializeFloatingPawnMovement();
 
 }
 
@@ -75,7 +64,7 @@ void ATopDownCharacter::InitializeMainAnimationComponent()
 		static FName CollisionProfileName(TEXT("CharacterMesh"));
 		MainAnimationComponent->SetCollisionProfileName(CollisionProfileName);
 		MainAnimationComponent->SetGenerateOverlapEvents(false);
-		MainAnimationComponent->SetRelativeRotation(FRotator(0.0f, 0.0f, -90.0f));
+		MainAnimationComponent->SetUsingAbsoluteLocation(false);
 	}
 	else {
 		throw std::exception("MainAnimationComponent is null");
@@ -91,8 +80,7 @@ void ATopDownCharacter::InitializeCameraArmComponent()
 		CameraArmComponent->TargetArmLength = 260.0f;
 		CameraArmComponent->SocketOffset = FVector(0.0f, 0.0f, 75.0f);
 		CameraArmComponent->bDoCollisionTest = false;
-		CameraArmComponent->SetRelativeRotation(FRotator(0.0f, 0.0f, -90.0f));
-		//CameraArmComponent->SetUsingAbsoluteRotation(true);
+		CameraArmComponent->SetUsingAbsoluteLocation(false);
 	}
 	else {
 		throw std::exception("CameraArmComponent is null");
@@ -114,23 +102,16 @@ void ATopDownCharacter::InitializeCameraComponent()
 	}
 }
 
-void ATopDownCharacter::InitializeCharacterMovementProperties()
+void ATopDownCharacter::InitializeFloatingPawnMovement()
 {
-	PawnMovementComponent = CreateDefaultSubobject<UPawnMovementComponent>(TEXT("PawnMovement"));
-	if (PawnMovementComponent)
+	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
+	if (FloatingPawnMovement)
 	{
-		//PawnMovementComponent->UpdatedComponent = CapsuleComponent;
-		//CrouchedEyeHeight = CharacterMovement->CrouchedHalfHeight * 0.80f;
-		//PawnMovementComponent->MovementMode = EMovementMode::MOVE_Flying;
-		//PawnMovementComponent->GravityScale = 0.0f;
-		//PawnMovementComponent->AirControl = 0.30f;
-		//PawnMovementComponent->GroundFriction = 8.0f;
-		//PawnMovementComponent->MaxFlySpeed = 300.0f;
-		//PawnMovementComponent->BrakingDecelerationFlying = 1200.0f;
-		//PawnMovementComponent->bOrientRotationToMovement = false;
+		FloatingPawnMovement->UpdatedComponent = CapsuleComponent;
+		FloatingPawnMovement->MaxSpeed = 200.f;
 	}
 	else {
-		//throw std::exception("PawnMovementComponent is null");
+		throw std::exception("FloatingPawnMovement is null");
 	}
 }
 
@@ -142,22 +123,12 @@ void ATopDownCharacter::BeginPlay()
 
 void ATopDownCharacter::MoveVertical(float Value)
 {
-	if (GEngine) {
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Move Vertical"));
-	}
-
-	//PawnMovementComponent->AddInputVector(FVector(0.0f, 0.0f, Value), false);
-	//AddMovementInput(FVector(0.0f, 0.0f, Value), 1.f, false);
+	FloatingPawnMovement->AddInputVector(FVector(0.0f, 0.0f, Value), false);
 }
 
 void ATopDownCharacter::MoveHorizontal(float Value)
 {
-	if (GEngine) {
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Move Horizontal"));
-	}
-
-	//PawnMovementComponent->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
-	//AddMovementInput(FVector(Value, 0.0f, 0.0f), 1.f, false);
+	FloatingPawnMovement->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
 }
 
 void ATopDownCharacter::PostInitializeComponents() 
@@ -167,22 +138,6 @@ void ATopDownCharacter::PostInitializeComponents()
 	if (!IsPendingKill())
 	{
 		PostInitializeMainAnimationComponent();
-
-		//if (CharacterMovementComponent && CapsuleComponent)
-		//{
-		//	CharacterMovementComponent->UpdateNavAgent(*CapsuleComponent);
-		//}
-		//else {
-		//	throw std::exception("Cant update nav agent");
-		//}
-		//
-		//if (!Controller && GetNetMode() != NM_Client)
-		//{
-		//	if (CharacterMovementComponent && CharacterMovementComponent->bRunPhysicsWithNoController)
-		//	{
-		//		CharacterMovementComponent->SetDefaultMovementMode();
-		//	}
-		//}
 	}
 }
 
@@ -190,10 +145,6 @@ void ATopDownCharacter::PostInitializeMainAnimationComponent()
 {
 	if (MainAnimationComponent)
 	{
-		//if (MainAnimationComponent->PrimaryComponentTick.bCanEverTick && CharacterMovementComponent)
-		//{
-		//	MainAnimationComponent->PrimaryComponentTick.AddPrerequisite(CharacterMovementComponent, CharacterMovementComponent->PrimaryComponentTick);
-		//}
 	}
 }
 
