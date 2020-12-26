@@ -81,6 +81,8 @@ void ATopDownCharacter::InitializeFloatingPawnMovement()
 	{
 		FloatingPawnMovement->UpdatedComponent = CapsuleComponent;
 		FloatingPawnMovement->MaxSpeed = 200.f;
+		FloatingPawnMovement->bConstrainToPlane = true;
+		FloatingPawnMovement->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 	}
 	else {
 		throw std::exception("FloatingPawnMovement is null");
