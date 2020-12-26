@@ -14,11 +14,9 @@ void UTopDownPlayerStateWalk::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 	BindAxis();
 
-	#if WITH_EDITOR
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Walk State"));
-		}
-	#endif
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Walk State"));
+	}
 }
 
 void UTopDownPlayerStateWalk::Tick(float DeltaSeconds) {

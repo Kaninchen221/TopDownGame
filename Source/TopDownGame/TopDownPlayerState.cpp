@@ -51,9 +51,7 @@ void UTopDownPlayerState::Exit()
 	PlayerInputComponent->ClearActionBindings();
 	PlayerInputComponent->AxisBindings.Empty();
 
-	#if WITH_EDITOR
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Exit State"));
-		}
-	#endif
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Exit State"));
+	}
 }

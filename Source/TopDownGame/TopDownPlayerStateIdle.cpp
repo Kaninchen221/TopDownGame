@@ -15,11 +15,9 @@ void UTopDownPlayerStateIdle::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 	UpdateCurrentAnimationBasingAtDirection(PlayerCharacter->GetCurrentDirection());
 
-	#if WITH_EDITOR
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Idle State"));
-		}
-	#endif
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Idle State"));
+	}
 }
 
 void UTopDownPlayerStateIdle::Tick(float DeltaSeconds) {
