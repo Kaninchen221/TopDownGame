@@ -5,8 +5,6 @@
 #include "PaperFlipbookComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"	
 #include "GameFramework/FloatingPawnMovement.h"
 
 #include "Engine/CollisionProfile.h"
@@ -18,17 +16,20 @@ void ATopDownCharacter::Tick(float DeltaSeconds) {
 
 ATopDownCharacter::ATopDownCharacter()
 {
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = false;
+	ControllerUseOnlyYawRotation();
 
 	InitializeCapsuleComponent();
-	InitializeMainAnimationComponent();
-	InitializeCameraArmComponent();
-	InitializeCameraComponent();
+	InitializeCurrentAnimationComponent();
 
 	InitializeFloatingPawnMovement();
 
+}
+
+void ATopDownCharacter::ControllerUseOnlyYawRotation()
+{
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = false;
 }
 
 void ATopDownCharacter::InitializeCapsuleComponent()
@@ -49,57 +50,28 @@ void ATopDownCharacter::InitializeCapsuleComponent()
 	}
 }
 
-void ATopDownCharacter::InitializeMainAnimationComponent() 
+void ATopDownCharacter::InitializeCurrentAnimationComponent()
 {
-	static FName MainAnimationComponentName(TEXT("CharacterMesh"));
-	MainAnimationComponent = CreateOptionalDefaultSubobject<UPaperFlipbookComponent>(MainAnimationComponentName);
-	if (MainAnimationComponent)
+	CurrentAnimationComponent = CreateOptionalDefaultSubobject<UPaperFlipbookComponent>(TEXT("CharacterCurrentAnimation"));
+	if (CurrentAnimationComponent)
 	{
-		MainAnimationComponent->AlwaysLoadOnClient = true;
-		MainAnimationComponent->AlwaysLoadOnServer = true;
-		MainAnimationComponent->bOwnerNoSee = false;
-		MainAnimationComponent->bAffectDynamicIndirectLighting = true;
-		MainAnimationComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-		MainAnimationComponent->SetupAttachment(CapsuleComponent);
-		static FName CollisionProfileName(TEXT("CharacterMesh"));
-		MainAnimationComponent->SetCollisionProfileName(CollisionProfileName);
-		MainAnimationComponent->SetGenerateOverlapEvents(false);
-		MainAnimationComponent->SetUsingAbsoluteLocation(false);
+		CurrentAnimationComponent->AlwaysLoadOnClient = true;
+		CurrentAnimationComponent->AlwaysLoadOnServer = true;
+		CurrentAnimationComponent->bOwnerNoSee = false;
+		CurrentAnimationComponent->bAffectDynamicIndirectLighting = true;
+		CurrentAnimationComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
+		CurrentAnimationComponent->SetupAttachment(CapsuleComponent);
+		CurrentAnimationComponent->AddRelativeRotation(FRotator(0.0f, 0.0f, -90.0f));
+
+		static FName CollisionProfileName(TEXT("CharacterCollisionProfile"));
+		CurrentAnimationComponent->SetCollisionProfileName(CollisionProfileName);
+		CurrentAnimationComponent->SetGenerateOverlapEvents(false);
+		CurrentAnimationComponent->SetUsingAbsoluteLocation(false);
 	}
 	else {
 		throw std::exception("MainAnimationComponent is null");
 	}
 
-}
-
-void ATopDownCharacter::InitializeCameraArmComponent() 
-{
-	CameraArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	if (CameraArmComponent) {
-		CameraArmComponent->SetupAttachment(RootComponent);
-		CameraArmComponent->TargetArmLength = 260.0f;
-		CameraArmComponent->SocketOffset = FVector(0.0f, 0.0f, 75.0f);
-		CameraArmComponent->bDoCollisionTest = false;
-		CameraArmComponent->SetUsingAbsoluteLocation(false);
-	}
-	else {
-		throw std::exception("CameraArmComponent is null");
-	}
-}
-
-void ATopDownCharacter::InitializeCameraComponent()
-{
-	SideViewCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("SideViewCamera"));
-	if (SideViewCameraComponent) {
-		SideViewCameraComponent->ProjectionMode = ECameraProjectionMode::Orthographic;
-		SideViewCameraComponent->OrthoWidth = 2048.0f;
-		SideViewCameraComponent->SetupAttachment(CameraArmComponent, USpringArmComponent::SocketName);
-		SideViewCameraComponent->bUsePawnControlRotation = false;
-		SideViewCameraComponent->bAutoActivate = true;
-	}
-	else {
-		throw std::exception("SideViewCameraComponent is null");
-	}
 }
 
 void ATopDownCharacter::InitializeFloatingPawnMovement()
@@ -121,41 +93,14 @@ void ATopDownCharacter::BeginPlay()
 	
 }
 
-void ATopDownCharacter::MoveVertical(float Value)
-{
-	FloatingPawnMovement->AddInputVector(FVector(0.0f, 0.0f, Value), false);
-}
-
-void ATopDownCharacter::MoveHorizontal(float Value)
-{
-	FloatingPawnMovement->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
-}
-
 void ATopDownCharacter::PostInitializeComponents() 
 {
 	Super::PostInitializeComponents();
 
-	if (!IsPendingKill())
-	{
-		PostInitializeMainAnimationComponent();
-	}
-}
-
-void ATopDownCharacter::PostInitializeMainAnimationComponent()
-{
-	if (MainAnimationComponent)
-	{
-	}
 }
 
 void ATopDownCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	//Super::SetupPlayerInputComponent(PlayerInputComponent);
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownCharacter::MoveVertical);
-	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATopDownCharacter::MoveHorizontal);
-}
-
-void ATopDownCharacter::TurnOffTick() {
-	PrimaryActorTick.bCanEverTick = false;
 }
