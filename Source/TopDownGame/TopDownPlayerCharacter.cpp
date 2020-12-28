@@ -5,12 +5,14 @@
 
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 
 #include "TopDownPlayerStateIdle.h"
 #include "TopDownPlayerStateWalk.h"
+#include "TopDownNonPlayerCharacter.h"
 
 void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
 {
@@ -87,28 +89,17 @@ void ATopDownPlayerCharacter::InitializeTopDownPlayerStates()
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerState()
 {
-	//TopDownPlayerState = TopDownPlayerStateIdle;
+
 }
 
-void ATopDownPlayerCharacter::InitializeTopDownPlayerStateIdle() {
-	//TopDownPlayerStateIdle = CreateDefaultSubobject<UTopDownPlayerStateIdle>(TEXT("TopDownPlayerStateIdle"));
-	//if (TopDownPlayerStateIdle) {
-	//
-	//}
-	//else {
-	//	throw std::exception("TopDownPlayerStateIdle is null");
-	//}
+void ATopDownPlayerCharacter::InitializeTopDownPlayerStateIdle() 
+{
+
 }
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerStateWalk()
 {
-	//TopDownPlayerStateWalk = CreateDefaultSubobject<UTopDownPlayerStateWalk>(TEXT("TopDownPlayerStateWalk"));
-	//if (TopDownPlayerStateWalk) {
-	//
-	//}
-	//else {
-	//	throw std::exception("TopDownPlayerStateWalk is null");
-	//}
+
 }
 
 void ATopDownPlayerCharacter::BeginPlay()
@@ -120,12 +111,10 @@ void ATopDownPlayerCharacter::BeginPlay()
 
 void ATopDownPlayerCharacter::MoveVertical(float Value)
 {
-	//FloatingPawnMovement->AddInputVector(FVector(0.0f, 0.0f, Value), false);
 	TopDownPlayerState.GetDefaultObject()->MoveVertical(Value);
 }
 
 void ATopDownPlayerCharacter::MoveHorizontal(float Value)
 {
-	//FloatingPawnMovement->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
 	TopDownPlayerState.GetDefaultObject()->MoveHorizontal(Value);
 }
