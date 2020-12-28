@@ -3,8 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Containers/UnrealString.h"
+
 #include "TopDownCharacter.h"
+
 #include "TopDownNonPlayerCharacter.generated.h"
+
 
 /**
  * 
@@ -14,4 +18,10 @@ class TOPDOWNGAME_API ATopDownNonPlayerCharacter : public ATopDownCharacter
 {
 	GENERATED_BODY()
 	
+public:
+
+	ATopDownNonPlayerCharacter();
+
+private:
+
 };

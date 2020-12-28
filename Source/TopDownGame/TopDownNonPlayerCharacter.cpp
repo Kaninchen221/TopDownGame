@@ -3,3 +3,9 @@
 
 #include "TopDownNonPlayerCharacter.h"
 
+#include "Engine/CollisionProfile.h"
+
+ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
+{
+	SetName("NPC");
+}
