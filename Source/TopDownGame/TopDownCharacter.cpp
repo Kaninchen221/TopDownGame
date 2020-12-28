@@ -34,21 +34,6 @@ void ATopDownCharacter::ControllerUseOnlyYawRotation()
 	bUseControllerRotationRoll = false;
 }
 
-void ATopDownCharacter::NewInteractableInBoundsOfInteractionComponent()
-{
-	FString OverlapInfoMessage = "Overlaped actors: ";
-	auto OverlapInfos = InteractionSphereComponent->GetOverlapInfos();
-	for (const auto& Info : OverlapInfos) {
-		auto HitResult = Info.OverlapInfo;
-		auto ActorName = HitResult.Actor->GetName();
-		OverlapInfoMessage += ActorName + " ";
-	}
-
-	if (GEngine) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, OverlapInfoMessage);
-	}
-}
-
 void ATopDownCharacter::InitializeCapsuleComponent()
 {
 	static FName CapsuleComponentName(TEXT("Capsule"));
