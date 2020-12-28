@@ -12,6 +12,7 @@ class UCapsuleComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
+class USphereComponent;
 
 UCLASS(config = Character, BlueprintType, Blueprintable)
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
@@ -28,6 +29,9 @@ public:
 	UPROPERTY(Category = Animation, EditAnywhere, BlueprintReadWrite)
 	UPaperFlipbookComponent* CurrentAnimationComponent;
 
+	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
+	USphereComponent* InteractionSphereComponent;
+
 	UPROPERTY(Category = Movement, EditAnywhere, BlueprintReadWrite)
 	UFloatingPawnMovement* FloatingPawnMovement;
 
@@ -41,6 +45,7 @@ protected:
 
 	void InitializeCapsuleComponent();
 	void InitializeCurrentAnimationComponent();
+	void InitializeInteractionComponent();
 
 	void InitializeFloatingPawnMovement();
 
@@ -51,5 +56,16 @@ public:
 	virtual void PostInitializeComponents() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	
+	FORCEINLINE UFUNCTION(BlueprintCallable)
+	void SetName(const FString& String) { Name = String; }
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE FString GetName() const { return Name; }
+
+private:
+
+	FString Name = "TopDownCharacter";
 
 };

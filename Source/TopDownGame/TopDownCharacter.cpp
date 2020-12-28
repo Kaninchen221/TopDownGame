@@ -5,6 +5,7 @@
 #include "PaperFlipbookComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 
 #include "Engine/CollisionProfile.h"
@@ -20,6 +21,7 @@ ATopDownCharacter::ATopDownCharacter()
 
 	InitializeCapsuleComponent();
 	InitializeCurrentAnimationComponent();
+	InitializeInteractionComponent();
 
 	InitializeFloatingPawnMovement();
 
@@ -30,6 +32,21 @@ void ATopDownCharacter::ControllerUseOnlyYawRotation()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
+}
+
+void ATopDownCharacter::NewInteractableInBoundsOfInteractionComponent()
+{
+	FString OverlapInfoMessage = "Overlaped actors: ";
+	auto OverlapInfos = InteractionSphereComponent->GetOverlapInfos();
+	for (const auto& Info : OverlapInfos) {
+		auto HitResult = Info.OverlapInfo;
+		auto ActorName = HitResult.Actor->GetName();
+		OverlapInfoMessage += ActorName + " ";
+	}
+
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, OverlapInfoMessage);
+	}
 }
 
 void ATopDownCharacter::InitializeCapsuleComponent()
@@ -72,6 +89,30 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 		throw std::exception("MainAnimationComponent is null");
 	}
 
+}
+
+void ATopDownCharacter::InitializeInteractionComponent()
+{
+	static FName InteractionSphereComponentName(TEXT("Interaction"));
+	InteractionSphereComponent = CreateDefaultSubobject<USphereComponent>(InteractionSphereComponentName);
+	if (InteractionSphereComponent) {
+		InteractionSphereComponent->InitSphereRadius(48.f);
+		InteractionSphereComponent->SetCollisionProfileName("Interaction", true);
+		InteractionSphereComponent->CanCharacterStepUpOn = ECB_Yes;
+		InteractionSphereComponent->SetShouldUpdatePhysicsVolume(false);
+		InteractionSphereComponent->SetCanEverAffectNavigation(false);
+		InteractionSphereComponent->bDynamicObstacle = true;
+		InteractionSphereComponent->SetupAttachment(RootComponent);
+
+		/// Bind interaction sphere with NewInteractable function
+		//InteractionSphereComponent->SetGenerateOverlapEvents(true);
+		//FScriptDelegate overlapDelegate;
+		//overlapDelegate.BindUFunction(this, "NewInteractableInBoundsOfInteractionComponent");
+		//InteractionSphereComponent->OnComponentBeginOverlap.Add(overlapDelegate);
+	}
+	else {
+		throw std::exception("InteractionComponent is null");
+	}
 }
 
 void ATopDownCharacter::InitializeFloatingPawnMovement()
