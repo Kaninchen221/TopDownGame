@@ -7,5 +7,4 @@
 
 ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
 {
-	SetName("NPC");
 }
