@@ -108,3 +108,8 @@ bool UTopDownPlayerStateWalk::IsWalkingLeft()
 {
 	return MoveHorizontalValue > 0.f;
 }
+
+void UTopDownPlayerStateWalk::SetMaxWalkSpeed(float Value) noexcept
+{
+	MaxWalkSpeed = Value;
+}
