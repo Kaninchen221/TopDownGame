@@ -6,6 +6,7 @@
 #include "TopDownCharacter.h"
 #include "Templates/SharedPointer.h"
 #include "Containers/Array.h"
+#include "UObject/SoftObjectPtr.h"
 
 #include "TopDownPlayerState.h"
 
@@ -78,6 +79,9 @@ protected:
 
 	void MoveVertical(float Value);
 	void MoveHorizontal(float Value);
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	TArray<TSoftObjectPtr<ATopDownCharacter>> InteractableCharacters;
 
 public:
 
