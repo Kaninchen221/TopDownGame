@@ -28,8 +28,6 @@ public:
 
 	virtual void Tick(float DeltaSeconds);
 
-	virtual void BindAxis();
-
 	virtual void MoveVertical(float Value);
 	virtual void MoveHorizontal(float Value);
 

@@ -23,8 +23,6 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	virtual void BindAxis() override;
-
 	virtual void MoveVertical(float Value) override;
 	virtual void MoveHorizontal(float Value) override;
 

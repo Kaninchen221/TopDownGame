@@ -12,8 +12,6 @@ void UTopDownPlayerStateWalk::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
 
-	BindAxis();
-
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Walk State"));
 	}
@@ -45,13 +43,6 @@ void UTopDownPlayerStateWalk::Tick(float DeltaSeconds) {
 		}
 
 	}
-}
-
-void UTopDownPlayerStateWalk::BindAxis() {
-	auto PlayerInputComponent = PlayerCharacter->InputComponent;
-
-	PlayerInputComponent->BindAxis("MoveVertical", this, &UTopDownPlayerStateWalk::MoveVertical);
-	PlayerInputComponent->BindAxis("MoveHorizontal", this, &UTopDownPlayerStateWalk::MoveHorizontal);
 }
 
 void UTopDownPlayerStateWalk::MoveVertical(float Value)

@@ -11,8 +11,6 @@ void UTopDownPlayerStateIdle::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 	
 	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
 
-	BindAxis();
-
 	UpdateCurrentAnimationBasingAtDirection(PlayerCharacter->GetCurrentDirection());
 
 	if (GEngine) {
@@ -22,13 +20,6 @@ void UTopDownPlayerStateIdle::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 void UTopDownPlayerStateIdle::Tick(float DeltaSeconds) {
 
-}
-
-void UTopDownPlayerStateIdle::BindAxis() {
-	auto PlayerInputComponent = PlayerCharacter->InputComponent;
-
-	PlayerInputComponent->BindAxis("MoveVertical", this, &UTopDownPlayerStateIdle::MoveVertical);
-	PlayerInputComponent->BindAxis("MoveHorizontal", this, &UTopDownPlayerStateIdle::MoveHorizontal);
 }
 
 void UTopDownPlayerStateIdle::MoveVertical(float Value)

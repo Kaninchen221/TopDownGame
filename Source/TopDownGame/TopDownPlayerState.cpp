@@ -26,10 +26,6 @@ void UTopDownPlayerState::Tick(float DeltaSeconds)
 
 }
 
-void UTopDownPlayerState::BindAxis() {
-
-}
-
 void UTopDownPlayerState::MoveVertical(float Value)
 {
 	if (Value != 0.0f) {
@@ -47,9 +43,6 @@ void UTopDownPlayerState::MoveHorizontal(float Value)
 void UTopDownPlayerState::Exit()
 {
 	auto PlayerInputComponent = PlayerCharacter->InputComponent;
-
-	PlayerInputComponent->ClearActionBindings();
-	PlayerInputComponent->AxisBindings.Empty();
 
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Exit State"));
