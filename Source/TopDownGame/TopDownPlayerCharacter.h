@@ -33,11 +33,17 @@ class TOPDOWNGAME_API ATopDownPlayerCharacter : public ATopDownCharacter
 {
 	GENERATED_BODY()
 
+	friend class UTopDownPlayerState;
+	friend class UTopDownPlayerStateWalk;
+	friend class UTopDownPlayerStateIdle;
+
 	virtual void Tick(float DeltaSeconds) override;
 
 public:
 
 	ATopDownPlayerCharacter();
+
+protected:
 
 	UPROPERTY(Category = Camera, EditAnywhere, BlueprintReadWrite)
 	USpringArmComponent* CameraArmComponent;
@@ -53,6 +59,9 @@ public:
 
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateWalk;
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	TArray<TSoftObjectPtr<ATopDownCharacter>> InteractableCharacters;
 
 	virtual void PostInitializeComponents() override;
 
@@ -79,9 +88,6 @@ protected:
 
 	void MoveVertical(float Value);
 	void MoveHorizontal(float Value);
-
-	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	TArray<TSoftObjectPtr<ATopDownCharacter>> InteractableCharacters;
 
 public:
 

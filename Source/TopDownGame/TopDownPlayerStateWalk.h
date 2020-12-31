@@ -35,6 +35,8 @@ public:
 	bool IsWalkingRight();
 	bool IsWalkingLeft();
 
+protected:
+
 	UPROPERTY(Category = Animations, EditAnywhere, BlueprintReadWrite)
 	class UPaperFlipbook* RunFrontAnimation;
 

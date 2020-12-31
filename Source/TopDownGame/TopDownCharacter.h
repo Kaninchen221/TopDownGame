@@ -23,6 +23,8 @@ public:
 
 	ATopDownCharacter();
 
+protected:
+
 	UPROPERTY(Category = Capsule, EditAnywhere, BlueprintReadWrite)
 	UCapsuleComponent* CapsuleComponent;
 

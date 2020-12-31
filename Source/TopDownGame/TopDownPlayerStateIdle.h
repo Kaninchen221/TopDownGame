@@ -26,6 +26,8 @@ public:
 	virtual void MoveVertical(float Value) override;
 	virtual void MoveHorizontal(float Value) override;
 
+protected:
+
 	void UpdateCurrentAnimationBasingAtDirection(ETopDownPlayerDirection Direction);
 
 	UPROPERTY(Category = Animations, EditAnywhere, BlueprintReadWrite)
