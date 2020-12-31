@@ -51,21 +51,18 @@ protected:
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	FName Name;
+
 public:
 
 	virtual void PostInitializeComponents() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-	FORCEINLINE UFUNCTION(BlueprintCallable)
-	void SetName(const FString& String) { Name = String; }
-
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE FString GetName() const { return Name; }
+	FORCEINLINE FName GetName() const { return Name; }
 
 private:
-
-	FString Name = "TopDownCharacter";
 
 };
