@@ -12,6 +12,8 @@ void UTopDownPlayerStateWalk::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
 
+	UpdateMaxWalkSpeed();
+
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Walk State"));
 	}
@@ -112,4 +114,10 @@ bool UTopDownPlayerStateWalk::IsWalkingLeft()
 void UTopDownPlayerStateWalk::SetMaxWalkSpeed(float Value) noexcept
 {
 	MaxWalkSpeed = Value;
+	UpdateMaxWalkSpeed();
+}
+
+void UTopDownPlayerStateWalk::UpdateMaxWalkSpeed() noexcept
+{
+	FloatingPawnMovement->MaxSpeed = Value.f;
 }

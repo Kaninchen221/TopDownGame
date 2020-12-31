@@ -62,4 +62,6 @@ private:
 
 	float MaxWalkSpeed = 200.f;
 
+	void UpdateMaxWalkSpeed() noexcept;
+
 };
