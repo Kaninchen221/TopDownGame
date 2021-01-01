@@ -51,7 +51,7 @@ protected:
 	UPROPERTY(Category = Camera, EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* CameraComponent;
 
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerState;
 
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
