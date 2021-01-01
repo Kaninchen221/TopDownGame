@@ -119,5 +119,5 @@ void UTopDownPlayerStateWalk::SetMaxWalkSpeed(float Value) noexcept
 
 void UTopDownPlayerStateWalk::UpdateMaxWalkSpeed() noexcept
 {
-	FloatingPawnMovement->MaxSpeed = Value.f;
+	PlayerCharacter->FloatingPawnMovement->MaxSpeed = MaxWalkSpeed;
 }
