@@ -52,7 +52,7 @@ protected:
 	UPROPERTY(Category = Camera, EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* CameraComponent;
 
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerState;
 
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
@@ -72,6 +72,9 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState);
 
 private:
 

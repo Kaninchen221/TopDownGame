@@ -51,6 +51,11 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnim
 	}
 }
 
+void ATopDownPlayerCharacter::ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState)
+{
+	TopDownPlayerState.GetDefaultObject()->ChangeTopDownPlayerState(NewPlayerState);
+}
+
 void ATopDownPlayerCharacter::InitializeCameraArmComponent()
 {
 	CameraArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraArm"));
