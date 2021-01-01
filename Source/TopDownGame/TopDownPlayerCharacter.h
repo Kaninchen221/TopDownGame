@@ -61,6 +61,9 @@ protected:
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateWalk;
 
+	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateInInteraction;
+
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownCharacter>> InteractableCharacters;
 
