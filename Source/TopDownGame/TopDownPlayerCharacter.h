@@ -36,6 +36,7 @@ class TOPDOWNGAME_API ATopDownPlayerCharacter : public ATopDownCharacter
 	friend class UTopDownPlayerState;
 	friend class UTopDownPlayerStateWalk;
 	friend class UTopDownPlayerStateIdle;
+	friend class UTopDownPlayerStateInInteraction;
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -91,7 +92,11 @@ protected:
 
 public:
 
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE ETopDownPlayerDirection GetCurrentDirection() const noexcept { return CurrentDirection; }
-	FORCEINLINE void SetCurrentDirection(ETopDownPlayerDirection Direction) noexcept { CurrentDirection = Direction; }
+	
+	FORCEINLINE
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentDirection(ETopDownPlayerDirection Direction) noexcept { CurrentDirection = Direction; }
 
 };

@@ -22,6 +22,7 @@ class TOPDOWNGAME_API UTopDownPlayerState : public UObject
 
 public:
 
+	UFUNCTION(BlueprintCallable)
 	void ChangeTopDownPlayerState(TSubclassOf<UTopDownPlayerState> PlayerState);
 
 	virtual void Enter(ATopDownPlayerCharacter* TopDownPlayerCharacter);

@@ -24,15 +24,23 @@ public:
 
 	virtual void MoveVertical(float Value) override;
 	virtual void MoveHorizontal(float Value) override;
-
+	
+	UFUNCTION(BlueprintCallable)
 	bool ShouldChangeStateToIdle();
 
 	bool IsWalkingVertical();
 	bool IsWalkingHorizontal();
 
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingUp();
+
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingDown();
+
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingRight();
+
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingLeft();
 
 	UFUNCTION(BlueprintCallable)
