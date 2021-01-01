@@ -33,6 +33,8 @@ public:
 
 	virtual void Exit();
 
+protected:
+
 	ATopDownPlayerCharacter* PlayerCharacter; 
 
 };
