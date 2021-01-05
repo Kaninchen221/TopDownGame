@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "TopDownCharacter.h"
-#include "Templates/SharedPointer.h"
-#include "Containers/Array.h"
 #include "UObject/SoftObjectPtr.h"
+#include "Containers/Array.h"
+#include "Templates/SharedPointer.h"
 
 #include "TopDownPlayerState.h"
 
@@ -16,6 +16,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UPlayerStateIdle;
 class UPaperFlipbook;
+class ATopDownNonPlayerCharacter;
 
 UENUM(BlueprintType)
 enum class ETopDownPlayerDirection : uint8 {
@@ -65,7 +66,7 @@ protected:
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateInInteraction;
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	TArray<TSoftObjectPtr<ATopDownCharacter>> InteractableCharacters;
+	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
 
 	virtual void PostInitializeComponents() override;
 
