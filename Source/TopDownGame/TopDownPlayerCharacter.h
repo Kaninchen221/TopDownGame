@@ -17,6 +17,7 @@ class UCameraComponent;
 class UPlayerStateIdle;
 class UPaperFlipbook;
 class ATopDownNonPlayerCharacter;
+class UUserWidget;
 
 UENUM(BlueprintType)
 enum class ETopDownPlayerDirection : uint8 {
@@ -53,8 +54,11 @@ protected:
 	UPROPERTY(Category = Camera, EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* CameraComponent;
 
+	UPROPERTY(Category = UI, EditAnywhere, BlueprintReadWrite)
+	UUserWidget* UserInterface;
+
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UTopDownPlayerState> TopDownPlayerState;
+	UTopDownPlayerState* TopDownPlayerState;
 
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateIdle;

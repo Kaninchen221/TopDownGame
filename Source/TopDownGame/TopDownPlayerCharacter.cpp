@@ -18,15 +18,13 @@ void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	TopDownPlayerState.GetDefaultObject()->Tick(DeltaSeconds);
+	TopDownPlayerState->Tick(DeltaSeconds);
 }
 
 ATopDownPlayerCharacter::ATopDownPlayerCharacter()
 {
 	InitializeCameraArmComponent();
 	InitializeCameraComponent();
-
-	InitializeTopDownPlayerStates();
 }
 
 void ATopDownPlayerCharacter::PostInitializeComponents()
@@ -53,7 +51,7 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnim
 
 void ATopDownPlayerCharacter::ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState)
 {
-	TopDownPlayerState.GetDefaultObject()->ChangeTopDownPlayerState(NewPlayerState);
+	TopDownPlayerState->ChangeTopDownPlayerState(NewPlayerState);
 }
 
 void ATopDownPlayerCharacter::InitializeCameraArmComponent()
@@ -97,7 +95,7 @@ void ATopDownPlayerCharacter::InitializeTopDownPlayerStates()
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerState()
 {
-
+	TopDownPlayerState = TopDownPlayerStateIdle.GetDefaultObject();
 }
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerStateIdle() 
@@ -114,15 +112,16 @@ void ATopDownPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TopDownPlayerState.GetDefaultObject()->Enter(this);
+	InitializeTopDownPlayerStates();
+	TopDownPlayerState->Enter(this);
 }
 
 void ATopDownPlayerCharacter::MoveVertical(float Value)
 {
-	TopDownPlayerState.GetDefaultObject()->MoveVertical(Value);
+	TopDownPlayerState->MoveVertical(Value);
 }
 
 void ATopDownPlayerCharacter::MoveHorizontal(float Value)
 {
-	TopDownPlayerState.GetDefaultObject()->MoveHorizontal(Value);
+	TopDownPlayerState->MoveHorizontal(Value);
 }
