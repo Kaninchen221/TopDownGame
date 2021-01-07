@@ -8,14 +8,15 @@
 #include "PaperFlipbookComponent.h"
 
 void UTopDownPlayerStateIdle::Enter(ATopDownPlayerCharacter* TopDownPlayerCharacter) {
-	
-	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
-
-	UpdateCurrentAnimationBasingAtDirection(PlayerCharacter->GetCurrentDirection());
 
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Idle State"));
 	}
+
+	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
+
+	UpdateCurrentAnimationBasingAtDirection(PlayerCharacter->GetCurrentDirection());
+
 }
 
 void UTopDownPlayerStateIdle::Tick(float DeltaSeconds) {
@@ -47,22 +48,36 @@ void UTopDownPlayerStateIdle::UpdateCurrentAnimationBasingAtDirection(ETopDownPl
 	switch (PlayerCharacter->GetCurrentDirection())
 	{
 		case ETopDownPlayerDirection::UP:
-		PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleBackAnimation);
+			PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleBackAnimation);
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Set IdleBackAnimation"));
+			}
 			break;
 
 		case ETopDownPlayerDirection::DOWN:
-		PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleFrontAnimation);
+			PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleFrontAnimation);
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Set IdleFrontAnimation"));
+			}
 			break;
 
 		case ETopDownPlayerDirection::LEFT:
 			PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleLeftSideAnimation);
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Set IdleLeftSideAnimation"));
+			}
 			break;
 
 		case ETopDownPlayerDirection::RIGHT:
 			PlayerCharacter->CurrentAnimationComponent->SetFlipbook(IdleRightSideAnimation);
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Set IdleRightSideAnimation"));
+			}
 			break;
 
 		default:
-			throw std::exception("Not supported ETopDownPlayerDirection");
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Invalid ETopDownPlayerDirection"));
+			}
 	}
 }
