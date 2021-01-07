@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TopDownPlayerState.h"
+#include "TopDownPlayerStateIdle.h"
 #include "TopDownPlayerStateInInteraction.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOPDOWNGAME_API UTopDownPlayerStateInInteraction : public UTopDownPlayerState
+class TOPDOWNGAME_API UTopDownPlayerStateInInteraction : public UTopDownPlayerStateIdle
 {
 	GENERATED_BODY()
 	

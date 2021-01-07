@@ -6,16 +6,17 @@
 
 void UTopDownPlayerStateInInteraction::Enter(ATopDownPlayerCharacter* TopDownPlayerCharacter)
 {
-	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
-
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter InInteraction State"));
 	}
+
+	UTopDownPlayerStateIdle::Enter(TopDownPlayerCharacter);
+
 }
 
 void UTopDownPlayerStateInInteraction::Tick(float DeltaSeconds)
 {
-	UTopDownPlayerState::Tick(DeltaSeconds);
+	UTopDownPlayerStateIdle::Tick(DeltaSeconds);
 
 }
 
@@ -31,7 +32,7 @@ void UTopDownPlayerStateInInteraction::MoveHorizontal(float Value)
 
 void UTopDownPlayerStateInInteraction::Exit()
 {
-	UTopDownPlayerState::Exit();
+	UTopDownPlayerStateIdle::Exit();
 
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Exit InInteraction State"));
