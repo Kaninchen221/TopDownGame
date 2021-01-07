@@ -9,10 +9,10 @@ void UTopDownPlayerState::ChangeTopDownPlayerState(TSubclassOf<UTopDownPlayerSta
 {
 	auto& CurrentPlayerState = this->PlayerCharacter->TopDownPlayerState;
 
-	if (CurrentPlayerState != PlayerState) {
+	if (CurrentPlayerState != PlayerState.GetDefaultObject()) {
 		Exit();
-		CurrentPlayerState = PlayerState;
-		CurrentPlayerState.GetDefaultObject()->Enter(PlayerCharacter);
+		CurrentPlayerState = PlayerState.GetDefaultObject();
+		CurrentPlayerState->Enter(PlayerCharacter);
 	}
 }
 
