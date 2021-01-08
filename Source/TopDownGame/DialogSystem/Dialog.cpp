@@ -33,6 +33,15 @@ void UDialog::StartDialog()
 
 bool UDialog::ChooseOption(int Index)
 {
+	if (!CurrentNode) {
+
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Current node is invalid"));
+		}
+
+		return false;
+	}
+
 	auto DialogOptions = CurrentNode->GetDialogOptions();
 	auto DialogOptionsCount = DialogOptions.Num();
 
