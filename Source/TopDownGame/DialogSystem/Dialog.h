@@ -9,7 +9,9 @@
 #include "Templates/SubclassOf.h"
 #include "Dialog.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartDialog);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewCurrentDialogNode);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndDialog);
 
 UCLASS( ClassGroup=(Dialog), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class TOPDOWNGAME_API UDialog : public UActorComponent
@@ -49,7 +51,13 @@ public:
 	UDialogNode* GetStartNode() { return StartNode; }
 
 	UPROPERTY(Category = "Dialog|Event", BlueprintAssignable)
+	FOnStartDialog OnStartDialog;
+
+	UPROPERTY(Category = "Dialog|Event", BlueprintAssignable)
 	FOnNewCurrentDialogNode OnNewCurrentDialogNode;
+
+	UPROPERTY(Category = "Dialog|Event", BlueprintAssignable)
+	FOnEndDialog OnEndDialog;
 
 private:
 

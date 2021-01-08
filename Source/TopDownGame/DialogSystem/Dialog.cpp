@@ -28,6 +28,7 @@ void UDialog::BeginPlay()
 void UDialog::StartDialog()
 {
 	SetCurrentNode(StartNode);
+	OnStartDialog.Broadcast();
 }
 
 bool UDialog::ChooseOption(int Index)
@@ -73,6 +74,7 @@ bool UDialog::ChooseOption(int Index)
 void UDialog::EndDialog()
 {
 	CurrentNode = nullptr;
+	OnEndDialog.Broadcast();
 }
 
 void UDialog::SetCurrentNode(UDialogNode* NewCurrentNode)

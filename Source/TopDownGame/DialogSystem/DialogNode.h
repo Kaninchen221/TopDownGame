@@ -6,9 +6,8 @@
 #include "UObject/NoExportTypes.h"
 #include "Templates/SubclassOf.h"
 #include "Containers/Array.h"
+#include "DialogOption.h"
 #include "DialogNode.generated.h"
-
-class UDialogOption;
 
 /**
  * 

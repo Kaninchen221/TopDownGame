@@ -10,6 +10,10 @@ UDialogNode* UDialogOption::Choose()
 	if (CanBeChoosen && ResultNode) {
 		return ResultNode;
 	}
+	else if (CanBeChoosen) {
+		ActionOfThisOption.ExecuteIfBound();
+		return nullptr;
+	}
 	else {
 		return nullptr;
 	}
@@ -21,4 +25,10 @@ UDialogNode* UDialogOption::CreateResultNode(FText DialogNodeText)
 	ResultNode = NewObject<UDialogNode>();
 	ResultNode->SetText(DialogNodeText);
 	return ResultNode;
+}
+
+UDialogOption* UDialogOption::SetActionOfThisOption(FActionOfThisOption NewActionOfThisOption)
+{
+	ActionOfThisOption = NewActionOfThisOption;
+	return this;
 }

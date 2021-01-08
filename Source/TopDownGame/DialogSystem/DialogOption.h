@@ -10,6 +10,8 @@
 
 class UDialogNode;
 
+DECLARE_DYNAMIC_DELEGATE(FActionOfThisOption);
+
 /**
  * 
  */
@@ -33,6 +35,9 @@ protected:
 	UPROPERTY(Category = Dialog, EditAnywhere, BlueprintReadOnly)
 	bool CanBeChoosen;
 
+	UPROPERTY(Category = Dialog, EditAnywhere, BlueprintReadOnly)
+	FActionOfThisOption ActionOfThisOption;
+
 public:
 
 	UFUNCTION(BlueprintCallable)
@@ -55,4 +60,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FText GetText() { return Text; }
 
+	UFUNCTION(BlueprintCallable)
+	UDialogOption* SetActionOfThisOption(FActionOfThisOption NewActionOfThisOption);
 };
