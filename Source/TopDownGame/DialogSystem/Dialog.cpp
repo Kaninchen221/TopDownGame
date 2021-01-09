@@ -8,21 +8,27 @@
 UDialog::UDialog()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	
+
+}
+
+void UDialog::InitializeStartNode()
+{
+	StartNode = NewObject<UDialogNode>();
+	if (StartNode) {
+
+	}
+	else {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Failed to create StartNode in Dialog"));
+		}
+	}
 }
 
 void UDialog::BeginPlay()
 {
 	Super::BeginPlay();
 
-	StartNode = NewObject<UDialogNode>();
-	if (StartNode) {
-
-	}
-	else {
-		throw std::exception("DialogNode is null");
-	}
-	
+	InitializeStartNode();
 }
 
 void UDialog::StartDialog()

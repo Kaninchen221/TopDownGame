@@ -7,16 +7,15 @@
 
 UDialogNode* UDialogOption::Choose()
 {
-	if (CanBeChoosen && ResultNode) {
-		return ResultNode;
-	}
-	else if (CanBeChoosen) {
+	if (CanBeChoosen) {
 		ActionOfThisOption.ExecuteIfBound();
-		return nullptr;
+
+		if (ResultNode) {
+			return ResultNode;
+		}
 	}
-	else {
-		return nullptr;
-	}
+
+	return nullptr;
 }
 
 UDialogNode* UDialogOption::CreateResultNode(FText DialogNodeText)

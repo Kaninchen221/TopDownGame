@@ -23,6 +23,10 @@ public:
 
 	UDialog();
 
+private:
+
+	void InitializeStartNode();
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -49,6 +53,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UDialogNode* GetStartNode() { return StartNode; }
+
+	UFUNCTION(BlueprintCallable)
+	void SetTopic(FText TopicText) { Topic = TopicText; }
+
+	UFUNCTION(BlueprintCallable)
+	FText GetTopic() const { return Topic; }
 
 	UPROPERTY(Category = "Dialog|Event", BlueprintAssignable)
 	FOnStartDialog OnStartDialog;
