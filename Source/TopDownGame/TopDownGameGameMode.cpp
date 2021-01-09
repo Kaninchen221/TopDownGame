@@ -1,10 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "TopDownGameGameMode.h"
-#include "TopDownGameCharacter.h"
+#include "TopDownPlayerCharacter.h"
 
 ATopDownGameGameMode::ATopDownGameGameMode()
 {
 	// Set default pawn class to our character
-	DefaultPawnClass = ATopDownGameCharacter::StaticClass();	
+	DefaultPawnClass = ATopDownPlayerCharacter::StaticClass();	
 }
