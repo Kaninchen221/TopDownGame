@@ -88,12 +88,6 @@ void ATopDownCharacter::InitializeInteractionComponent()
 		InteractionSphereComponent->SetCanEverAffectNavigation(false);
 		InteractionSphereComponent->bDynamicObstacle = true;
 		InteractionSphereComponent->SetupAttachment(RootComponent);
-
-		/// Bind interaction sphere with NewInteractable function
-		//InteractionSphereComponent->SetGenerateOverlapEvents(true);
-		//FScriptDelegate overlapDelegate;
-		//overlapDelegate.BindUFunction(this, "NewInteractableInBoundsOfInteractionComponent");
-		//InteractionSphereComponent->OnComponentBeginOverlap.Add(overlapDelegate);
 	}
 	else {
 		throw std::exception("InteractionComponent is null");

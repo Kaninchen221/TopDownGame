@@ -54,7 +54,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	FName Name;
+	FText Name;
 
 public:
 
@@ -63,7 +63,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE FName GetName() const { return Name; }
+	FText GetName() const { return Name; }
+
+	UFUNCTION(BlueprintCallable)
+	void SetName(FText NewName) { Name = NewName; }
 
 private:
 
