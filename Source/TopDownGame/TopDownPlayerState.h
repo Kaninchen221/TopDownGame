@@ -18,8 +18,6 @@ class TOPDOWNGAME_API UTopDownPlayerState : public UObject
 {
 	GENERATED_BODY()
 
-	friend ATopDownPlayerCharacter;
-
 public:
 
 	UFUNCTION(BlueprintCallable)

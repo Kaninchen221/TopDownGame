@@ -32,8 +32,6 @@ void UTopDownPlayerState::MoveHorizontal(float Value)
 
 void UTopDownPlayerState::Exit()
 {
-	auto PlayerInputComponent = PlayerCharacter->InputComponent;
-
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Exit State"));
 	}
