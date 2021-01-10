@@ -1,8 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CoreTypes.h"
+#include "UObject/Object.h"
+#include "UObject/UObjectGlobals.h"
 #include "Misc/AutomationTest.h"
 
+#include "../TopDownPlayerStateIdle.h"
 #include "../TopDownPlayerCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -41,7 +44,7 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
     {
         auto PlayerCharacter = CreatePlayerCharacter();
 
-        auto PlayerState = PlayerCharacter->GetPlayerState();
+        auto PlayerState = PlayerCharacter->GetCurrentPlayerState();
         TestNull("PlayerState must be null", PlayerState);
     }
 
@@ -53,6 +56,16 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 
         auto ActualDirection = PlayerCharacter->GetCurrentDirection();
         TestEqual("Actual and Expected Direction must be equal", ActualDirection, ExpectedDirection);
+    }
+
+    {
+        auto PlayerCharacter = CreatePlayerCharacter();
+
+        TSubclassOf<UTopDownPlayerState> ExpectedState = UTopDownPlayerStateIdle::StaticClass();
+        PlayerCharacter->ChangePlayerState(ExpectedState);
+
+        auto ActualState = PlayerCharacter->GetCurrentPlayerState();
+        TestEqual("Address of ActualState and ExpectedState DefaultObject must be same", ActualState, ExpectedState.GetDefaultObject());
     }
 
     return true;

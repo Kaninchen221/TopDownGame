@@ -7,13 +7,7 @@
 
 void UTopDownPlayerState::ChangeTopDownPlayerState(TSubclassOf<UTopDownPlayerState> PlayerState)
 {
-	auto& CurrentPlayerState = this->PlayerCharacter->TopDownPlayerState;
-
-	if (CurrentPlayerState != PlayerState.GetDefaultObject()) {
-		Exit();
-		CurrentPlayerState = PlayerState.GetDefaultObject();
-		CurrentPlayerState->Enter(PlayerCharacter);
-	}
+	PlayerCharacter->ChangePlayerState(PlayerState);
 }
 
 void UTopDownPlayerState::Enter(ATopDownPlayerCharacter* TopDownPlayerCharacter)
@@ -28,16 +22,12 @@ void UTopDownPlayerState::Tick(float DeltaSeconds)
 
 void UTopDownPlayerState::MoveVertical(float Value)
 {
-	if (Value != 0.0f) {
-		ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateWalk);
-	}
+
 }
 
 void UTopDownPlayerState::MoveHorizontal(float Value)
 {
-	if (Value != 0.0f) {
-		ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateWalk);
-	}
+
 }
 
 void UTopDownPlayerState::Exit()

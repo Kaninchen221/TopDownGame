@@ -72,12 +72,6 @@ protected:
 	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
 
-	virtual void PostInitializeComponents() override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
-
 private:
 
 	void InitializeCameraArmComponent();
@@ -86,15 +80,14 @@ private:
 	void InitializeTopDownPlayerStates();
 
 	void InitializeTopDownPlayerState();
-	void InitializeTopDownPlayerStateIdle();
-	void InitializeTopDownPlayerStateWalk();
 
 protected:
 
-	virtual void BeginPlay() override;
+	virtual void PostInitializeComponents() override;
 
-	void MoveVertical(float Value);
-	void MoveHorizontal(float Value);
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void BeginPlay() override;
 
 public:
 
@@ -119,6 +112,15 @@ public:
 	FORCEINLINE
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentDirection(ETopDownPlayerDirection Direction) noexcept { CurrentDirection = Direction; }
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
+
+	UFUNCTION(BlueprintCallable)
+	void MoveVertical(float Value);
+
+	UFUNCTION(BlueprintCallable)
+	void MoveHorizontal(float Value);
 
 private:
 

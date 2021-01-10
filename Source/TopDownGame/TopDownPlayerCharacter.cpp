@@ -51,7 +51,13 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnim
 
 void ATopDownPlayerCharacter::ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState)
 {
-	TopDownPlayerState->ChangeTopDownPlayerState(NewPlayerState);
+	if (TopDownPlayerState != NewPlayerState.GetDefaultObject()) {
+		if (TopDownPlayerState) {
+			TopDownPlayerState->Exit();
+		}
+		TopDownPlayerState = NewPlayerState.GetDefaultObject();
+		TopDownPlayerState->Enter(this);
+	}
 }
 
 void ATopDownPlayerCharacter::InitializeCameraArmComponent()
@@ -86,26 +92,12 @@ void ATopDownPlayerCharacter::InitializeCameraComponent()
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerStates()
 {
-	InitializeTopDownPlayerStateIdle();
-	InitializeTopDownPlayerStateWalk();
-
-
 	InitializeTopDownPlayerState();
 }
 
 void ATopDownPlayerCharacter::InitializeTopDownPlayerState()
 {
 	TopDownPlayerState = TopDownPlayerStateIdle.GetDefaultObject();
-}
-
-void ATopDownPlayerCharacter::InitializeTopDownPlayerStateIdle() 
-{
-
-}
-
-void ATopDownPlayerCharacter::InitializeTopDownPlayerStateWalk()
-{
-
 }
 
 void ATopDownPlayerCharacter::BeginPlay()
