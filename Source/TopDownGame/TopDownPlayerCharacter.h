@@ -69,7 +69,7 @@ protected:
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateInInteraction;
 
-	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
 
 	virtual void PostInitializeComponents() override;
@@ -77,9 +77,6 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
-
-	UFUNCTION(BlueprintCallable)
-	void ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState);
 
 private:
 
@@ -92,8 +89,6 @@ private:
 	void InitializeTopDownPlayerStateIdle();
 	void InitializeTopDownPlayerStateWalk();
 
-	ETopDownPlayerDirection CurrentDirection = ETopDownPlayerDirection::DOWN;
-
 protected:
 
 	virtual void BeginPlay() override;
@@ -104,10 +99,29 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
+	void ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState);
+
+	UFUNCTION(BlueprintCallable)
+	USpringArmComponent* GetCameraArmComponent() { return CameraArmComponent; }
+
+	UFUNCTION(BlueprintCallable)
+	UCameraComponent* GetCameraComponent() { return CameraComponent; }
+
+	UFUNCTION(BlueprintCallable)
+	UUserWidget* GetUserInterface() { return UserInterface; }
+
+	UFUNCTION(BlueprintCallable)
+	UTopDownPlayerState* GetCurrentPlayerState() { return TopDownPlayerState; }
+
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE ETopDownPlayerDirection GetCurrentDirection() const noexcept { return CurrentDirection; }
 	
 	FORCEINLINE
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentDirection(ETopDownPlayerDirection Direction) noexcept { CurrentDirection = Direction; }
+
+private:
+
+	ETopDownPlayerDirection CurrentDirection = ETopDownPlayerDirection::DOWN;
 
 };
