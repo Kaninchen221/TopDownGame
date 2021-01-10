@@ -35,11 +35,11 @@ protected:
 	USphereComponent* InteractionSphereComponent;
 
 	UPROPERTY(Category = Movement, EditAnywhere, BlueprintReadWrite)
-	UFloatingPawnMovement* FloatingPawnMovement;
+	UFloatingPawnMovement* FloatingPawnMovementComponent;
 
 private:
 
-	void ControllerUseOnlyYawRotation();
+	void ControllerDoNotUseAnyRotation();
 
 protected:
 
@@ -48,19 +48,18 @@ protected:
 	void InitializeCapsuleComponent();
 	void InitializeCurrentAnimationComponent();
 	void InitializeInteractionComponent();
-
-	void InitializeFloatingPawnMovement();
+	void InitializeFloatingPawnMovementComponent();
 
 	virtual void BeginPlay() override;
+
+	virtual void PostInitializeComponents() override;
+
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 	FText Name;
 
 public:
-
-	virtual void PostInitializeComponents() override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
 	FText GetName() const { return Name; }
@@ -68,6 +67,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetName(FText NewName) { Name = NewName; }
 
-private:
+	UFUNCTION(BlueprintCallable)
+	UCapsuleComponent* GetCapsuleComponent() { return CapsuleComponent; }
+
+	UFUNCTION(BlueprintCallable)
+	UPaperFlipbookComponent* GetCurrentAnimationComponent() { return CurrentAnimationComponent; }
+
+	UFUNCTION(BlueprintCallable)
+	USphereComponent* GetInteractionSphereComponent() { return InteractionSphereComponent; }
+
+	UFUNCTION(BlueprintCallable)
+	UFloatingPawnMovement* GetFloatingPawnMovementComponent() { return FloatingPawnMovementComponent; }
 
 };

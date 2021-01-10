@@ -53,8 +53,8 @@ void UTopDownPlayerStateWalk::MoveVertical(float Value)
 	if (!IsWalkingHorizontal()) {
 		MoveVerticalValue = Value;
 
-		auto PawnMovement = PlayerCharacter->FloatingPawnMovement;
-		PawnMovement->AddInputVector(FVector(0.0f, 0.0f, Value), false);
+		auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
+		PawnMovementComponent->AddInputVector(FVector(0.0f, 0.0f, Value), false);
 
 		if (ShouldChangeStateToIdle()) {
 			ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
@@ -67,8 +67,8 @@ void UTopDownPlayerStateWalk::MoveHorizontal(float Value)
 	if (!IsWalkingVertical()) {
 		MoveHorizontalValue = Value;
 
-		auto PawnMovement = PlayerCharacter->FloatingPawnMovement;
-		PawnMovement->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
+		auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
+		PawnMovementComponent->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
 
 		if (ShouldChangeStateToIdle()) {
 			ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
@@ -119,5 +119,5 @@ void UTopDownPlayerStateWalk::SetMaxWalkSpeed(float Value) noexcept
 
 void UTopDownPlayerStateWalk::UpdateMaxWalkSpeed() noexcept
 {
-	PlayerCharacter->FloatingPawnMovement->MaxSpeed = MaxWalkSpeed;
+	PlayerCharacter->FloatingPawnMovementComponent->MaxSpeed = MaxWalkSpeed;
 }

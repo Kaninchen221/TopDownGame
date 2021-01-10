@@ -17,20 +17,19 @@ void ATopDownCharacter::Tick(float DeltaSeconds) {
 
 ATopDownCharacter::ATopDownCharacter()
 {
-	ControllerUseOnlyYawRotation();
+	ControllerDoNotUseAnyRotation();
 
 	InitializeCapsuleComponent();
 	InitializeCurrentAnimationComponent();
 	InitializeInteractionComponent();
-
-	InitializeFloatingPawnMovement();
+	InitializeFloatingPawnMovementComponent();
 
 }
 
-void ATopDownCharacter::ControllerUseOnlyYawRotation()
+void ATopDownCharacter::ControllerDoNotUseAnyRotation()
 {
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 }
 
@@ -94,15 +93,15 @@ void ATopDownCharacter::InitializeInteractionComponent()
 	}
 }
 
-void ATopDownCharacter::InitializeFloatingPawnMovement()
+void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
 {
-	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
-	if (FloatingPawnMovement)
+	FloatingPawnMovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
+	if (FloatingPawnMovementComponent)
 	{
-		FloatingPawnMovement->UpdatedComponent = CapsuleComponent;
-		FloatingPawnMovement->MaxSpeed = 200.f;
-		FloatingPawnMovement->bConstrainToPlane = true;
-		FloatingPawnMovement->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
+		FloatingPawnMovementComponent->UpdatedComponent = CapsuleComponent;
+		FloatingPawnMovementComponent->MaxSpeed = 200.f;
+		FloatingPawnMovementComponent->bConstrainToPlane = true;
+		FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 	}
 	else {
 		throw std::exception("FloatingPawnMovement is null");
