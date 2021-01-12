@@ -28,8 +28,10 @@ void UTopDownPlayerStateIdle::MoveVertical(float Value)
 	if (Value != 0.0f) {
 		ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateWalk);
 
-		auto PlayerStateWalk = PlayerCharacter->TopDownPlayerStateWalk.GetDefaultObject();
-		PlayerStateWalk->MoveVertical(Value);
+		auto PlayerState = PlayerCharacter->GetCurrentPlayerState();
+		if (PlayerState) {
+			PlayerState->MoveVertical(Value);
+		}
 	}
 }
 
@@ -38,8 +40,10 @@ void UTopDownPlayerStateIdle::MoveHorizontal(float Value)
 	if (Value != 0.0f) {
 		ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateWalk);
 
-		auto PlayerStateWalk = PlayerCharacter->TopDownPlayerStateWalk.GetDefaultObject();
-		PlayerStateWalk->MoveHorizontal(Value);
+		auto PlayerState = PlayerCharacter->GetCurrentPlayerState();
+		if (PlayerState) {
+			PlayerState->MoveHorizontal(Value);
+		}
 	}
 }
 
