@@ -28,7 +28,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool ShouldChangeStateToIdle();
 
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingVertical();
+
+	UFUNCTION(BlueprintCallable)
 	bool IsWalkingHorizontal();
 
 	UFUNCTION(BlueprintCallable)
