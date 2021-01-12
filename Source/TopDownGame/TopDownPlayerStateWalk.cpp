@@ -12,8 +12,6 @@ void UTopDownPlayerStateWalk::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 	UTopDownPlayerState::Enter(TopDownPlayerCharacter);
 
-	UpdateMaxWalkSpeed();
-
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Enter Walk State"));
 	}
@@ -53,11 +51,13 @@ void UTopDownPlayerStateWalk::MoveVertical(float Value)
 	if (!IsWalkingHorizontal()) {
 		MoveVerticalValue = Value;
 
-		auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
-		PawnMovementComponent->AddInputVector(FVector(0.0f, 0.0f, Value), false);
+		if (PlayerCharacter) {
+			auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
+			PawnMovementComponent->AddInputVector(FVector(0.0f, 0.0f, Value), false);
 
-		if (ShouldChangeStateToIdle()) {
-			ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
+			if (ShouldChangeStateToIdle()) {
+				ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
+			}
 		}
 	}
 }
@@ -67,11 +67,13 @@ void UTopDownPlayerStateWalk::MoveHorizontal(float Value)
 	if (!IsWalkingVertical()) {
 		MoveHorizontalValue = Value;
 
-		auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
-		PawnMovementComponent->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
+		if (PlayerCharacter) {
+			auto PawnMovementComponent = PlayerCharacter->FloatingPawnMovementComponent;
+			PawnMovementComponent->AddInputVector(FVector(Value, 0.0f, 0.0f), false);
 
-		if (ShouldChangeStateToIdle()) {
-			ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
+			if (ShouldChangeStateToIdle()) {
+				ChangeTopDownPlayerState(PlayerCharacter->TopDownPlayerStateIdle);
+			}
 		}
 	}
 }
@@ -103,21 +105,10 @@ bool UTopDownPlayerStateWalk::IsWalkingDown()
 
 bool UTopDownPlayerStateWalk::IsWalkingRight()
 {
-	return MoveHorizontalValue < 0.f;
+	return MoveHorizontalValue > 0.f;
 }
 
 bool UTopDownPlayerStateWalk::IsWalkingLeft()
 {
-	return MoveHorizontalValue > 0.f;
-}
-
-void UTopDownPlayerStateWalk::SetMaxWalkSpeed(float Value) noexcept
-{
-	MaxWalkSpeed = Value;
-	UpdateMaxWalkSpeed();
-}
-
-void UTopDownPlayerStateWalk::UpdateMaxWalkSpeed() noexcept
-{
-	PlayerCharacter->FloatingPawnMovementComponent->MaxSpeed = MaxWalkSpeed;
+	return MoveHorizontalValue < 0.f;
 }

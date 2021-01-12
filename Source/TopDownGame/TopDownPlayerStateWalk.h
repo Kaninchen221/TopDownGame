@@ -46,12 +46,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IsWalkingLeft();
 
-	UFUNCTION(BlueprintCallable)
-	void SetMaxWalkSpeed(float Value) noexcept;
-
-	UFUNCTION(BlueprintCallable)
-	FORCEINLINE float GetMaxWalkSpeed() const noexcept { return MaxWalkSpeed; }
-
 protected:
 
 	UPROPERTY(Category = Animations, EditAnywhere, BlueprintReadWrite)
@@ -70,9 +64,5 @@ private:
 
 	float MoveVerticalValue = 0.f;
 	float MoveHorizontalValue = 0.f;
-
-	float MaxWalkSpeed = 200.f;
-
-	void UpdateMaxWalkSpeed() noexcept;
 
 };
