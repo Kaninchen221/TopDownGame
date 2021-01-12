@@ -16,7 +16,6 @@ void UTopDownPlayerStateInInteraction::Enter(ATopDownPlayerCharacter* TopDownPla
 
 void UTopDownPlayerStateInInteraction::Tick(float DeltaSeconds)
 {
-	UTopDownPlayerStateIdle::Tick(DeltaSeconds);
 
 }
 
