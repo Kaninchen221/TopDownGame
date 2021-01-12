@@ -11,8 +11,21 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUDialogComponentTest, "TopDownGame.DialogSyste
 
 bool FUDialogComponentTest::RunTest(const FString& Parameters)
 {
-    auto DialogComponent = NewObject<UDialog>();
-    TestNotNull("DialogComponent must be initialized", DialogComponent);
+    auto CreateDialogComponent = [&]() {
+        auto DialogComponent = NewObject<UDialog>();
+        TestNotNull("DialogComponent must be initialized", DialogComponent);
+        return DialogComponent;
+    };
+
+    {
+        auto Dialog = CreateDialogComponent();
+        
+        auto ExpectedTopic = FText::FromString("Placeholder");
+        Dialog->SetTopic(ExpectedTopic);
+
+        auto ActualTopic = Dialog->GetTopic();
+        TestTrue("ActualTopic and ExpectedTopic must be equal", ActualTopic.EqualTo(ExpectedTopic));
+    }
 
     return true;
 }
