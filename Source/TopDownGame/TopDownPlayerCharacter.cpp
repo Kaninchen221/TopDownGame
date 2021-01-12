@@ -55,8 +55,12 @@ void ATopDownPlayerCharacter::ChangePlayerState(TSubclassOf<UTopDownPlayerState>
 		if (TopDownPlayerState) {
 			TopDownPlayerState->Exit();
 		}
+
 		TopDownPlayerState = NewPlayerState.GetDefaultObject();
-		TopDownPlayerState->Enter(this);
+
+		if (TopDownPlayerState) {
+			TopDownPlayerState->Enter(this);
+		}
 	}
 }
 
