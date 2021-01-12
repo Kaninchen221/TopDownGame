@@ -21,8 +21,6 @@ public:
 
 	virtual void Enter(ATopDownPlayerCharacter* TopDownPlayerCharacter) override;
 
-	virtual void Tick(float DeltaSeconds) override;
-
 	virtual void MoveVertical(float Value) override;
 	virtual void MoveHorizontal(float Value) override;
 

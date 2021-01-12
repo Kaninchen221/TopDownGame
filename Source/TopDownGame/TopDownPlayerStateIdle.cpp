@@ -19,10 +19,6 @@ void UTopDownPlayerStateIdle::Enter(ATopDownPlayerCharacter* TopDownPlayerCharac
 
 }
 
-void UTopDownPlayerStateIdle::Tick(float DeltaSeconds) {
-
-}
-
 void UTopDownPlayerStateIdle::MoveVertical(float Value)
 {
 	if (Value != 0.0f) {
