@@ -8,11 +8,11 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUTopDownPlayerStateTestIdle, "TopDownGame.Character.UTopDownPlayerStateIdle", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUTopDownPlayerStateIdleTest, "TopDownGame.Character.UTopDownPlayerStateIdle", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 
 class TopDownPlayerState;
 
-bool FUTopDownPlayerStateTestIdle::RunTest(const FString& Parameters)
+bool FUTopDownPlayerStateIdleTest::RunTest(const FString& Parameters)
 {
     auto CreatePlayerStateIdle = [&]() -> UTopDownPlayerStateIdle* {
         auto PlayerStateIdle = NewObject<UTopDownPlayerStateIdle>();
