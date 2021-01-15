@@ -5,7 +5,6 @@
 #include "UObject/UObjectGlobals.h"
 #include "Misc/AutomationTest.h"
 
-#include "../TopDownPlayerStateIdle.h"
 #include "../TopDownPlayerCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -39,33 +38,6 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 
         auto UI = PlayerCharacter->GetUserInterface();
         TestNull("UserInterface must be null", UI);
-    }
-
-    {
-        auto PlayerCharacter = CreatePlayerCharacter();
-
-        auto PlayerState = PlayerCharacter->GetCurrentPlayerState();
-        TestNull("PlayerState must be null", PlayerState);
-    }
-
-    {
-        auto PlayerCharacter = CreatePlayerCharacter();
-
-        auto ExpectedDirection = ETopDownPlayerDirection::RIGHT;
-        PlayerCharacter->SetCurrentDirection(ExpectedDirection);
-
-        auto ActualDirection = PlayerCharacter->GetCurrentDirection();
-        TestEqual("Actual and Expected Direction must be equal", ActualDirection, ExpectedDirection);
-    }
-
-    {
-        auto PlayerCharacter = CreatePlayerCharacter();
-
-        TSubclassOf<UTopDownPlayerState> ExpectedState = UTopDownPlayerStateIdle::StaticClass();
-        PlayerCharacter->ChangePlayerState(ExpectedState);
-
-        auto ActualState = PlayerCharacter->GetCurrentPlayerState();
-        TestEqual("Address of ActualState and ExpectedState DefaultObject must be same", ActualState, ExpectedState.GetDefaultObject());
     }
 
     return true;

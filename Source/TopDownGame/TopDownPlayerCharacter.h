@@ -8,8 +8,6 @@
 #include "Containers/Array.h"
 #include "Templates/SharedPointer.h"
 
-#include "TopDownPlayerState.h"
-
 #include "TopDownPlayerCharacter.generated.h"
 
 class USpringArmComponent;
@@ -18,14 +16,6 @@ class UPlayerStateIdle;
 class UPaperFlipbook;
 class ATopDownNonPlayerCharacter;
 class UUserWidget;
-
-UENUM(BlueprintType)
-enum class ETopDownPlayerDirection : uint8 {
-	UP = 0		UMETA(DisplayName = "UP"),
-	DOWN = 1	UMETA(DisplayName = "DOWN"),
-	LEFT = 2	UMETA(DisplayName = "LEFT"),
-	RIGHT = 3	UMETA(DisplayName = "RIGHT"),
-};
 
 /**
  * 
@@ -57,18 +47,6 @@ protected:
 	UPROPERTY(Category = UI, EditAnywhere, BlueprintReadWrite)
 	UUserWidget* UserInterface;
 
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
-	UTopDownPlayerState* TopDownPlayerState;
-
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateIdle;
-
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateWalk;
-
-	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UTopDownPlayerState> TopDownPlayerStateInInteraction;
-
 	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
 
@@ -76,10 +54,6 @@ private:
 
 	void InitializeCameraArmComponent();
 	void InitializeCameraComponent();
-
-	void InitializeTopDownPlayerStates();
-
-	void InitializeTopDownPlayerState();
 
 protected:
 
@@ -92,9 +66,6 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
-	void ChangePlayerState(TSubclassOf<UTopDownPlayerState> NewPlayerState);
-
-	UFUNCTION(BlueprintCallable)
 	USpringArmComponent* GetCameraArmComponent() { return CameraArmComponent; }
 
 	UFUNCTION(BlueprintCallable)
@@ -104,16 +75,6 @@ public:
 	UUserWidget* GetUserInterface() { return UserInterface; }
 
 	UFUNCTION(BlueprintCallable)
-	UTopDownPlayerState* GetCurrentPlayerState() { return TopDownPlayerState; }
-
-	UFUNCTION(BlueprintCallable)
-	FORCEINLINE ETopDownPlayerDirection GetCurrentDirection() const noexcept { return CurrentDirection; }
-	
-	FORCEINLINE
-	UFUNCTION(BlueprintCallable)
-	void SetCurrentDirection(ETopDownPlayerDirection Direction) noexcept { CurrentDirection = Direction; }
-
-	UFUNCTION(BlueprintCallable)
 	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
 
 	UFUNCTION(BlueprintCallable)
@@ -121,9 +82,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void MoveHorizontal(float Value);
-
-private:
-
-	ETopDownPlayerDirection CurrentDirection = ETopDownPlayerDirection::DOWN;
 
 };
