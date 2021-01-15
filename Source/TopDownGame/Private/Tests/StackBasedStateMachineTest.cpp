@@ -99,10 +99,13 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
     {
         UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
 
-        float DeltaSeconds = 21.37f;
-
         StateMachine->Update();
+        float DeltaSeconds = 21.37f;
         StateMachine->Tick(DeltaSeconds);
+    }
+
+    {
+        UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
 
         FString Key1 = "Key1";
         AddStateToStateMachine(StateMachine, Key1);
@@ -115,13 +118,19 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
         StateMachine->PushState(Key2);
 
         StateMachine->Update();
+        float DeltaSeconds = 21.37f;
         StateMachine->Tick(DeltaSeconds);
+    }
+
+    {
+        UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
 
         FString InvalidStateKey = "InvalidStateKey";
         AddInvalidStateToStateMachine(StateMachine, InvalidStateKey);
         StateMachine->PushState(InvalidStateKey);
 
         StateMachine->Update();
+        float DeltaSeconds = 21.37f;
         StateMachine->Tick(DeltaSeconds);
     }
 
