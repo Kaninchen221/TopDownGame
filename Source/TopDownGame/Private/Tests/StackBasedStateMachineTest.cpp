@@ -134,6 +134,22 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
         StateMachine->Tick(DeltaSeconds);
     }
 
+    {
+        UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
+
+        FString Key1 = "Key1";
+        StateMachine->ChangeCurrentState(Key1);
+        UStateBase* ExpectedState = AddStateToStateMachine(StateMachine, Key1);
+
+        FString Key2 = "Key2";
+        AddStateToStateMachine(StateMachine, Key2);
+
+        StateMachine->ChangeCurrentState(Key1);
+
+        UStateBase* ActualState = StateMachine->TopState();
+        TestEqual("Top State must be same as Expected State", ActualState, ExpectedState);
+    }
+
     return true;
 }
 

@@ -42,6 +42,8 @@ public:
 
 	void Tick(float DeltaSeconds);
 
+	void ChangeCurrentState(FKeyType Key);
+
 private:
 
 	UObject* ControledObject = nullptr;
@@ -147,5 +149,27 @@ inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 		for (UStateBase* State : StatesStack) {
 			State->Tick(DeltaSeconds);
 		}
+	}
+}
+
+inline void UStackBasedStateMachine::ChangeCurrentState(FKeyType Key)
+{
+	UStateBase** State = States.Find(Key);
+	if (State) {
+		UStateBase* ActualTopState = TopState();
+		if (ActualTopState) {
+			ActualTopState->Exit();
+		}
+		else {
+			if (DefaultState) {
+				DefaultState->Exit();
+			}
+		}
+		PopState();
+		StatesStack.Push(*State);
+		TopState()->Enter();
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Can't find state with key: %s"), *Key);
 	}
 }
