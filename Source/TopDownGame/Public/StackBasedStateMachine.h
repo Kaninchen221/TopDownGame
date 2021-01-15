@@ -13,7 +13,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Category = "StateMachine", Blueprintable, BlueprintType)
 class TOPDOWNGAME_API UStackBasedStateMachine : public UObject
 {
 	GENERATED_BODY()
@@ -22,41 +22,55 @@ public:
 	UStackBasedStateMachine() = default;
 
 	using FStatesStack = TArray<UStateBase*>;
+	
+	using FStatesContainer = TMap<FString, UStateBase*>;
 
-	using FKeyType = FString;
-	using FStatesContainer = TMap<FKeyType, UStateBase*>;
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
+	UStateBase* AddState(FString Key, UStateBase* State);
 
-	UStateBase* AddState(FKeyType Key, UStateBase* State);
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
+	bool PushState(FString Key);
 
-	bool PushState(FKeyType Key);
-
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	UStateBase* TopState();
 
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void PopState();
 
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void SetControledObject(UObject* NewControledObject);
 
-	bool SetDefaultState(FKeyType Key);
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
+	bool SetDefaultState(FString Key);
 
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void Update();
 
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void Tick(float DeltaSeconds);
 
-	void ChangeCurrentState(FKeyType Key);
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
+	void ChangeCurrentState(FString Key);
+
+protected:
+
+	UPROPERTY(Category = "StateMachine", BlueprintReadWrite)
+	bool bShrinkStackWhenPossible = false;
 
 private:
 
+	UPROPERTY()
 	UObject* ControledObject = nullptr;
 
-	FStatesContainer States;
+	UPROPERTY()
+	TMap<FString, UStateBase*> States;
 
-	bool bShrinkStackWhenPossible = false;
 	FStatesStack StatesStack;
 
 	UStateBase* DefaultState = nullptr;
 };
 
-inline UStateBase* UStackBasedStateMachine::AddState(FKeyType Key, UStateBase* State)
+inline UStateBase* UStackBasedStateMachine::AddState(FString Key, UStateBase* State)
 {
 	if (State) {
 		UStateBase* AddedState = States.Add(Key, State);
@@ -69,7 +83,7 @@ inline UStateBase* UStackBasedStateMachine::AddState(FKeyType Key, UStateBase* S
 	}
 }
 
-inline bool UStackBasedStateMachine::PushState(FKeyType Key)
+inline bool UStackBasedStateMachine::PushState(FString Key)
 {
 	auto FindResult = States.Find(Key);
 	if (FindResult) {
@@ -115,7 +129,7 @@ inline void UStackBasedStateMachine::SetControledObject(UObject* NewControledObj
 	}
 }
 
-inline bool UStackBasedStateMachine::SetDefaultState(FKeyType Key)
+inline bool UStackBasedStateMachine::SetDefaultState(FString Key)
 {
 	UStateBase** State = States.Find(Key);
 	if (State) {
@@ -152,7 +166,7 @@ inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 	}
 }
 
-inline void UStackBasedStateMachine::ChangeCurrentState(FKeyType Key)
+inline void UStackBasedStateMachine::ChangeCurrentState(FString Key)
 {
 	UStateBase** State = States.Find(Key);
 	if (State) {

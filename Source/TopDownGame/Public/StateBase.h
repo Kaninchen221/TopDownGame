@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Category = "State", ClassGroup = "States", Blueprintable)
 class TOPDOWNGAME_API UStateBase : public UObject
 {
 	GENERATED_BODY()
@@ -18,19 +18,19 @@ public:
 
 	UStateBase() = default;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Category = "State", BlueprintCallable)
 	virtual void SetControledObject(UObject* Object) {}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Category = "State", BlueprintCallable)
 	virtual void Enter() {}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Category = "State", BlueprintCallable)
 	virtual void Update() {}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Category = "State", BlueprintCallable)
 	virtual void Tick(float DeltaSeconds) {}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Category = "State", BlueprintCallable)
 	virtual void Exit() {}
 
 };
