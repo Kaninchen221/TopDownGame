@@ -30,6 +30,9 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 
         auto UI = PlayerCharacter->GetUserInterface();
         TestNull("UserInterface must be null", UI);
+
+        auto PlayerStateMachine = PlayerCharacter->GetPlayerStateMachine();
+        TestNotNull("PlayerStateMachine can't be null", PlayerStateMachine);
     }
 
     {

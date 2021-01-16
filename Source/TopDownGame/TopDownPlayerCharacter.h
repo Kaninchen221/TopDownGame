@@ -16,6 +16,7 @@ class UPlayerStateIdle;
 class UPaperFlipbook;
 class ATopDownNonPlayerCharacter;
 class UUserWidget;
+class UStackBasedStateMachine;
 
 /**
  * 
@@ -33,6 +34,7 @@ private:
 
 	void InitializeCameraArmComponent();
 	void InitializeCameraComponent();
+	void InitializePlayerStateMachine();
 
 protected:
 
@@ -47,6 +49,9 @@ protected:
 
 	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
+
+	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
+	UStackBasedStateMachine* PlayerStateMachine;
 
 protected:
 
@@ -83,6 +88,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	float GetMoveHorizontalValue() const { return MoveHorizontalValue; }
+
+	UFUNCTION(BlueprintCallable)
+	UStackBasedStateMachine* GetPlayerStateMachine() { return PlayerStateMachine; }
 
 private:
 

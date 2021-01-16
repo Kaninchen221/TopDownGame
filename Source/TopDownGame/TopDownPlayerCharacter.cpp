@@ -11,12 +11,13 @@
 #include "PaperFlipbook.h"
 
 #include "TopDownNonPlayerCharacter.h"
-
+#include "StackBasedStateMachine.h"
 
 ATopDownPlayerCharacter::ATopDownPlayerCharacter()
 {
 	InitializeCameraArmComponent();
 	InitializeCameraComponent();
+	InitializePlayerStateMachine();
 }
 
 void ATopDownPlayerCharacter::InitializeCameraArmComponent()
@@ -49,6 +50,17 @@ void ATopDownPlayerCharacter::InitializeCameraComponent()
 	}
 }
 
+void ATopDownPlayerCharacter::InitializePlayerStateMachine()
+{
+	PlayerStateMachine = CreateDefaultSubobject<UStackBasedStateMachine>(TEXT("PlayerStateMachine"));
+	if (PlayerStateMachine) {
+		PlayerStateMachine->SetControledObject(this);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("PlayerStateMachine is null, character name: %s"), *Name.ToString());
+	}
+}
+
 void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	InputComponent = PlayerInputComponent;
@@ -70,6 +82,8 @@ void ATopDownPlayerCharacter::BeginPlay()
 void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	PlayerStateMachine->Tick(DeltaSeconds);
 }
 
 void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation)
@@ -83,9 +97,13 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnim
 void ATopDownPlayerCharacter::MoveVertical(float Value)
 {
 	MoveVerticalValue = Value;
+
+	PlayerStateMachine->Update();
 }
 
 void ATopDownPlayerCharacter::MoveHorizontal(float Value)
 {
 	MoveHorizontalValue = Value;
+
+	PlayerStateMachine->Update();
 }
