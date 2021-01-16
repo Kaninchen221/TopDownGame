@@ -24,20 +24,32 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 
         auto CameraArmComponent = PlayerCharacter->GetCameraArmComponent();
         TestNotNull("CameraArmComponent can't be null", CameraArmComponent);
+
+        auto CameraComponent = PlayerCharacter->GetCameraComponent();
+        TestNotNull("CameraComponent can't be null", CameraComponent);
+
+        auto UI = PlayerCharacter->GetUserInterface();
+        TestNull("UserInterface must be null", UI);
     }
 
     {
         auto PlayerCharacter = CreatePlayerCharacter();
 
-        auto CameraComponent = PlayerCharacter->GetCameraComponent();
-        TestNotNull("CameraComponent can't be null", CameraComponent);
-    } 
-    
+        float ExpectedMoveVerticalValue = 3234.112f;
+        PlayerCharacter->MoveVertical(ExpectedMoveVerticalValue);
+        float ActualMoveVerticalValue = PlayerCharacter->GetMoveVerticalValue();
+
+        TestEqual("", ActualMoveVerticalValue, ExpectedMoveVerticalValue);
+    }
+
     {
         auto PlayerCharacter = CreatePlayerCharacter();
 
-        auto UI = PlayerCharacter->GetUserInterface();
-        TestNull("UserInterface must be null", UI);
+        float ExpectedMoveHorizontalValue = 234.2f;
+        PlayerCharacter->MoveHorizontal(ExpectedMoveHorizontalValue);
+        float ActualMoveHorizontalValue = PlayerCharacter->GetMoveHorizontalValue();
+
+        TestEqual("", ActualMoveHorizontalValue, ExpectedMoveHorizontalValue);
     }
 
     return true;

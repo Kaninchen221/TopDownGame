@@ -60,7 +60,6 @@ void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 void ATopDownPlayerCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
 }
 
 void ATopDownPlayerCharacter::BeginPlay()
@@ -83,8 +82,10 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnim
 
 void ATopDownPlayerCharacter::MoveVertical(float Value)
 {
+	MoveVerticalValue = Value;
 }
 
 void ATopDownPlayerCharacter::MoveHorizontal(float Value)
 {
+	MoveHorizontalValue = Value;
 }

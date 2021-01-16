@@ -78,4 +78,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void MoveHorizontal(float Value);
 
+	UFUNCTION(BlueprintCallable)
+	float GetMoveVerticalValue() const { return MoveVerticalValue; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetMoveHorizontalValue() const { return MoveHorizontalValue; }
+
+private:
+
+	float MoveVerticalValue = 0.0f;
+	float MoveHorizontalValue = 0.0f;
+
 };
