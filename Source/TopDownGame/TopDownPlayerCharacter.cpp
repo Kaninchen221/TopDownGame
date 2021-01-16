@@ -12,37 +12,11 @@
 
 #include "TopDownNonPlayerCharacter.h"
 
-void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-}
 
 ATopDownPlayerCharacter::ATopDownPlayerCharacter()
 {
 	InitializeCameraArmComponent();
 	InitializeCameraComponent();
-}
-
-void ATopDownPlayerCharacter::PostInitializeComponents()
-{
-	Super::PostInitializeComponents();
-
-}
-
-void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	InputComponent = PlayerInputComponent;
-
-	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownPlayerCharacter::MoveVertical);
-	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATopDownPlayerCharacter::MoveHorizontal);
-}
-
-void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation) 
-{
-	auto CurrentFlipbook = CurrentAnimationComponent->GetFlipbook();
-	if (CurrentFlipbook != DesiredAnimation) {
-		CurrentAnimationComponent->SetFlipbook(DesiredAnimation);
-	}
 }
 
 void ATopDownPlayerCharacter::InitializeCameraArmComponent()
@@ -56,7 +30,7 @@ void ATopDownPlayerCharacter::InitializeCameraArmComponent()
 		CameraArmComponent->SetUsingAbsoluteLocation(false);
 	}
 	else {
-		throw std::exception("CameraArmComponent is null");
+		UE_LOG(LogTemp, Warning, TEXT("CameraArmComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
@@ -71,13 +45,40 @@ void ATopDownPlayerCharacter::InitializeCameraComponent()
 		CameraComponent->bAutoActivate = true;
 	}
 	else {
-		throw std::exception("CameraComponent is null");
+		UE_LOG(LogTemp, Warning, TEXT("CameraArmComponent is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	InputComponent = PlayerInputComponent;
+
+	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownPlayerCharacter::MoveVertical);
+	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATopDownPlayerCharacter::MoveHorizontal);
+}
+
+void ATopDownPlayerCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
 }
 
 void ATopDownPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}
+
+void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation)
+{
+	auto CurrentFlipbook = CurrentAnimationComponent->GetFlipbook();
+	if (CurrentFlipbook != DesiredAnimation) {
+		CurrentAnimationComponent->SetFlipbook(DesiredAnimation);
+	}
 }
 
 void ATopDownPlayerCharacter::MoveVertical(float Value)
