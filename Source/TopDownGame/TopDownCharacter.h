@@ -24,9 +24,18 @@ public:
 
 	ATopDownCharacter();
 
+private:
+
+	void InitializeCapsuleComponent();
+	void InitializeCurrentAnimationComponent();
+	void InitializeInteractionComponent();
+	void InitializeFloatingPawnMovementComponent();
+
+	void ControllerDoNotUseAnyRotation();
+
 protected:
 
-	UPROPERTY(Category = Capsule, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = Collision, EditAnywhere, BlueprintReadWrite)
 	UCapsuleComponent* CapsuleComponent;
 
 	UPROPERTY(Category = Animation, EditAnywhere, BlueprintReadWrite)
@@ -38,27 +47,18 @@ protected:
 	UPROPERTY(Category = Movement, EditAnywhere, BlueprintReadWrite)
 	UFloatingPawnMovement* FloatingPawnMovementComponent;
 
-private:
-
-	void ControllerDoNotUseAnyRotation();
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	FText Name;
 
 protected:
 
 	virtual void Tick(float DeltaSeconds) override;
-
-	void InitializeCapsuleComponent();
-	void InitializeCurrentAnimationComponent();
-	void InitializeInteractionComponent();
-	void InitializeFloatingPawnMovementComponent();
 
 	virtual void BeginPlay() override;
 
 	virtual void PostInitializeComponents() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	FText Name;
 
 public:
 

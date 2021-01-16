@@ -47,7 +47,7 @@ void ATopDownCharacter::InitializeCapsuleComponent()
 		RootComponent = CapsuleComponent;
 	}
 	else {
-		throw std::exception("CapsuleComponent is null");
+		UE_LOG(LogTemp, Warning, TEXT("CapsuleComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
@@ -70,7 +70,7 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 		CurrentAnimationComponent->SetUsingAbsoluteLocation(false);
 	}
 	else {
-		throw std::exception("MainAnimationComponent is null");
+		UE_LOG(LogTemp, Warning, TEXT("CurrentAnimationComponent is null, character name: %s"), *Name.ToString());
 	}
 
 }
@@ -89,7 +89,7 @@ void ATopDownCharacter::InitializeInteractionComponent()
 		InteractionSphereComponent->SetupAttachment(RootComponent);
 	}
 	else {
-		throw std::exception("InteractionComponent is null");
+		UE_LOG(LogTemp, Warning, TEXT("InteractionSphereComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
@@ -104,7 +104,7 @@ void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
 		FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 	}
 	else {
-		throw std::exception("FloatingPawnMovement is null");
+		UE_LOG(LogTemp, Warning, TEXT("FloatingPawnMovementComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
