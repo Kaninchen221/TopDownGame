@@ -63,6 +63,8 @@ void ATopDownPlayerCharacter::InitializePlayerStateMachine()
 
 void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+	UE_LOG(LogTemp, Log, TEXT("SetupPlayerInputComponent"));
+
 	InputComponent = PlayerInputComponent;
 
 	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownPlayerCharacter::MoveVertical);
