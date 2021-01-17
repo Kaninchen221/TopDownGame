@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 	FText Name;
 
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	ECharacterDirection CharacterDirection = ECharacterDirection::DOWN;
+
 protected:
 
 	virtual void Tick(float DeltaSeconds) override;
@@ -80,4 +83,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UFloatingPawnMovement* GetFloatingPawnMovementComponent() { return FloatingPawnMovementComponent; }
 
+	UFUNCTION(BlueprintCallable)
+	ECharacterDirection GetCharacterDirection() { return CharacterDirection; }
 };
