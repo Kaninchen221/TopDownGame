@@ -90,7 +90,7 @@ inline bool UStackBasedStateMachine::PushState(FString Key)
 		StatesStack.Push(*FindResult);
 		UStateBase* TopState = StatesStack.Top();
 		if (TopState) {
-			TopState->OnExit();
+			TopState->OnEnter();
 		}
 		return true;
 	}
@@ -121,6 +121,19 @@ inline void UStackBasedStateMachine::PopState()
 			TopState->OnExit();
 		}
 		StatesStack.Pop(bShrinkStackWhenPossible);
+
+		NumOfStatesOnStack = StatesStack.Num();
+		if (NumOfStatesOnStack > 0) {
+			TopState = StatesStack.Top();
+			if (TopState) {
+				TopState->OnEnter();
+			}
+		}
+		else {
+			if (DefaultState) {
+				DefaultState->OnEnter();
+			}
+		}
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Trying to pop element from empty stack"));
