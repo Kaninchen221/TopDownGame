@@ -88,6 +88,10 @@ inline bool UStackBasedStateMachine::PushState(FString Key)
 	auto FindResult = States.Find(Key);
 	if (FindResult) {
 		StatesStack.Push(*FindResult);
+		UStateBase* TopState = StatesStack.Top();
+		if (TopState) {
+			TopState->OnExit();
+		}
 		return true;
 	}
 	else {
@@ -112,6 +116,10 @@ inline void UStackBasedStateMachine::PopState()
 {
 	int32 NumOfStatesOnStack = StatesStack.Num();
 	if (NumOfStatesOnStack > 0) {
+		UStateBase* TopState = StatesStack.Top();
+		if (TopState) {
+			TopState->OnExit();
+		}
 		StatesStack.Pop(bShrinkStackWhenPossible);
 	}
 	else {
@@ -144,19 +152,25 @@ inline bool UStackBasedStateMachine::SetDefaultState(FString Key)
 
 inline void UStackBasedStateMachine::Update()
 {
-	if (StatesStack.Num() == 0 && DefaultState) {
-		DefaultState->OnUpdate();
+	if (StatesStack.Num() == 0) {
+		if (DefaultState) {
+			DefaultState->OnUpdate();
+		}
 	}
 	else {
 		UStateBase* TopState = StatesStack.Top();
-		TopState->OnUpdate();
+		if (TopState) {
+			TopState->OnUpdate();
+		}
 	}
 }
 
 inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 {
-	if (StatesStack.Num() == 0 && DefaultState) {
-		DefaultState->OnTick(DeltaSeconds);
+	if (StatesStack.Num() == 0) {
+		if (DefaultState) {
+			DefaultState->OnUpdate();
+		}
 	}
 	else {
 		UStateBase* TopState = StatesStack.Top();
