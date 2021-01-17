@@ -74,7 +74,7 @@ inline UStateBase* UStackBasedStateMachine::AddState(FString Key, UStateBase* St
 {
 	if (State) {
 		UStateBase* AddedState = States.Add(Key, State);
-		AddedState->SetControledObject(ControledObject);
+		AddedState->OnSetControledObject(ControledObject);
 		return AddedState;
 	}
 	else {
@@ -125,7 +125,7 @@ inline void UStackBasedStateMachine::SetControledObject(UObject* NewControledObj
 
 	for (auto& Pair : States) {
 		UStateBase*& State = Pair.Value;
-		State->SetControledObject(ControledObject);
+		State->OnSetControledObject(ControledObject);
 	}
 }
 
@@ -145,11 +145,11 @@ inline bool UStackBasedStateMachine::SetDefaultState(FString Key)
 inline void UStackBasedStateMachine::Update()
 {
 	if (StatesStack.Num() == 0 && DefaultState) {
-		DefaultState->Update();
+		DefaultState->OnUpdate();
 	}
 	else {
 		for (UStateBase* State : StatesStack) {
-			State->Update();
+			State->OnUpdate();
 		}
 	}
 }
@@ -157,11 +157,11 @@ inline void UStackBasedStateMachine::Update()
 inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 {
 	if (StatesStack.Num() == 0 && DefaultState) {
-		DefaultState->Tick(DeltaSeconds);
+		DefaultState->OnTick(DeltaSeconds);
 	}
 	else {
 		for (UStateBase* State : StatesStack) {
-			State->Tick(DeltaSeconds);
+			State->OnTick(DeltaSeconds);
 		}
 	}
 }
@@ -172,16 +172,16 @@ inline void UStackBasedStateMachine::ChangeCurrentState(FString Key)
 	if (State) {
 		UStateBase* ActualTopState = TopState();
 		if (ActualTopState) {
-			ActualTopState->Exit();
+			ActualTopState->OnExit();
 		}
 		else {
 			if (DefaultState) {
-				DefaultState->Exit();
+				DefaultState->OnExit();
 			}
 		}
 		PopState();
 		StatesStack.Push(*State);
-		TopState()->Enter();
+		TopState()->OnEnter();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Can't find state with key: %s"), *Key);

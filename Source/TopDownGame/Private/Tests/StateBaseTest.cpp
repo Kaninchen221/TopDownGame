@@ -26,33 +26,33 @@ bool FUStateBaseTypeTest::RunTest(const FString& Parameters)
         UStateBase* State = CreateState();
         UObject* Object = NewObject<UStateBase>();
 
-        State->SetControledObject(Object);
+        State->OnSetControledObject(Object);
    
     }
 
     {
         UStateBase* State = CreateState();
 
-        State->Enter();
+        State->OnEnter();
     }
 
     {
         UStateBase* State = CreateState();
 
-        State->Update();
+        State->OnUpdate();
     }
 
     {
         UStateBase* State = CreateState();
 
         float DeltaSeconds = 34.f;
-        State->Tick(DeltaSeconds);
+        State->OnTick(DeltaSeconds);
     }
 
     {
         UStateBase* State = CreateState();
 
-        State->Exit();
+        State->OnExit();
     }
 
     return true;

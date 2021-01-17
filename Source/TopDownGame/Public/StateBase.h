@@ -18,19 +18,19 @@ public:
 
 	UStateBase() = default;
 
-	UFUNCTION(Category = "State", BlueprintCallable)
-	virtual void SetControledObject(UObject* Object) {}
+	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnSetControledObject"))
+	void OnSetControledObject(UObject* Object);
 
-	UFUNCTION(Category = "State", BlueprintCallable)
-	virtual void Enter() {}
+	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnEnter"))
+	void OnEnter();
 
-	UFUNCTION(Category = "State", BlueprintCallable)
-	virtual void Update() {}
+	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnUpdate"))
+	void OnUpdate();
 
-	UFUNCTION(Category = "State", BlueprintCallable)
-	virtual void Tick(float DeltaSeconds) {}
+	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnTick"))
+	void OnTick(float DeltaSeconds);
 
-	UFUNCTION(Category = "State", BlueprintCallable)
-	virtual void Exit() {}
+	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnExit"))
+	void OnExit();
 
 };
