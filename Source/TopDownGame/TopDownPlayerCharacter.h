@@ -50,7 +50,7 @@ protected:
 	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
 
-	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	UStackBasedStateMachine* PlayerStateMachine;
 
 protected:
