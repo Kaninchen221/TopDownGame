@@ -148,9 +148,8 @@ inline void UStackBasedStateMachine::Update()
 		DefaultState->OnUpdate();
 	}
 	else {
-		for (UStateBase* State : StatesStack) {
-			State->OnUpdate();
-		}
+		UStateBase* TopState = StatesStack.Top();
+		TopState->OnUpdate();
 	}
 }
 
@@ -160,9 +159,8 @@ inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 		DefaultState->OnTick(DeltaSeconds);
 	}
 	else {
-		for (UStateBase* State : StatesStack) {
-			State->OnTick(DeltaSeconds);
-		}
+		UStateBase* TopState = StatesStack.Top();
+		TopState->OnTick(DeltaSeconds);
 	}
 }
 
