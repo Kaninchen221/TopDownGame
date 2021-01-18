@@ -182,7 +182,7 @@ inline void UStackBasedStateMachine::Tick(float DeltaSeconds)
 {
 	if (StatesStack.Num() == 0) {
 		if (DefaultState) {
-			DefaultState->OnUpdate();
+			DefaultState->OnTick(DeltaSeconds);
 		}
 	}
 	else {
