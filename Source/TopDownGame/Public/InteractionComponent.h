@@ -6,6 +6,9 @@
 #include "Components/SceneComponent.h"
 #include "InteractionComponent.generated.h"
 
+class USphereComponent;
+class ATopDownCharacter;
+class AActor;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TOPDOWNGAME_API UInteractionComponent : public USceneComponent
@@ -13,16 +16,49 @@ class TOPDOWNGAME_API UInteractionComponent : public USceneComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
+
 	UInteractionComponent();
 
+private:
+
+	void InitializeCollisionComponent();
+	void SetupCollisionComponentProperties();
+	void BindCollisionComponentEvents();
+	void BindCollisionComponentBeginOverlapEvent();
+	void BindCollisionComponentEndOverlapEvent();
+
 protected:
-	// Called when the game starts
+
+	UPROPERTY(Category = "Collision", EditAnywhere, BlueprintReadWrite)
+	USphereComponent* CollisionComponent;
+
+	UPROPERTY(Category = "Interaction", BlueprintReadOnly)
+	TSoftObjectPtr<AActor> CurrentInteractableActor;
+
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
+
+	UFUNCTION(BlueprintCallable)
+	TSoftObjectPtr<AActor> GetCurrentInteractableActor();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsChoosedInteractableCharacterValid() const;
+
+	UFUNCTION()
+	void ComponentBeginOverlapInteractableCharacter();
+
+	UFUNCTION()
+	void ComponentEndOverlapInteractableCharacter();
+
+	USphereComponent* GetCollisionComponent() { return CollisionComponent; }
+
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+private:
+
+	TArray<AActor*> GetOverlapedActors();
+
+	void NeverTick();
+
 };
