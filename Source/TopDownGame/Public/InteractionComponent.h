@@ -10,7 +10,7 @@ class USphereComponent;
 class ATopDownCharacter;
 class AActor;
 
-DECLARE_EVENT(UInteractionComponent, FOnCurrentInteractableActorHasBeenChanged)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCurrentInteractableActorHasBeenChanged);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TOPDOWNGAME_API UInteractionComponent : public USceneComponent
@@ -61,7 +61,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(Category = "Interaction|Event", BlueprintAssignable)
-	FOnCurrentInteractableActorHasBeenChanged OnCurrentInteractableActorHasBeenChangedEvent;
+	FOnCurrentInteractableActorHasBeenChanged CurrentInteractableActorHasBeenChangedEvent;
 
 private:
 
