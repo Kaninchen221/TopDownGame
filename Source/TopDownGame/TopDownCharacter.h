@@ -14,6 +14,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
 class USphereComponent;
+class UInteractionComponent;
 
 UCLASS(config = Character, BlueprintType, Blueprintable)
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
@@ -29,6 +30,7 @@ private:
 	void InitializeCapsuleComponent();
 	void InitializeCurrentAnimationComponent();
 	void InitializeInteractionComponent();
+	void InitializeInteractionCollisionComponent();
 	void InitializeFloatingPawnMovementComponent();
 
 	void ControllerDoNotUseAnyRotation();
@@ -42,7 +44,7 @@ protected:
 	UPaperFlipbookComponent* CurrentAnimationComponent;
 
 	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
-	USphereComponent* InteractionSphereComponent;
+	UInteractionComponent* InteractionComponent;
 
 	UPROPERTY(Category = Movement, EditAnywhere, BlueprintReadWrite)
 	UFloatingPawnMovement* FloatingPawnMovementComponent;
@@ -78,11 +80,12 @@ public:
 	UPaperFlipbookComponent* GetCurrentAnimationComponent() { return CurrentAnimationComponent; }
 
 	UFUNCTION(BlueprintCallable)
-	USphereComponent* GetInteractionSphereComponent() { return InteractionSphereComponent; }
+	UInteractionComponent* GetInteractionComponent() { return InteractionComponent; }
 
 	UFUNCTION(BlueprintCallable)
 	UFloatingPawnMovement* GetFloatingPawnMovementComponent() { return FloatingPawnMovementComponent; }
 
 	UFUNCTION(BlueprintCallable)
 	ECharacterDirection GetCharacterDirection() { return CharacterDirection; }
+
 };

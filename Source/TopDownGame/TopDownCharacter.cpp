@@ -7,6 +7,7 @@
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Public/InteractionComponent.h"
 
 #include "Engine/CollisionProfile.h"
 
@@ -77,19 +78,15 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 
 void ATopDownCharacter::InitializeInteractionComponent()
 {
-	static FName InteractionSphereComponentName(TEXT("Interaction"));
-	InteractionSphereComponent = CreateDefaultSubobject<USphereComponent>(InteractionSphereComponentName);
-	if (InteractionSphereComponent) {
-		InteractionSphereComponent->InitSphereRadius(48.f);
-		InteractionSphereComponent->SetCollisionProfileName("Interaction", true);
-		InteractionSphereComponent->CanCharacterStepUpOn = ECB_Yes;
-		InteractionSphereComponent->SetShouldUpdatePhysicsVolume(false);
-		InteractionSphereComponent->SetCanEverAffectNavigation(false);
-		InteractionSphereComponent->bDynamicObstacle = true;
-		InteractionSphereComponent->SetupAttachment(RootComponent);
+	static FName InteractionComponentName(TEXT("InteractionComponent"));
+	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(InteractionComponentName);
+	if (InteractionComponent) {
+
+		InteractionComponent->SetupAttachment(RootComponent);
+
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("InteractionSphereComponent is null, character name: %s"), *Name.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("InteractionComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
