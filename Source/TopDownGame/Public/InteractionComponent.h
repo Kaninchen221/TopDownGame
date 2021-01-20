@@ -10,6 +10,8 @@ class USphereComponent;
 class ATopDownCharacter;
 class AActor;
 
+DECLARE_EVENT(UInteractionComponent, OnCurrentInteractableActorHasBeenChanged)
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TOPDOWNGAME_API UInteractionComponent : public USceneComponent
 {
@@ -40,20 +42,25 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
+	void NextInteractableActor();
+
+	UFUNCTION(BlueprintCallable)
 	TSoftObjectPtr<AActor> GetCurrentInteractableActor();
 
 	UFUNCTION(BlueprintCallable)
-	bool IsChoosedInteractableCharacterValid() const;
+	bool IsChoosedInteractableActorValid() const;
 
 	UFUNCTION()
-	void ComponentBeginOverlapInteractableCharacter();
+	void ComponentBeginOverlapInteractableActor();
 
 	UFUNCTION()
-	void ComponentEndOverlapInteractableCharacter();
+	void ComponentEndOverlapInteractableActor();
 
 	USphereComponent* GetCollisionComponent() { return CollisionComponent; }
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	OnCurrentInteractableActorHasBeenChanged CurrentInteractableActorHasBeenChangedEvent;
 
 private:
 

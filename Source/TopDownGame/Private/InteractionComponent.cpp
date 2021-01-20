@@ -26,7 +26,7 @@ void UInteractionComponent::InitializeCollisionComponent()
 
 void UInteractionComponent::SetupCollisionComponentProperties()
 {
-	CollisionComponent->AttachTo(this);
+	CollisionComponent->SetupAttachment(this);
 	CollisionComponent->InitSphereRadius(48.f);
 	CollisionComponent->SetCollisionProfileName("Interaction", true);
 	CollisionComponent->CanCharacterStepUpOn = ECB_Yes;
@@ -44,14 +44,14 @@ void UInteractionComponent::BindCollisionComponentEvents()
 void UInteractionComponent::BindCollisionComponentBeginOverlapEvent()
 {
 	FScriptDelegate ScriptDelegate;
-	ScriptDelegate.BindUFunction(this, "ComponentBeginOverlapInteractableCharacter");
+	ScriptDelegate.BindUFunction(this, "ComponentBeginOverlapInteractableActor");
 	CollisionComponent->OnComponentBeginOverlap.Add(ScriptDelegate);
 }
 
 void UInteractionComponent::BindCollisionComponentEndOverlapEvent()
 {
 	FScriptDelegate ScriptDelegate;
-	ScriptDelegate.BindUFunction(this, "ComponentEndOverlapInteractableCharacter");
+	ScriptDelegate.BindUFunction(this, "ComponentEndOverlapInteractableActor");
 	CollisionComponent->OnComponentBeginOverlap.Add(ScriptDelegate);
 }
 
@@ -61,12 +61,35 @@ void UInteractionComponent::BeginPlay()
 	
 }
 
+void UInteractionComponent::NextInteractableActor()
+{
+	TArray<AActor*> OverlapedActors = GetOverlapedActors();
+
+	int32 NumOfOverlapedActors = OverlapedActors.Num();
+	bool bCanChangeCurrentInteractableActor = NumOfOverlapedActors > 1;
+	if (bCanChangeCurrentInteractableActor) {
+
+		int32 ActualIndex = OverlapedActors.Find(CurrentInteractableActor.Get());
+
+		bool bCurrentInteractableActorIsLastItem = ActualIndex == (NumOfOverlapedActors - 1);
+		if (bCurrentInteractableActorIsLastItem) {
+			CurrentInteractableActor = OverlapedActors[0];
+		}
+		else {
+			int32 NextIndex = ActualIndex + 1;
+			CurrentInteractableActor = OverlapedActors[NextIndex];
+		}
+
+		CurrentInteractableActorHasBeenChangedEvent.Broadcast();
+	}
+}
+
 TSoftObjectPtr<AActor> UInteractionComponent::GetCurrentInteractableActor()
 {
 	return CurrentInteractableActor;
 }
 
-bool UInteractionComponent::IsChoosedInteractableCharacterValid() const
+bool UInteractionComponent::IsChoosedInteractableActorValid() const
 {
 	bool bIsPtrValid = CurrentInteractableActor.IsValid();
 	if (bIsPtrValid) {
@@ -81,24 +104,26 @@ bool UInteractionComponent::IsChoosedInteractableCharacterValid() const
 	return false;
 }
 
-void UInteractionComponent::ComponentBeginOverlapInteractableCharacter()
+void UInteractionComponent::ComponentBeginOverlapInteractableActor()
 {
-	bool bIsChoosedInteractableCharacterValid = IsChoosedInteractableCharacterValid();
+	bool bIsChoosedInteractableCharacterValid = IsChoosedInteractableActorValid();
 	if (!bIsChoosedInteractableCharacterValid) 
 	{
 		TArray<AActor*> OverlapedActors = GetOverlapedActors();
 		CurrentInteractableActor = OverlapedActors[0];
+
+		CurrentInteractableActorHasBeenChangedEvent.Broadcast();
 	}
 }
 
-void UInteractionComponent::ComponentEndOverlapInteractableCharacter()
+void UInteractionComponent::ComponentEndOverlapInteractableActor()
 {
-	bool bIsChoosedInteractableCharacterValid = IsChoosedInteractableCharacterValid();
+	bool bIsChoosedInteractableCharacterValid = IsChoosedInteractableActorValid();
 	if (!bIsChoosedInteractableCharacterValid) 
 	{
 		TArray<AActor*> OverlapedActors = GetOverlapedActors();
-		bool bIsAnyOverlapedActor = OverlapedActors.Num() > 0;
-		if (bIsAnyOverlapedActor) 
+		bool bIsAnyActorOverlapped = OverlapedActors.Num() > 0;
+		if (bIsAnyActorOverlapped)
 		{
 			CurrentInteractableActor = OverlapedActors[0];
 		}
@@ -106,6 +131,8 @@ void UInteractionComponent::ComponentEndOverlapInteractableCharacter()
 		{
 			CurrentInteractableActor = nullptr;
 		}
+
+		CurrentInteractableActorHasBeenChangedEvent.Broadcast();
 	}
 }
 

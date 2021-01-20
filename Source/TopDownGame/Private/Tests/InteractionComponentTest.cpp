@@ -35,14 +35,19 @@ bool FUInteractionComponentTest::RunTest(const FString& Parameters)
 
     {
         UInteractionComponent* InteractionComponent = CreateInteractionComponent();
-        bool bIsChoosedInteractableCharacterValid = InteractionComponent->IsChoosedInteractableCharacterValid();
+        bool bIsChoosedInteractableCharacterValid = InteractionComponent->IsChoosedInteractableActorValid();
         TestFalse("bIsChoosedInteractableCharacterValid", bIsChoosedInteractableCharacterValid);
     }
 
     {
         UInteractionComponent* InteractionComponent = CreateInteractionComponent();
-        AActor* CurrentInteractableActor = InteractionComponent->GetCurrentInteractableActor();
-        TestNull("CurrentInteractableActor", CurrentInteractableActor);
+        TSoftObjectPtr<AActor> CurrentInteractableActor = InteractionComponent->GetCurrentInteractableActor();
+        TestNull("CurrentInteractableActor", CurrentInteractableActor.Get());
+    }
+
+    {
+        UInteractionComponent* InteractionComponent = CreateInteractionComponent();
+        InteractionComponent->NextInteractableActor();
     }
 
     return true;
