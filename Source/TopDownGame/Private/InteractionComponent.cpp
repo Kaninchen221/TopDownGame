@@ -52,7 +52,7 @@ void UInteractionComponent::BindCollisionComponentEndOverlapEvent()
 {
 	FScriptDelegate ScriptDelegate;
 	ScriptDelegate.BindUFunction(this, "ComponentEndOverlapInteractableActor");
-	CollisionComponent->OnComponentBeginOverlap.Add(ScriptDelegate);
+	CollisionComponent->OnComponentEndOverlap.Add(ScriptDelegate);
 }
 
 void UInteractionComponent::BeginPlay()
@@ -92,12 +92,10 @@ TSoftObjectPtr<AActor> UInteractionComponent::GetCurrentInteractableActor()
 bool UInteractionComponent::IsChoosedInteractableActorValid() const
 {
 	bool bIsPtrValid = CurrentInteractableActor.IsValid();
-	if (bIsPtrValid) {
+	bool bIsChoosedInteractableCharacterOverlaped = CollisionComponent->IsOverlappingActor(CurrentInteractableActor.Get());
+	if (bIsPtrValid && bIsChoosedInteractableCharacterOverlaped) {
 
-		bool bIsChoosedInteractableCharacterOverlaped = CollisionComponent->IsOverlappingActor(CurrentInteractableActor.Get());
-		if (bIsChoosedInteractableCharacterOverlaped) {
-			return true;
-		}
+		return true;
 
 	}
 
