@@ -30,7 +30,6 @@ private:
 	void InitializeCapsuleComponent();
 	void InitializeCurrentAnimationComponent();
 	void InitializeInteractionComponent();
-	void InitializeInteractionCollisionComponent();
 	void InitializeFloatingPawnMovementComponent();
 
 	void ControllerDoNotUseAnyRotation();
