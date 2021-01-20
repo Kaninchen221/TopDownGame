@@ -44,8 +44,8 @@ bool FATopDownCharacterTest::RunTest(const FString& Parameters)
     {
         auto Character = CreateCharacter();
 
-        auto InteractionSphereComponent = Character->GetInteractionSphereComponent();
-        TestNotNull("InteractionSphereComponent can't be null", InteractionSphereComponent);
+        auto InteractionComponent = Character->GetInteractionComponent();
+        TestNotNull("InteractionComponent", InteractionComponent);
     }
 
     {
