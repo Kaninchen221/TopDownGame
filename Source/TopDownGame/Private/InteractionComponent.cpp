@@ -27,7 +27,6 @@ void UInteractionComponent::InitializeCollisionComponent()
 void UInteractionComponent::SetupCollisionComponentProperties()
 {
 	CollisionComponent->SetupAttachment(this);
-	CollisionComponent->InitSphereRadius(48.f);
 	CollisionComponent->SetCollisionProfileName("Interaction", true);
 	CollisionComponent->CanCharacterStepUpOn = ECB_Yes;
 	CollisionComponent->SetShouldUpdatePhysicsVolume(false);
