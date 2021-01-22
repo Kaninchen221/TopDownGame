@@ -3,7 +3,7 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../DialogSystem/Dialog.h"
+#include "../Public/DialogSystem/DialogComponent.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -12,7 +12,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUDialogComponentTest, "TopDownGame.DialogSyste
 bool FUDialogComponentTest::RunTest(const FString& Parameters)
 {
     auto CreateDialogComponent = [&]() {
-        auto DialogComponent = NewObject<UDialog>();
+        auto DialogComponent = NewObject<UDialogComponent>();
         TestNotNull("DialogComponent must be initialized", DialogComponent);
         return DialogComponent;
     };

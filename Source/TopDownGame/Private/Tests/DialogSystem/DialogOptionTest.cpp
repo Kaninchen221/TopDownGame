@@ -3,8 +3,8 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../DialogSystem/DialogOption.h"
-#include "../DialogSystem/DialogNode.h"
+#include "../Public/DialogSystem/DialogOption.h"
+#include "../Public/DialogSystem/DialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

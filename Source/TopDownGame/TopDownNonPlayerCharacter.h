@@ -9,7 +9,7 @@
 
 #include "TopDownNonPlayerCharacter.generated.h"
 
-class UDialog;
+class UDialogComponent;
 
 /**
  * 
@@ -30,11 +30,11 @@ private:
 protected:
 
 	UPROPERTY(Category = Dialog, EditAnywhere, BlueprintReadWrite)
-	UDialog* DialogComponent;
+	UDialogComponent* DialogComponent;
 
 public:
 
 	UFUNCTION(BlueprintCallable)
-	UDialog * GetDialogComponent() const { return DialogComponent; }
+	UDialogComponent * GetDialogComponent() const { return DialogComponent; }
 
 };

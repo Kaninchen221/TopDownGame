@@ -7,21 +7,21 @@
 #include "Containers/Array.h"
 #include "DialogNode.h"
 #include "Templates/SubclassOf.h"
-#include "Dialog.generated.h"
+#include "DialogComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartDialog);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewCurrentDialogNode);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndDialog);
 
 UCLASS( ClassGroup=(Dialog), Blueprintable, meta=(BlueprintSpawnableComponent) )
-class TOPDOWNGAME_API UDialog : public UActorComponent
+class TOPDOWNGAME_API UDialogComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 
 public:	
 
-	UDialog();
+	UDialogComponent();
 
 private:
 

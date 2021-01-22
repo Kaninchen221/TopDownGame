@@ -4,7 +4,7 @@
 #include "Misc/AutomationTest.h"
 #include "Internationalization/Text.h"
 
-#include "../DialogSystem/DialogNode.h"
+#include "../Public/DialogSystem/DialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

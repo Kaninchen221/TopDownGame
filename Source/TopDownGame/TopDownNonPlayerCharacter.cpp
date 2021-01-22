@@ -5,7 +5,7 @@
 
 #include "Engine/CollisionProfile.h"
 
-#include "DialogSystem/Dialog.h"
+#include "Public/DialogSystem/DialogComponent.h"
 
 ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
 {
@@ -15,7 +15,7 @@ ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
 void ATopDownNonPlayerCharacter::InitializeDialogComponent() 
 {
 	static FName DialogComponentName(TEXT("Dialog"));
-	DialogComponent = CreateDefaultSubobject<UDialog>(DialogComponentName);
+	DialogComponent = CreateDefaultSubobject<UDialogComponent>(DialogComponentName);
 	if (DialogComponent) {
 		
 	}

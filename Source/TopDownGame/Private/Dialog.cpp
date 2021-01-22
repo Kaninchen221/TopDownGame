@@ -1,17 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Dialog.h"
+#include "../Public/DialogSystem/DialogComponent.h"
+#include "../Public/DialogSystem/DialogOption.h"
 
-#include "DialogOption.h"
-
-UDialog::UDialog()
+UDialogComponent::UDialogComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
 }
 
-void UDialog::InitializeStartNode()
+void UDialogComponent::InitializeStartNode()
 {
 	StartNode = NewObject<UDialogNode>();
 	if (StartNode) {
@@ -24,20 +23,20 @@ void UDialog::InitializeStartNode()
 	}
 }
 
-void UDialog::BeginPlay()
+void UDialogComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 	InitializeStartNode();
 }
 
-void UDialog::StartDialog()
+void UDialogComponent::StartDialog()
 {
 	SetCurrentNode(StartNode);
 	OnStartDialog.Broadcast();
 }
 
-bool UDialog::ChooseOption(int Index)
+bool UDialogComponent::ChooseOption(int Index)
 {
 	if (!CurrentNode) {
 
@@ -86,13 +85,13 @@ bool UDialog::ChooseOption(int Index)
 	return true;
 }
 
-void UDialog::EndDialog()
+void UDialogComponent::EndDialog()
 {
 	CurrentNode = nullptr;
 	OnEndDialog.Broadcast();
 }
 
-void UDialog::SetCurrentNode(UDialogNode* NewCurrentNode)
+void UDialogComponent::SetCurrentNode(UDialogNode* NewCurrentNode)
 {
 	CurrentNode = NewCurrentNode; 
 	OnNewCurrentDialogNode.Broadcast();
