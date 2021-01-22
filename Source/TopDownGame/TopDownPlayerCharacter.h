@@ -47,9 +47,6 @@ protected:
 	UPROPERTY(Category = UI, EditAnywhere, BlueprintReadWrite)
 	UUserWidget* UserInterface;
 
-	UPROPERTY(Category = Interaction, EditAnywhere, BlueprintReadWrite)
-	TArray<TSoftObjectPtr<ATopDownNonPlayerCharacter>> InteractableCharacters;
-
 	UPROPERTY(Category = PlayerState, EditAnywhere, BlueprintReadWrite)
 	UStackBasedStateMachine* PlayerStateMachine;
 
