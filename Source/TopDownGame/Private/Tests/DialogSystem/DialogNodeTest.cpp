@@ -15,7 +15,6 @@ bool FUDialogNodeTest::RunTest(const FString& Parameters)
     auto DialogNode = NewObject<UDialogNode>();
     TestNotNull("DialogNode must be initialized", DialogNode);
 
-    /// Add Dialog Option
     {
         auto ExpectedDialogOptionText = FText::FromString("Placeholder");
         bool ExpectedCanBeChoosen = true;
