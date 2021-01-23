@@ -103,7 +103,7 @@ inline bool UStackBasedStateMachine::PushState(FString Key)
 inline UStateBase* UStackBasedStateMachine::TopState()
 {
 	int32 StatesOnStack = StatesStack.Num();
-	if (StatesOnStack <= 0) {
+	if (StatesOnStack == 0) {
 		UE_LOG(LogTemp, Warning, TEXT("States Stack is empty return nullptr"));
 		return nullptr;
 	}
@@ -198,13 +198,13 @@ inline void UStackBasedStateMachine::ChangeCurrentState(FString Key)
 		UStateBase* ActualTopState = TopState();
 		if (ActualTopState) {
 			ActualTopState->OnExit();
+			PopState();
 		}
 		else {
 			if (DefaultState) {
 				DefaultState->OnExit();
 			}
 		}
-		PopState();
 		StatesStack.Push(*State);
 		TopState()->OnEnter();
 	}
