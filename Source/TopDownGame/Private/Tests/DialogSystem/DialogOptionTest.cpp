@@ -18,7 +18,6 @@ bool FUDialogOptionTest::RunTest(const FString& Parameters)
         return DialogOption;
     };
 
-    /// Create Result Node
     {
         auto DialogOption = InitializeDialogOption();
         auto ExpectedResultNodeText = FText::FromString("Placeholder");
@@ -30,7 +29,6 @@ bool FUDialogOptionTest::RunTest(const FString& Parameters)
         TestTrue("Text must be equal", ResultNodeText.EqualTo(ExpectedResultNodeText));
     }
 
-    /// Choose must return same pointer as CreateResultNode
     {
         auto DialogOption = InitializeDialogOption();
         DialogOption->SetCanBeChoosen(true);
@@ -40,7 +38,6 @@ bool FUDialogOptionTest::RunTest(const FString& Parameters)
         TestEqual("Choose must return same pointer as CreateResultNode", ResultNode, ExpectedResultNode);
     }
 
-    /// Choose must return nullptr if Dialog Option can't be choosed
     {
         auto DialogOption = InitializeDialogOption();
         DialogOption->SetCanBeChoosen(false);
@@ -50,7 +47,6 @@ bool FUDialogOptionTest::RunTest(const FString& Parameters)
         TestNull("If DialogOption can't be choosen then Choose must return nullptr", ResultNode);
     }
 
-    /// Choose must return nullptr if we don't call CreateResultNode
     {
         auto DialogOption = InitializeDialogOption();
         DialogOption->SetCanBeChoosen(true);
