@@ -33,6 +33,14 @@ bool FUDialogNodeTest::RunTest(const FString& Parameters)
         TestEqual("Can be choosen must be equal", CanBeChoosen, ExpectedCanBeChoosen);
     }
 
+    {
+        FText ExpectedText = FText::FromString("Placeholder");
+        DialogNode->SetText(ExpectedText);
+
+        FText ActualText = DialogNode->GetText();
+        TestTrue("Expected and Actual texts must be equal", ExpectedText.EqualTo(ActualText));
+    }
+
     return true;
 }
 
