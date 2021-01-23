@@ -20,6 +20,6 @@ void ATopDownNonPlayerCharacter::InitializeDialogComponent()
 		
 	}
 	else {
-		throw std::exception("DialogComponent is null");
+		UE_LOG(LogTemp, Error, TEXT("DialogComponent is null"));
 	}
 }
