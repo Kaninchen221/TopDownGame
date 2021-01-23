@@ -17,9 +17,7 @@ void UDialogComponent::InitializeStartNode()
 
 	}
 	else {
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Failed to create StartNode in Dialog"));
-		}
+		UE_LOG(LogTemp, Error, TEXT("StartNode is null"));
 	}
 }
 
@@ -40,37 +38,29 @@ bool UDialogComponent::ChooseOption(int Index)
 {
 	if (!CurrentNode) {
 
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Current node is invalid"));
-		}
+		UE_LOG(LogTemp, Warning, TEXT("CurrentNode is null"));
 
 		return false;
 	}
 
-	auto DialogOptions = CurrentNode->GetDialogOptions();
-	auto DialogOptionsCount = DialogOptions.Num();
-
-	Index--;
+	TArray<UDialogOption*> DialogOptions = CurrentNode->GetDialogOptions();
+	int32 DialogOptionsCount = DialogOptions.Num();
 	if (Index >= DialogOptionsCount || Index < 0) {
-		
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Index is invalid"));
-		}
+
+		UE_LOG(LogTemp, Warning, TEXT("Index is invalid"));
 
 		return false;
 	}
 	
-	auto Choosed = DialogOptions[Index];
+	UDialogOption* Choosed = DialogOptions[Index];
 	if (!Choosed->IsCanBeChoosen()) {
-		
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Dialog option Can't be Choosen"));
-		}
+
+		UE_LOG(LogTemp, Warning, TEXT("DialogOption with index %i can't be choosen"), Index);
 
 		return false;
 	}
 
-	auto ResultDialogNode = Choosed->Choose();
+	UDialogNode* ResultDialogNode = Choosed->Choose();
 	if (!ResultDialogNode) {
 
 		SetCurrentNode(ResultDialogNode);
