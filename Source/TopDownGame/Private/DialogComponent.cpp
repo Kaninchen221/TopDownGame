@@ -73,9 +73,7 @@ bool UDialogComponent::ChooseOption(int Index)
 	auto ResultDialogNode = Choosed->Choose();
 	if (!ResultDialogNode) {
 
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Result Dialog Node is invalid"));
-		}
+		SetCurrentNode(ResultDialogNode);
 
 		return false;
 	}
