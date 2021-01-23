@@ -35,6 +35,9 @@ public:
 	UStateBase* TopState();
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
+	UStateBase* CurrentState();
+
+	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void PopState();
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
@@ -104,8 +107,18 @@ inline UStateBase* UStackBasedStateMachine::TopState()
 {
 	int32 StatesOnStack = StatesStack.Num();
 	if (StatesOnStack == 0) {
-		UE_LOG(LogTemp, Warning, TEXT("States Stack is empty return nullptr"));
 		return nullptr;
+	}
+	else {
+		return StatesStack.Top();
+	}
+}
+
+inline UStateBase* UStackBasedStateMachine::CurrentState()
+{
+	int32 StatesOnStack = StatesStack.Num();
+	if (StatesOnStack == 0) {
+		return DefaultState;
 	}
 	else {
 		return StatesStack.Top();
