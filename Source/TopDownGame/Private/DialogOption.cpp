@@ -26,6 +26,12 @@ UDialogNode* UDialogOption::CreateResultNode(FText DialogNodeText)
 	return ResultNode;
 }
 
+UDialogNode* UDialogOption::SetResultNode(UDialogNode* DialogNode)
+{
+	ResultNode = DialogNode;
+	return ResultNode;
+}
+
 UDialogOption* UDialogOption::SetActionOfThisOption(FActionOfThisOption NewActionOfThisOption)
 {
 	ActionOfThisOption = NewActionOfThisOption;

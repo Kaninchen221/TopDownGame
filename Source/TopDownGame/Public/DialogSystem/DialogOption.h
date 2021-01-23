@@ -47,6 +47,9 @@ public:
 	UDialogNode* CreateResultNode(FText DialogNodeText);
 
 	UFUNCTION(BlueprintCallable)
+	UDialogNode* SetResultNode(UDialogNode* DialogNode);
+
+	UFUNCTION(BlueprintCallable)
 	UDialogNode* GetResultNode() { return ResultNode; }
 
 	void SetCanBeChoosen(bool Value) { CanBeChoosen = Value; }
