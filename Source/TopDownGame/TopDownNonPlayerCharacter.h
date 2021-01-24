@@ -14,7 +14,7 @@ class UDialogComponent;
 /**
  * 
  */
-UCLASS()
+UCLASS(config = NonPlayerCharacter, BlueprintType, Blueprintable)
 class TOPDOWNGAME_API ATopDownNonPlayerCharacter : public ATopDownCharacter
 {
 	GENERATED_BODY()
@@ -25,16 +25,8 @@ public:
 
 private:
 
-	void InitializeDialogComponent();
-
 protected:
 
-	UPROPERTY(Category = Dialog, EditAnywhere, BlueprintReadWrite)
-	UDialogComponent* DialogComponent;
-
 public:
-
-	UFUNCTION(BlueprintCallable)
-	UDialogComponent* GetDialogComponent() { return DialogComponent; }
 
 };

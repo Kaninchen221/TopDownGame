@@ -9,17 +9,4 @@
 
 ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
 {
-	InitializeDialogComponent();
-}
-
-void ATopDownNonPlayerCharacter::InitializeDialogComponent() 
-{
-	static FName DialogComponentName(TEXT("Dialog"));
-	DialogComponent = CreateDefaultSubobject<UDialogComponent>(DialogComponentName);
-	if (DialogComponent) {
-		
-	}
-	else {
-		UE_LOG(LogTemp, Error, TEXT("DialogComponent is null"));
-	}
 }

@@ -17,13 +17,6 @@ bool FATopDownNonPlayerCharacterTest::RunTest(const FString& Parameters)
         return NonPlayerCharacter;
     };
 
-    {
-        auto NPC = CreateNonPlayerCharacter();
-        
-        auto DialogComponent = NPC->GetDialogComponent();
-        TestNotNull("DialogComponent can't be null", DialogComponent);
-    }
-
     return true;
 }
 
