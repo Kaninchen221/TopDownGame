@@ -65,7 +65,7 @@ bool UDialogComponent::ChooseOption(int Index)
 
 		SetCurrentNode(ResultDialogNode);
 
-		return false;
+		return true;
 	}
 
 	SetCurrentNode(ResultDialogNode);
