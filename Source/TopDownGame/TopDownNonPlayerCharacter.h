@@ -35,6 +35,6 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
-	UDialogComponent * GetDialogComponent() const { return DialogComponent; }
+	UDialogComponent* GetDialogComponent() { return DialogComponent; }
 
 };
