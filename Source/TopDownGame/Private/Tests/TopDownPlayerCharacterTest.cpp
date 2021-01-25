@@ -5,7 +5,7 @@
 #include "UObject/UObjectGlobals.h"
 #include "Misc/AutomationTest.h"
 
-#include "../TopDownPlayerCharacter.h"
+#include "../Public/TopDownPlayerCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

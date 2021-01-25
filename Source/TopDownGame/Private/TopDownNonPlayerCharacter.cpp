@@ -5,7 +5,7 @@
 
 #include "Engine/CollisionProfile.h"
 
-#include "Public/DialogSystem/DialogComponent.h"
+#include "../Public/DialogSystem/DialogComponent.h"
 
 ATopDownNonPlayerCharacter::ATopDownNonPlayerCharacter()
 {

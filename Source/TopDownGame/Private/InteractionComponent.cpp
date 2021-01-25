@@ -2,7 +2,7 @@
 
 
 #include "InteractionComponent.h"
-#include "../TopDownCharacter.h"
+#include "../Public/TopDownCharacter.h"
 #include "Components/SphereComponent.h"
 
 UInteractionComponent::UInteractionComponent()

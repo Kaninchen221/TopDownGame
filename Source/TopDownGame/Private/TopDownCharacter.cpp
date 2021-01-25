@@ -7,7 +7,7 @@
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
-#include "Public/InteractionComponent.h"
+#include "../Public/InteractionComponent.h"
 
 #include "Engine/CollisionProfile.h"
 

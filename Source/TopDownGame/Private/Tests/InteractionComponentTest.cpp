@@ -4,7 +4,7 @@
 #include "Misc/AutomationTest.h"
 
 #include "../Public/InteractionComponent.h"
-#include "../TopDownCharacter.h"
+#include "../Public/TopDownCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

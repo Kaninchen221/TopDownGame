@@ -3,7 +3,7 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../TopDownNonPlayerCharacter.h"
+#include "../Public/TopDownNonPlayerCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
