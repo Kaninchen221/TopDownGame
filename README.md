@@ -1,16 +1,25 @@
-## TopDownGame
-### Introduction
+
+# TopDownGame
+## Introduction
 Open source small TopDown 2D game in UE4  
 Target is 15m - 30m of gameplay  
 I am currently creating gameplay mechanics  
 
-### Technology
+## Technology
 + Unreal Engine 4.26
 + Paper2D module
 + C++/Blueprints
 + Git
 
-### Credits
+## Actual State
+### Working Mechanics
++ Player Idle State
++ Player Walk State
++ Player InInteraction State
++ At early stage Player UI
++ Dialog System
+
+## Credits
 + Sprites
   + [Crazy Bird Lady](https://crazybirdladygames.itch.io/)
   + [SSCARY](https://www.gamedevmarket.net/member/justtodraw/)
