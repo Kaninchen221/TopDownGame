@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "BetterPaper2D",
+	"Description": "Overlay on Paper2d",
+	"Category": "Other",
+	"CreatedBy": "Kaninchen",
+	"CreatedByURL": "https://github.com/Kaninchen221",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "BetterPaper2D",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
