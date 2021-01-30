@@ -7,7 +7,7 @@ public class BetterPaper2D : ModuleRules
 	public BetterPaper2D(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
@@ -26,6 +26,7 @@ public class BetterPaper2D : ModuleRules
 			new string[]
 			{
 				"Core",
+                "Paper2D",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
