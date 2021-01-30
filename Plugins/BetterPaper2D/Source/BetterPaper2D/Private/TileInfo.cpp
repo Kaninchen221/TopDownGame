@@ -9,7 +9,7 @@ FTileInfo::FTileInfo()
 {
 }
 
-bool FTileInfo::operator==(const FTileInfo& Other) const
+bool FTileInfo::operator==(const FTileInfo& Other) const noexcept
 {
 	bool bTileSetsAreEqual = this->TileSet == Other.TileSet;
 	bool bIndexesAreEqual = this->IndexInTileSet == Other.IndexInTileSet;
@@ -17,7 +17,7 @@ bool FTileInfo::operator==(const FTileInfo& Other) const
 	return bTileSetsAreEqual && bIndexesAreEqual;
 }
 
-bool FTileInfo::operator!=(const FTileInfo& Other) const
+bool FTileInfo::operator!=(const FTileInfo& Other) const noexcept
 {
 	return !(*this == Other);
 }
