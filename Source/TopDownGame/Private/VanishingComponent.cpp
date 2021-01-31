@@ -4,11 +4,15 @@
 #include "VanishingComponent.h"
 
 #include "PaperSprite.h"
+#include "PaperSpriteComponent.h"
 #include "Components/SphereComponent.h"
+#include "Math/UnrealMathUtility.h"
 
 // Sets default values for this component's properties
 UVanishingComponent::UVanishingComponent()
-	: MaxAlphaChannelValue(1.0f)
+	: MaxAlphaChannelValue(1.0f),
+	bShouldUpdate(false),
+	bShouldHide(false)
 {
 	AlwaysTick();
 
@@ -32,10 +36,27 @@ void UVanishingComponent::InitializeCollisionComponent()
 		ColllisionComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 		ColllisionComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 		ColllisionComponent->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
+
+		BindBeginHide();
+		BindBeginUnhide();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("ColllisionComponent is null, class name: %s"), *this->GetClass()->GetName());
 	}
+}
+
+void UVanishingComponent::BindBeginHide()
+{
+	FScriptDelegate ScriptDelegate;
+	ScriptDelegate.BindUFunction(this, "BeginHide");
+	ColllisionComponent->OnComponentBeginOverlap.Add(ScriptDelegate);
+}
+
+void UVanishingComponent::BindBeginUnhide()
+{
+	FScriptDelegate ScriptDelegate;
+	ScriptDelegate.BindUFunction(this, "BeginUnhide");
+	ColllisionComponent->OnComponentEndOverlap.Add(ScriptDelegate);
 }
 
 void UVanishingComponent::BeginPlay()
@@ -48,16 +69,24 @@ void UVanishingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (bShouldUpdate) {
+		if (bShouldHide) {
+			Hide(DeltaTime);
+		}
+		else {
+			Unhide(DeltaTime);
+		}
+	}
 }
 
-void UVanishingComponent::SetControlledSprite(UPaperSprite* Sprite) noexcept
+void UVanishingComponent::SetControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept
 {
-	ControlledSprite = Sprite;
+	ControlledSpriteComponent = Component;
 }
 
-UPaperSprite* UVanishingComponent::GetControlledSprite() const noexcept
+UPaperSpriteComponent* UVanishingComponent::GetControlledSpriteComponent() const noexcept
 {
-	return ControlledSprite;
+	return ControlledSpriteComponent;
 }
 
 void UVanishingComponent::SetMinAlphaChannelValue(float Value) noexcept
@@ -78,5 +107,51 @@ float UVanishingComponent::GetMaxAlphaChannelValue() const noexcept
 USphereComponent* UVanishingComponent::GetCollisionComponent() const noexcept
 {
 	return ColllisionComponent;
+}
+
+bool UVanishingComponent::GetShouldUpdate() const noexcept
+{
+	return bShouldUpdate;
+}
+
+bool UVanishingComponent::GetShouldHide() const noexcept
+{
+	return bShouldHide;
+}
+
+void UVanishingComponent::BeginHide()
+{
+	bShouldUpdate = true;
+	bShouldHide = true;
+	
+}
+
+void UVanishingComponent::BeginUnhide()
+{
+	bShouldUpdate = true;
+	bShouldHide = false;
+}
+
+void UVanishingComponent::Hide(float DeltaSeconds)
+{
+	const static float bHideMultiplier = 1.0f;
+	Update(bHideMultiplier * DeltaSeconds);
+}
+
+void UVanishingComponent::Unhide(float DeltaSeconds)
+{
+	const static float bUnhideMultiplier = -1.0f;
+	Update(bUnhideMultiplier * DeltaSeconds);
+}
+
+void UVanishingComponent::Update(float Multiplier)
+{
+	FLinearColor SpriteColor = ControlledSpriteComponent->GetSpriteColor();
+
+	SpriteColor.A -= Multiplier;
+
+	SpriteColor.A = FMath::Clamp(SpriteColor.A, MinAlphaChannelValue, MaxAlphaChannelValue);
+
+	ControlledSpriteComponent->SetSpriteColor(SpriteColor);
 }
 

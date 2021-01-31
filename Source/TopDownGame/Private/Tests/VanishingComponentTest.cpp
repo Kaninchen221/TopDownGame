@@ -5,7 +5,7 @@
 
 #include "../Public/VanishingComponent.h"
 
-#include "PaperSprite.h"
+#include "PaperSpriteComponent.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -19,10 +19,10 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 		return VanishingComponent;
 	};
 
-	auto CreateSprite = [&]() -> UPaperSprite* {
-		UPaperSprite* Sprite = NewObject<UPaperSprite>();
-		TestNotNull("Sprite can't be null", Sprite);
-		return Sprite;
+	auto CreateSpriteComponent = [&]() -> UPaperSpriteComponent* {
+		UPaperSpriteComponent* SpriteComponent = NewObject<UPaperSpriteComponent>();
+		TestNotNull("SpriteComponent can't be null", SpriteComponent);
+		return SpriteComponent;
 	};
 
 	{
@@ -31,12 +31,12 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 
 	{
 		UVanishingComponent* Component = CreateVanishingComponent();
-		UPaperSprite* ExpectedSprite = CreateSprite();
+		UPaperSpriteComponent* ExpectedSpriteComponent = CreateSpriteComponent();
 
-		Component->SetControlledSprite(ExpectedSprite);
-		UPaperSprite* ActualSprite = Component->GetControlledSprite();
+		Component->SetControlledSpriteComponent(ExpectedSpriteComponent);
+		UPaperSpriteComponent* ActualSpriteComponent = Component->GetControlledSpriteComponent();
 
-		TestEqual("Expected and Actual sprites must be equal", ActualSprite, ExpectedSprite);
+		TestEqual("Expected and Actual sprite components must be equal", ActualSpriteComponent, ExpectedSpriteComponent);
 	}
 
 	{
@@ -63,6 +63,20 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 		float ActualMaxAlphaChannelValue = Component->GetMaxAlphaChannelValue();
 
 		TestEqual("Expected and Actual MaxAlphaChannelValue must be equal", ActualMaxAlphaChannelValue, ExpectedMaxAlphaChannelValue);
+	}
+
+	{
+		UVanishingComponent* Component = CreateVanishingComponent();
+
+		bool bShouldUpdate = Component->GetShouldUpdate();
+		TestFalse("ShouldUpdate should be default false", bShouldUpdate);
+	}
+
+	{
+		UVanishingComponent* Component = CreateVanishingComponent();
+
+		bool bShouldHide = Component->GetShouldHide();
+		TestFalse("ShouldHide should be default false", bShouldHide);
 	}
 
 	return true;

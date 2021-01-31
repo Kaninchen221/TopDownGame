@@ -23,13 +23,15 @@ private:
 
 	void AlwaysTick();
 	void InitializeCollisionComponent();
+	void BindBeginHide();
+	void BindBeginUnhide();
 
 protected:
 
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly)
-	UPaperSprite* ControlledSprite;
+	UPaperSpriteComponent* ControlledSpriteComponent;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	float MinAlphaChannelValue;
@@ -40,15 +42,21 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USphereComponent* ColllisionComponent;
 
+	UPROPERTY()
+	bool bShouldUpdate;
+
+	UPROPERTY()
+	bool bShouldHide;
+
 public:	
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
-	void SetControlledSprite(UPaperSprite* Sprite) noexcept;
+	void SetControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept;
 
 	UFUNCTION(BlueprintCallable)
-	UPaperSprite* GetControlledSprite() const noexcept;
+	UPaperSpriteComponent* GetControlledSpriteComponent() const noexcept;
 
 	UFUNCTION(BlueprintCallable)
 	void SetMinAlphaChannelValue(float Value) noexcept;
@@ -61,4 +69,25 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	USphereComponent* GetCollisionComponent() const noexcept;
+
+	UFUNCTION(BlueprintCallable)
+	bool GetShouldUpdate() const noexcept;
+
+	UFUNCTION(BlueprintCallable)
+	bool GetShouldHide() const noexcept;
+
+	UFUNCTION()
+	void BeginHide();
+
+	UFUNCTION()
+	void BeginUnhide();
+
+private:
+
+	void Hide(float DeltaSeconds);
+
+	void Unhide(float DeltaSeconds);
+
+	void Update(float Multiplier);
+
 };
