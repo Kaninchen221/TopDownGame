@@ -24,12 +24,25 @@ bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 
         auto CameraArmComponent = PlayerCharacter->GetCameraArmComponent();
         TestNotNull("CameraArmComponent can't be null", CameraArmComponent);
+    }
+
+	{
+		auto PlayerCharacter = CreatePlayerCharacter();
 
         auto CameraComponent = PlayerCharacter->GetCameraComponent();
         TestNotNull("CameraComponent can't be null", CameraComponent);
 
+    }
+
+	{
+		auto PlayerCharacter = CreatePlayerCharacter();
+
         auto UI = PlayerCharacter->GetUserInterface();
         TestNull("UserInterface must be null", UI);
+    }
+
+	{
+		auto PlayerCharacter = CreatePlayerCharacter();
 
         auto PlayerStateMachine = PlayerCharacter->GetPlayerStateMachine();
         TestNotNull("PlayerStateMachine can't be null", PlayerStateMachine);

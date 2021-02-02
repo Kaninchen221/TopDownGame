@@ -24,41 +24,56 @@ void ATopDownPlayerCharacter::InitializeCameraArmComponent()
 {
 	CameraArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraArm"));
 	if (CameraArmComponent) {
-		CameraArmComponent->SetupAttachment(RootComponent);
-		CameraArmComponent->TargetArmLength = 260.0f;
-		CameraArmComponent->SocketOffset = FVector(0.0f, 0.0f, 75.0f);
-		CameraArmComponent->bDoCollisionTest = false;
-		CameraArmComponent->SetUsingAbsoluteLocation(false);
+		SetupCameraArmComponent();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("CameraArmComponent is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownPlayerCharacter::SetupCameraArmComponent()
+{
+	CameraArmComponent->SetupAttachment(RootComponent);
+	CameraArmComponent->TargetArmLength = 260.0f;
+	CameraArmComponent->SocketOffset = FVector(0.0f, 0.0f, 75.0f);
+	CameraArmComponent->bDoCollisionTest = false;
+	CameraArmComponent->SetUsingAbsoluteLocation(false);
 }
 
 void ATopDownPlayerCharacter::InitializeCameraComponent()
 {
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	if (CameraComponent) {
-		CameraComponent->ProjectionMode = ECameraProjectionMode::Orthographic;
-		CameraComponent->OrthoWidth = 2048.0f;
-		CameraComponent->SetupAttachment(CameraArmComponent, USpringArmComponent::SocketName);
-		CameraComponent->bUsePawnControlRotation = false;
-		CameraComponent->bAutoActivate = true;
+		SetupCameraComponent();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("CameraArmComponent is null, character name: %s"), *Name.ToString());
 	}
 }
 
+void ATopDownPlayerCharacter::SetupCameraComponent()
+{
+	CameraComponent->ProjectionMode = ECameraProjectionMode::Orthographic;
+	CameraComponent->OrthoWidth = 2048.0f;
+	CameraComponent->SetupAttachment(CameraArmComponent, USpringArmComponent::SocketName);
+	CameraComponent->bUsePawnControlRotation = false;
+	CameraComponent->bAutoActivate = true;
+}
+
 void ATopDownPlayerCharacter::InitializePlayerStateMachine()
 {
 	PlayerStateMachine = CreateDefaultSubobject<UStackBasedStateMachine>(TEXT("PlayerStateMachine"));
 	if (PlayerStateMachine) {
-		PlayerStateMachine->SetControledObject(this);
+		SetupPlayerStateMachine();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("PlayerStateMachine is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownPlayerCharacter::SetupPlayerStateMachine()
+{
+	PlayerStateMachine->SetControledObject(this);
 }
 
 void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -88,11 +103,15 @@ void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
 	PlayerStateMachine->Tick(DeltaSeconds);
 }
 
-void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation)
+void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredFlipbook)
 {
-	auto CurrentFlipbook = CurrentAnimationComponent->GetFlipbook();
-	if (CurrentFlipbook != DesiredAnimation) {
-		CurrentAnimationComponent->SetFlipbook(DesiredAnimation);
+	UPaperFlipbook* CurrentFlipbook = CurrentAnimationComponent->GetFlipbook();
+
+	bool bDesiredFlipbookCanNotBeEqualToCurrentFlipbook = CurrentFlipbook != DesiredFlipbook;
+	bool bDesiredFlipbookCanNotBeNull = DesiredFlipbook != nullptr;
+
+	if (bDesiredFlipbookCanNotBeEqualToCurrentFlipbook && bDesiredFlipbookCanNotBeNull) {
+		CurrentAnimationComponent->SetFlipbook(DesiredFlipbook);
 	}
 }
 

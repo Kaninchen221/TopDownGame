@@ -33,8 +33,13 @@ public:
 private:
 
 	void InitializeCameraArmComponent();
+	void SetupCameraArmComponent();
+
 	void InitializeCameraComponent();
+	void SetupCameraComponent();
+
 	void InitializePlayerStateMachine();
+	void SetupPlayerStateMachine();
 
 protected:
 
@@ -72,7 +77,7 @@ public:
 	UUserWidget* GetUserInterface() { return UserInterface; }
 
 	UFUNCTION(BlueprintCallable)
-	void ChangeCurrentAnimation(UPaperFlipbook* DesiredAnimation);
+	void ChangeCurrentAnimation(UPaperFlipbook* DesiredFlipbook);
 
 	UFUNCTION(BlueprintCallable)
 	void MoveVertical(float Value);
