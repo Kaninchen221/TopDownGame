@@ -9,7 +9,7 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FATopDownPlayerCharacterTest, "TopDownGame.Character.ATopDownPlayerCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FATopDownPlayerCharacterTest, "Project.UnitTests.ATopDownPlayerCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
 {

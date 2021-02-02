@@ -8,7 +8,7 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUInteractionComponentTest, "TopDownGame.Components.UInteractionComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUInteractionComponentTest, "Project.UnitTests.Components.UInteractionComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FUInteractionComponentTest::RunTest(const FString& Parameters)
 {

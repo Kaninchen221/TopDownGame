@@ -9,7 +9,7 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVanishingComponentTest, "TopDownGame.UnitTests.UVanishingComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVanishingComponentTest, "Project.UnitTests.Components.UVanishingComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FVanishingComponentTest::RunTest(const FString& Parameters)
 {

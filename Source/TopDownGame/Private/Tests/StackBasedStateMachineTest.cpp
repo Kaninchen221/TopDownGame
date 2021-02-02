@@ -7,7 +7,7 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTStackBasedStateMachineTest, "TopDownGame.StateMachine.UStackBasedStateMachine", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTStackBasedStateMachineTest, "Project.UnitTests.UStackBasedStateMachine", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
 {
