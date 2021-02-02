@@ -17,6 +17,10 @@ bool FATopDownNonPlayerCharacterTest::RunTest(const FString& Parameters)
         return NonPlayerCharacter;
     };
 
+    {
+        CreateNonPlayerCharacter();
+    }
+
     return true;
 }
 
