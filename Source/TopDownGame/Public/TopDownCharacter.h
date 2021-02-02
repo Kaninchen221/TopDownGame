@@ -15,6 +15,7 @@ class UCameraComponent;
 class UFloatingPawnMovement;
 class USphereComponent;
 class UInteractionComponent;
+class UInputComponent;
 
 UCLASS(config = Character, BlueprintType, Blueprintable)
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
@@ -28,9 +29,16 @@ public:
 private:
 
 	void InitializeCapsuleComponent();
+	void SetupCapsuleComponentProperties();
+
 	void InitializeCurrentAnimationComponent();
+	void SetupCurrentAnimationComponent();
+
 	void InitializeInteractionComponent();
+	void SetupInteractionComponent();
+
 	void InitializeFloatingPawnMovementComponent();
+	void SetupFloatingPawnMovementComponent();
 
 	void ControllerDoNotUseAnyRotation();
 
@@ -62,7 +70,7 @@ protected:
 
 	virtual void PostInitializeComponents() override;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 public:
 

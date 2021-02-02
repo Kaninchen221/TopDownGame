@@ -39,17 +39,23 @@ void ATopDownCharacter::InitializeCapsuleComponent()
 	static FName CapsuleComponentName(TEXT("Capsule"));
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(CapsuleComponentName);
 	if (CapsuleComponent) {
-		CapsuleComponent->InitCapsuleSize(60.0f, 60.0f);
-		CapsuleComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
-		CapsuleComponent->CanCharacterStepUpOn = ECB_No;
-		CapsuleComponent->SetShouldUpdatePhysicsVolume(true);
-		CapsuleComponent->SetCanEverAffectNavigation(false);
-		CapsuleComponent->bDynamicObstacle = true;
-		RootComponent = CapsuleComponent;
+		SetupCapsuleComponentProperties();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("CapsuleComponent is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownCharacter::SetupCapsuleComponentProperties()
+{
+	CapsuleComponent->InitCapsuleSize(60.0f, 60.0f);
+	CapsuleComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
+	CapsuleComponent->CanCharacterStepUpOn = ECB_No;
+	CapsuleComponent->SetShouldUpdatePhysicsVolume(true);
+	CapsuleComponent->SetCanEverAffectNavigation(false);
+	CapsuleComponent->bDynamicObstacle = true;
+
+	RootComponent = CapsuleComponent;
 }
 
 void ATopDownCharacter::InitializeCurrentAnimationComponent()
@@ -57,18 +63,7 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 	CurrentAnimationComponent = CreateOptionalDefaultSubobject<UPaperFlipbookComponent>(TEXT("CharacterCurrentAnimation"));
 	if (CurrentAnimationComponent)
 	{
-		CurrentAnimationComponent->AlwaysLoadOnClient = true;
-		CurrentAnimationComponent->AlwaysLoadOnServer = true;
-		CurrentAnimationComponent->bOwnerNoSee = false;
-		CurrentAnimationComponent->bAffectDynamicIndirectLighting = true;
-		CurrentAnimationComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-		CurrentAnimationComponent->SetupAttachment(CapsuleComponent);
-		CurrentAnimationComponent->AddRelativeRotation(FRotator(0.0f, 0.0f, -90.0f));
-
-		static FName CollisionProfileName(TEXT("CharacterCollisionProfile"));
-		CurrentAnimationComponent->SetCollisionProfileName(CollisionProfileName);
-		CurrentAnimationComponent->SetGenerateOverlapEvents(false);
-		CurrentAnimationComponent->SetUsingAbsoluteLocation(false);
+		SetupCurrentAnimationComponent();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("CurrentAnimationComponent is null, character name: %s"), *Name.ToString());
@@ -76,18 +71,37 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 
 }
 
+void ATopDownCharacter::SetupCurrentAnimationComponent()
+{
+	CurrentAnimationComponent->AlwaysLoadOnClient = true;
+	CurrentAnimationComponent->AlwaysLoadOnServer = true;
+	CurrentAnimationComponent->bOwnerNoSee = false;
+	CurrentAnimationComponent->bAffectDynamicIndirectLighting = true;
+	CurrentAnimationComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
+	CurrentAnimationComponent->SetupAttachment(CapsuleComponent);
+	CurrentAnimationComponent->AddRelativeRotation(FRotator(0.0f, 0.0f, -90.0f));
+
+	static FName CollisionProfileName(TEXT("CharacterCollisionProfile"));
+	CurrentAnimationComponent->SetCollisionProfileName(CollisionProfileName);
+	CurrentAnimationComponent->SetGenerateOverlapEvents(false);
+	CurrentAnimationComponent->SetUsingAbsoluteLocation(false);
+}
+
 void ATopDownCharacter::InitializeInteractionComponent()
 {
 	static FName InteractionComponentName(TEXT("InteractionComponent"));
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(InteractionComponentName);
 	if (InteractionComponent) {
-
-		InteractionComponent->SetupAttachment(RootComponent);
-
+		SetupInteractionComponent();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("InteractionComponent is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownCharacter::SetupInteractionComponent()
+{
+	InteractionComponent->SetupAttachment(RootComponent);
 }
 
 void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
@@ -95,14 +109,19 @@ void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
 	FloatingPawnMovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
 	if (FloatingPawnMovementComponent)
 	{
-		FloatingPawnMovementComponent->UpdatedComponent = CapsuleComponent;
-		FloatingPawnMovementComponent->MaxSpeed = 200.f;
-		FloatingPawnMovementComponent->bConstrainToPlane = true;
-		FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
+		SetupFloatingPawnMovementComponent();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("FloatingPawnMovementComponent is null, character name: %s"), *Name.ToString());
 	}
+}
+
+void ATopDownCharacter::SetupFloatingPawnMovementComponent()
+{
+	FloatingPawnMovementComponent->UpdatedComponent = CapsuleComponent;
+	FloatingPawnMovementComponent->MaxSpeed = 200.f;
+	FloatingPawnMovementComponent->bConstrainToPlane = true;
+	FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 }
 
 void ATopDownCharacter::BeginPlay()
