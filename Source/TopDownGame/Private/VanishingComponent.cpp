@@ -29,20 +29,24 @@ void UVanishingComponent::InitializeCollisionComponent()
 {
 	ColllisionComponent = CreateDefaultSubobject<USphereComponent>("CollisionComponent");
 	if (ColllisionComponent) {
-		ColllisionComponent->SetupAttachment(this);
-		ColllisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-		ColllisionComponent->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
-		ColllisionComponent->SetGenerateOverlapEvents(true);
-		ColllisionComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-		ColllisionComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
-		ColllisionComponent->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
-
+		SetupCameraArmComponent();
 		BindBeginHide();
 		BindBeginUnhide();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("ColllisionComponent is null, class name: %s"), *this->GetClass()->GetName());
 	}
+}
+
+void UVanishingComponent::SetupCameraArmComponent()
+{
+	ColllisionComponent->SetupAttachment(this);
+	ColllisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	ColllisionComponent->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
+	ColllisionComponent->SetGenerateOverlapEvents(true);
+	ColllisionComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	ColllisionComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	ColllisionComponent->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
 }
 
 void UVanishingComponent::BindBeginHide()

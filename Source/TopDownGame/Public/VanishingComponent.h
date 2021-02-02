@@ -22,7 +22,9 @@ public:
 private:
 
 	void AlwaysTick();
+
 	void InitializeCollisionComponent();
+	void SetupCameraArmComponent();
 	void BindBeginHide();
 	void BindBeginUnhide();
 
@@ -30,7 +32,7 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	UPaperSpriteComponent* ControlledSpriteComponent;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
