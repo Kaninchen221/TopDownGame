@@ -29,12 +29,6 @@ bool FUInteractionComponentTest::RunTest(const FString& Parameters)
 
     {
         UInteractionComponent* InteractionComponent = CreateInteractionComponent();
-        USphereComponent* CollisionComponent = InteractionComponent->GetCollisionComponent();
-        TestNotNull("Collision Component", CollisionComponent);
-    }
-
-    {
-        UInteractionComponent* InteractionComponent = CreateInteractionComponent();
         bool bIsChoosedInteractableCharacterValid = InteractionComponent->IsChoosedInteractableActorValid();
         TestFalse("bIsChoosedInteractableCharacterValid", bIsChoosedInteractableCharacterValid);
     }

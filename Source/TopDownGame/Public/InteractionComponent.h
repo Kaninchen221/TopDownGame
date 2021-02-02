@@ -23,6 +23,7 @@ public:
 
 private:
 
+	void NeverTick();
 	void InitializeCollisionComponent();
 	void SetupCollisionComponentProperties();
 	void BindCollisionComponentEvents();
@@ -31,10 +32,10 @@ private:
 
 protected:
 
-	UPROPERTY(Category = "Collision", EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Interaction", EditAnywhere, BlueprintReadOnly)
 	USphereComponent* CollisionComponent;
 
-	UPROPERTY(Category = "Interaction", BlueprintReadOnly)
+	UPROPERTY(Category = "Interaction", VisibleAnywhere, BlueprintReadOnly)
 	TSoftObjectPtr<AActor> CurrentInteractableActor;
 
 	virtual void BeginPlay() override;
@@ -56,8 +57,6 @@ public:
 	UFUNCTION()
 	void ComponentEndOverlapInteractableActor();
 
-	USphereComponent* GetCollisionComponent() { return CollisionComponent; }
-
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(Category = "Interaction|Event", BlueprintAssignable)
@@ -66,7 +65,5 @@ public:
 private:
 
 	TArray<AActor*> GetOverlapedActors();
-
-	void NeverTick();
 
 };
