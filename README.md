@@ -18,6 +18,7 @@ I am currently creating gameplay mechanics
 + Player InInteraction State
 + At early stage Player UI
 + Dialog System
++ Vanishing Sprite
 
 ## Credits
 + Sprites
