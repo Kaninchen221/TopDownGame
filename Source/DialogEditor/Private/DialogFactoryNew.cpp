@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DialogSystem/Factories/DialogFactoryNew.h"
-#include "DialogSystem/DialogAsset.h"
+#include "DialogEditor/Public/Factories/DialogFactoryNew.h"
+#include "DialogEditor/Public/DialogAsset.h"
 
 UDialogFactoryNew::UDialogFactoryNew()
 {

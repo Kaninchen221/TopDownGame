@@ -16,7 +16,7 @@ DECLARE_DYNAMIC_DELEGATE(FActionOfThisOption);
  * 
  */
 UCLASS(config = Dialog, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API UDialogOption : public UObject
+class DIALOGEDITOR_API UDialogOption : public UObject
 {
 	GENERATED_BODY()
 	

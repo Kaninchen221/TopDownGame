@@ -10,11 +10,9 @@
 /**
  * 
  */
-class TOPDOWNGAME_API FDialogAssetActions : FAssetTypeActions_Base
+class DIALOGEDITOR_API FDialogAssetActions : public FAssetTypeActions_Base
 {
 public:
-	FDialogAssetActions();
-	~FDialogAssetActions();
 
 	virtual FText GetName() const override { return NSLOCTEXT("AssetTypeActions", "AssetTypeActions_DialogAsset", "Dialog Asset"); }
 	virtual FColor GetTypeColor() const override { return FColor(175, 0, 128); }

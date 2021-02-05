@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../Public/DialogSystem/DialogOption.h"
+#include "DialogEditor/Public/DialogOption.h"
 
-#include "../Public/DialogSystem/DialogNode.h"
+#include "DialogEditor/Public/DialogNode.h"
 
 UDialogNode* UDialogOption::Choose()
 {

@@ -13,7 +13,7 @@
  * 
  */
 UCLASS(config = Dialog, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API UDialogNode : public UObject
+class DIALOGEDITOR_API UDialogNode : public UObject
 {
 	GENERATED_BODY()
 	

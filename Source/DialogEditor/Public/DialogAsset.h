@@ -14,7 +14,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewCurrentDialogNode);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndDialog);
 
 UCLASS(ClassGroup = (Dialog), Blueprintable, meta = (BlueprintSpawnableComponent))
-class TOPDOWNGAME_API UDialogAsset : public UObject
+class DIALOGEDITOR_API UDialogAsset : public UObject
 {
 	GENERATED_BODY()
 

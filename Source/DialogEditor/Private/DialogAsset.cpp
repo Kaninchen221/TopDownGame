@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../Public/DialogSystem/DialogAsset.h"
-#include "../Public/DialogSystem/DialogOption.h"
+#include "DialogEditor/Public/DialogAsset.h"
+#include "DialogEditor/Public/DialogOption.h"
 
 UDialogAsset::UDialogAsset()
 {

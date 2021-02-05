@@ -9,6 +9,6 @@ public class TopDownGameEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("TopDownGame");
+		ExtraModuleNames.AddRange( new string[] { "TopDownGame", "DialogEditor" } );
 	}
 }

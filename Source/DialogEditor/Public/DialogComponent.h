@@ -6,7 +6,7 @@
 #include "DialogComponent.generated.h"
 
 UCLASS( ClassGroup=(Dialog), Blueprintable, meta=(BlueprintSpawnableComponent) )
-class TOPDOWNGAME_API UDialogComponent : public UActorComponent
+class DIALOGEDITOR_API UDialogComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

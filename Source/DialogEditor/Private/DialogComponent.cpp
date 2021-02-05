@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../Public/DialogSystem/DialogComponent.h"
-#include "../Public/DialogSystem/DialogAsset.h"
+#include "DialogEditor/Public/DialogComponent.h"
+#include "DialogEditor/Public/DialogAsset.h"
 
 UDialogComponent::UDialogComponent()
 {

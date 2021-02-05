@@ -10,7 +10,7 @@
  * 
  */
 UCLASS(Config = "Dialog")
-class TOPDOWNGAME_API UDialogFactoryNew : public UFactory
+class DIALOGEDITOR_API UDialogFactoryNew : public UFactory
 {
 	GENERATED_BODY()
 	

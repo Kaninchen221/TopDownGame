@@ -3,7 +3,7 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../Public/DialogSystem/DialogComponent.h"
+#include "DialogEditor/Public/DialogComponent.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
