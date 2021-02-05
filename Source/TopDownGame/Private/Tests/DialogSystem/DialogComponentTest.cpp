@@ -18,13 +18,14 @@ bool FUDialogComponentTest::RunTest(const FString& Parameters)
     };
 
     {
-        auto Dialog = CreateDialogComponent();
-        
-        auto ExpectedTopic = FText::FromString("Placeholder");
-        Dialog->SetTopic(ExpectedTopic);
+        CreateDialogComponent();
+    }
 
-        auto ActualTopic = Dialog->GetTopic();
-        TestTrue("ActualTopic and ExpectedTopic must be equal", ActualTopic.EqualTo(ExpectedTopic));
+    {
+        UDialogComponent* DialogComponent = CreateDialogComponent();
+
+        UDialogAsset* DialogAsset = DialogComponent->GetDialogAsset();
+        TestNotNull("DialogAsset can't be null", DialogAsset);
     }
 
     return true;
