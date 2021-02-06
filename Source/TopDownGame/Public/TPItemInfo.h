@@ -27,5 +27,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 	int32 BaseInGameValue;
 
-	virtual void OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName);
+	virtual void OnPostDataImport(const UDataTable* InDataTable, const FName InRowName, TArray<FString>& OutCollectedImportProblems) override;
+
+	virtual void OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName) override;
 };
