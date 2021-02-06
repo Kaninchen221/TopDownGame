@@ -14,8 +14,9 @@ class DIALOGEDITOR_API FDialogAssetActions : public FAssetTypeActions_Base
 {
 public:
 
-	virtual FText GetName() const override { return NSLOCTEXT("AssetTypeActions", "AssetTypeActions_DialogAsset", "Dialog Asset"); }
-	virtual FColor GetTypeColor() const override { return FColor(175, 0, 128); }
-	virtual UClass* GetSupportedClass() const override { return UDialogAsset::StaticClass(); }
-	virtual uint32 GetCategories() override { return EAssetTypeCategories::Gameplay; }
+	virtual FText GetName() const override;
+	virtual FColor GetTypeColor() const override;
+	virtual UClass* GetSupportedClass() const override;
+	virtual uint32 GetCategories() override;
+	virtual void OpenAssetEditor(const TArray<UObject*>& InObjects, TSharedPtr<class IToolkitHost> EditWithinLevelEditor = TSharedPtr<IToolkitHost>()) override;
 };
