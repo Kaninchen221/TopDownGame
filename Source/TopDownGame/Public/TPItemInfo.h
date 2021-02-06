@@ -16,9 +16,6 @@ public:
 	~FTPItemInfo() noexcept = default;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	int32 Id;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 	FText Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
@@ -30,5 +27,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 	int32 BaseInGameValue;
 
-
+	virtual void OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName);
 };
