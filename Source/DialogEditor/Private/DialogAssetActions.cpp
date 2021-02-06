@@ -3,6 +3,8 @@
 
 #include "DialogEditor/Public/DialogAssetActions.h"
 
+#include "Toolkits/IToolkitHost.h"
+
 FText FDialogAssetActions::GetName() const
 {
 	return NSLOCTEXT("AssetTypeActions", "AssetTypeActions_DialogAsset", "Dialog Asset");
@@ -23,7 +25,7 @@ uint32 FDialogAssetActions::GetCategories()
 	return EAssetTypeCategories::Gameplay; 
 }
 
-void FDialogAssetActions::OpenAssetEditor(const TArray<UObject*>& InObjects, TSharedPtr<class IToolkitHost> EditWithinLevelEditor /*= TSharedPtr<IToolkitHost>()*/)
+void FDialogAssetActions::OpenAssetEditor(const TArray<UObject*>& InObjects, TSharedPtr<IToolkitHost> EditWithinLevelEditor)
 {
 	FSimpleAssetEditor::CreateEditor(EToolkitMode::Standalone, EditWithinLevelEditor, InObjects);
 }
