@@ -16,8 +16,8 @@
 		},
 		{
 			"Name": "DialogEditor",
-			"Type": "Editor",
-			"LoadingPhase": "PostEngineInit"
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
