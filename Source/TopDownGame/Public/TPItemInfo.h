@@ -5,29 +5,23 @@
 #include "TPItemInfo.generated.h"
 
 
-USTRUCT(BlueprintType)
-struct TOPDOWNGAME_API FTPItemInfo : public FTableRowBase {
+UCLASS(BlueprintType)
+class TOPDOWNGAME_API UTPItemInfo : public UObject {
 	
 	GENERATED_BODY()
 	
 public:
 
-	FTPItemInfo() = default;
-	~FTPItemInfo() noexcept = default;
+	UTPItemInfo();
+	~UTPItemInfo() noexcept = default;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FText Name;
+	int32 ID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FText Description;
+	FString Name;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FString SpriteReference;
+	UFUNCTION(BlueprintCallable)
+	void GetDataFromDatabase();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	int32 BaseInGameValue;
-
-	virtual void OnPostDataImport(const UDataTable* InDataTable, const FName InRowName, TArray<FString>& OutCollectedImportProblems) override;
-
-	virtual void OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName) override;
 };

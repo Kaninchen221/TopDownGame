@@ -1,22 +1,28 @@
-#pragma once
-
 #include "TPItemInfo.h"
+#include "SQLiteDatabase.h"
 
-void FTPItemInfo::OnPostDataImport(const UDataTable* InDataTable, const FName InRowName, TArray<FString>& OutCollectedImportProblems)
-{
-	UE_LOG(LogTemp, Warning, TEXT("OnPostDataImport, InRowName: %s"), *Name.ToString());
+UTPItemInfo::UTPItemInfo() {
+
 }
 
-void FTPItemInfo::OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName) {
+void UTPItemInfo::GetDataFromDatabase()
+{
+	FString dbName = TEXT("TopDownGame");
 
-	static FString ContextString = "";
-	FTPItemInfo* ItemInfo = InDataTable->FindRow<FTPItemInfo>(InRowName, ContextString, true);
+	if (!USQLiteDatabase::IsDatabaseRegistered(dbName))
+	{
+		USQLiteDatabase::RegisterDatabase(dbName, "Databases/TopDownGame.db", true);
+		UE_LOG(LogTemp, Log, TEXT("RegisterDatabase"));
+	}
 
-	if (!ItemInfo) {
-		UE_LOG(LogTemp, Warning, TEXT("Failed found row FTPItemInfo, InRowName: %s"), *Name.ToString());
+	FString Query = FString("SELECT Name FROM ItemInfo WHERE ID=") + FString::FromInt(ID);
+	UE_LOG(LogTemp, Log, TEXT("%s"), *Query);
+	bool didPopulate = USQLiteDatabase::GetDataIntoObject(dbName, Query, this);
+
+	if (didPopulate) {
+		UE_LOG(LogTemp, Log, TEXT("Populated. ID: %i"), ID);
 	}
 	else {
-		UE_LOG(LogTemp, Log, TEXT("Successful found row FTPItemInfo, InRowName: %s"), *Name.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("Not Populated"));
 	}
-
 }
