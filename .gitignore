@@ -80,6 +80,8 @@ enc_temp_folder
 *.old
 *.tmp
 *.response
+*txt.tmp
+*.cpp.txt.tmp
 
 # Ignore CISQLLite3 Timestamp file
 Plugins/CISQLite3/unreal-sqlite3-master/Intermediate/Build/Win64/UE4Editor/Inc/CISQLite3/Timestamp
