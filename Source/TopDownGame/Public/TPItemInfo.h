@@ -12,19 +12,10 @@ struct TOPDOWNGAME_API FTPItemInfo : public FTableRowBase {
 	
 public:
 
-	FTPItemInfo() = default;
+	FTPItemInfo();
 	~FTPItemInfo() noexcept = default;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FText Name;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FText Description;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	FString SpriteReference;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
-	int32 BaseInGameValue;
+	int32 ID;
 
 };
