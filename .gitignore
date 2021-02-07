@@ -80,8 +80,10 @@ enc_temp_folder
 *.old
 *.tmp
 *.response
+.dll.response
 *txt.tmp
 *.cpp.txt.tmp
+.cpp.txt
 *.pdb
 *.exp
 Timestamp
