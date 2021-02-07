@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-CISQLite3.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Intermediate\Build\Win64\TopDownGameEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\Module.CISQLite3.cpp.obj"
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\Module.CISQLite3.gen.cpp.obj"
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\sqlite3.c.obj"
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\Default.rc2.res"
+/OUT:"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\UE4Editor-CISQLite3.lib"
+/INCLUDE:IMPLEMENT_MODULE_CISQLite3

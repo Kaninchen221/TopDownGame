@@ -1,6 +1,7 @@
 // Copyright (c) 2015 Jussi Saarivirta 2016 conflict.industries MIT License (MIT)
 
 using UnrealBuildTool;
+using System.Collections.Generic;
 
 public class CISQLite3 : ModuleRules
 {
