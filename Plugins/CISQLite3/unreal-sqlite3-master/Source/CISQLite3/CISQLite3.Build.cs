@@ -1,25 +1,14 @@
 // Copyright (c) 2015 Jussi Saarivirta 2016 conflict.industries MIT License (MIT)
 
 using UnrealBuildTool;
-using System.Collections.Generic;
 
 public class CISQLite3 : ModuleRules
 {
   public CISQLite3(ReadOnlyTargetRules Target) : base(Target)
   {
+	  
+    PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
     
-    PublicIncludePaths.AddRange(
-      new string[] {
-        "CISQLite3/Public"
-      }
-    );
-
-    PrivateIncludePaths.AddRange(
-      new string[] {
-        "CISQLite3/Private"
-      }
-    );
-
     PublicDependencyModuleNames.AddRange(
       new string[] {
         "Engine",
@@ -35,5 +24,18 @@ public class CISQLite3 : ModuleRules
     DynamicallyLoadedModuleNames.AddRange(
       new string[] {}
     );
+	
+    PublicIncludePaths.AddRange(
+      new string[] {
+        System.IO.Path.Combine(ModuleDirectory, "Public")
+      }
+    );
+
+    PrivateIncludePaths.AddRange(
+      new string[] {
+        System.IO.Path.Combine(ModuleDirectory, "Private")
+      }
+    );
+
   }
 }
