@@ -27,5 +27,4 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 	int32 BaseInGameValue;
 
-	virtual void OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName);
 };
