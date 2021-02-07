@@ -5,17 +5,23 @@
 #include "TPItemInfo.generated.h"
 
 
-USTRUCT(BlueprintType)
-struct TOPDOWNGAME_API FTPItemInfo : public FTableRowBase {
+UCLASS(BlueprintType)
+class TOPDOWNGAME_API UTPItemInfo : public UObject {
 	
 	GENERATED_BODY()
 	
 public:
 
-	FTPItemInfo();
-	~FTPItemInfo() noexcept = default;
+	UTPItemInfo();
+	~UTPItemInfo() noexcept = default;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 	int32 ID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
+	FString Name;
+
+	UFUNCTION(BlueprintCallable)
+	void GetDataFromDatabase();
 
 };
