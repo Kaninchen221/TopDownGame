@@ -21,7 +21,7 @@ bool USQLiteDatabase::RegisterDatabase(FString Name, FString Filename, bool Rela
 
 	if (RelativeToGameContentDirectory)
 	{
-		actualFilename = FPaths::GameContentDir() + Filename;
+		actualFilename = FPaths::ProjectContentDir() + Filename;
 	}
 		
 	if (!IsValidDatabase(actualFilename, true))

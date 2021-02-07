@@ -7,6 +7,7 @@
 /IGNORE:4221
 /NODEFAULTLIB
 "C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Intermediate\Build\Win64\TopDownGameEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\SQLiteDatabase.cpp.obj"
 "C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\Module.CISQLite3.cpp.obj"
 "C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\Module.CISQLite3.gen.cpp.obj"
 "C:\Users\Kaninchen\Documents\Unreal Projects\TopDownGame\Plugins\CISQLite3\unreal-sqlite3-master\Intermediate\Build\Win64\UE4Editor\Development\CISQLite3\sqlite3.c.obj"
