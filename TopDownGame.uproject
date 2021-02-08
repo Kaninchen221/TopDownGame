@@ -10,8 +10,14 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"CoreUObject",
-				"Engine"
+				"Engine",
+				"UnrealEd"
 			]
+		},
+		{
+			"Name": "DialogEditor",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
@@ -21,6 +27,10 @@
 		},
 		{
 			"Name": "RuntimeTests",
+			"Enabled": true
+		},
+		{
+			"Name": "CISQLite3",
 			"Enabled": true
 		}
 	]

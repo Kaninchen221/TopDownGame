@@ -3,6 +3,7 @@
 
 #include "TopDownPlayerCharacter.h"
 
+#include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/SphereComponent.h"
