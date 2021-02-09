@@ -21,5 +21,6 @@ I am currently creating gameplay mechanics
   + [Luis Zuno (@ansimuz)](http://ansimuz.com/site/)
   + [HomoHikka](https://opengameart.org/users/homohikka)
   + [Itsmars](https://opengameart.org/users/itsmars)
+  + [Wenrexa](https://www.gamedevmarket.net/member/wenrexa/)
 + Music
   + [Music by Adrian von Ziegler](https://www.youtube.com/channel/UCSeJA6az0GrNM4_-pl3HQSQ) (In future)
