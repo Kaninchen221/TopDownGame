@@ -11,14 +11,8 @@ I am currently creating gameplay mechanics
 + C++/Blueprints
 + Git
 
-## Actual State
-### Working Mechanics
-+ Player Idle State
-+ Player Walk State
-+ Player InInteraction State
-+ At early stage Player UI
-+ Dialog System
-+ Vanishing Sprite
+## Project Progress
+[Kanban](https://github.com/users/Kaninchen221/projects/5)
 
 ## Credits
 + Sprites
