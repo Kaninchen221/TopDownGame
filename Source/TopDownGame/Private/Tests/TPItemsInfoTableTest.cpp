@@ -12,7 +12,6 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPItemsInfoTableTest, "Project.UnitTests.UTPIt
 
 bool FTPItemsInfoTableTest::RunTest(const FString& Parameters)
 {
-	this->AddExpectedError("Query returned zero rows, no data to assign to object properties.", EAutomationExpectedErrorFlags::Contains, 1);
 
 	auto CreateItemsInfoTable = [&]() -> UTPItemsInfoTable* {
 		UTPItemsInfoTable* ItemsInfoTable = NewObject<UTPItemsInfoTable>();
@@ -25,6 +24,11 @@ bool FTPItemsInfoTableTest::RunTest(const FString& Parameters)
 	}
 
 	{
+		FString ErrorPattern = "Query returned zero rows";
+		EAutomationExpectedErrorFlags::MatchType ErrorFlag = EAutomationExpectedErrorFlags::Contains;
+		int32 Ocurrences = 1;
+		this->AddExpectedError(ErrorPattern, ErrorFlag, Ocurrences);
+
 		UTPItemsInfoTable* ItemsInfoTable = CreateItemsInfoTable();
 
 		ItemsInfoTable->LoadItemsInfoFromDatabase();
