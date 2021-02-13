@@ -62,12 +62,31 @@ int32 UTPStatusValueController::GetCurrentValue() const noexcept
 
 void UTPStatusValueController::ValidateCurrentValue()
 {
-	if (CurrentValue < MinimumValue)
+	if (CurrentValue <= MinimumValue)
 	{
 		CurrentValue = MinimumValue;
+		BroadcastCurrentValueIsMinimum();
 	}
-	else if (CurrentValue > MaximumValue)
+	else if (CurrentValue >= MaximumValue)
 	{
 		CurrentValue = MaximumValue;
+		BroadcastCurrentValueIsMaximum();
 	}
+
+	BroadcastNewCurrentValue();
+}
+
+void UTPStatusValueController::BroadcastNewCurrentValue()
+{
+	OnNewCurrentValue.Broadcast();
+}
+
+void UTPStatusValueController::BroadcastCurrentValueIsMaximum()
+{
+	OnCurrentValueIsMaximum.Broadcast();
+}
+
+void UTPStatusValueController::BroadcastCurrentValueIsMinimum()
+{
+	OnCurrentValueIsMinimum.Broadcast();
 }
