@@ -16,6 +16,7 @@ class UFloatingPawnMovement;
 class USphereComponent;
 class UInteractionComponent;
 class UInputComponent;
+class UTPStatusValueController;
 
 UCLASS(config = Character, BlueprintType, Blueprintable)
 class TOPDOWNGAME_API ATopDownCharacter : public APawn
@@ -42,6 +43,10 @@ private:
 
 	void ControllerDoNotUseAnyRotation();
 
+	void InitializeHealthStatus();
+
+	void InitializeEnergyStatus();
+
 protected:
 
 	UPROPERTY(Category = Collision, EditAnywhere, BlueprintReadWrite)
@@ -61,6 +66,12 @@ protected:
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 	ECharacterDirection CharacterDirection = ECharacterDirection::DOWN;
+
+	UPROPERTY(Category = InGameStatus, EditAnywhere, BlueprintReadWrite)
+	UTPStatusValueController* HealthStatus;
+
+	UPROPERTY(Category = InGameStatus, EditAnywhere, BlueprintReadWrite)
+	UTPStatusValueController* EnergyStatus;
 
 protected:
 
@@ -95,4 +106,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	ECharacterDirection GetCharacterDirection() { return CharacterDirection; }
 
+	const UTPStatusValueController* GetHealthStatus() const { return HealthStatus; }
+
+	const UTPStatusValueController* GetEnergyStatus() const { return EnergyStatus; }
 };

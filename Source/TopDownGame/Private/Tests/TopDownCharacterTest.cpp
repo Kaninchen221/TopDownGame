@@ -55,6 +55,20 @@ bool FATopDownCharacterTest::RunTest(const FString& Parameters)
         TestNotNull("FloatingPawnMovementComponent can't be null", FloatingPawnMovementComponent);
     }
 
+    {
+        auto Character = CreateCharacter();
+
+        const UTPStatusValueController* HealthStatus = Character->GetHealthStatus();
+        TestNotNull("HealthStatus can't be null", HealthStatus);
+    }
+
+    {
+        auto Character = CreateCharacter();
+
+        const UTPStatusValueController* EnergyStatus = Character->GetEnergyStatus();
+        TestNotNull("EnergyStatus can't be null", EnergyStatus);
+    }
+
     return true;
 }
 

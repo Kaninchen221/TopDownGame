@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "../Public/InteractionComponent.h"
+#include "../Public/TPStatusValueController.h"
 
 #include "Engine/CollisionProfile.h"
 
@@ -24,14 +25,8 @@ ATopDownCharacter::ATopDownCharacter()
 	InitializeCurrentAnimationComponent();
 	InitializeInteractionComponent();
 	InitializeFloatingPawnMovementComponent();
-
-}
-
-void ATopDownCharacter::ControllerDoNotUseAnyRotation()
-{
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
-	bUseControllerRotationRoll = false;
+	InitializeHealthStatus();
+	InitializeEnergyStatus();
 }
 
 void ATopDownCharacter::InitializeCapsuleComponent()
@@ -122,6 +117,37 @@ void ATopDownCharacter::SetupFloatingPawnMovementComponent()
 	FloatingPawnMovementComponent->MaxSpeed = 200.f;
 	FloatingPawnMovementComponent->bConstrainToPlane = true;
 	FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
+}
+
+void ATopDownCharacter::ControllerDoNotUseAnyRotation()
+{
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+}
+
+void ATopDownCharacter::InitializeHealthStatus()
+{
+	HealthStatus = CreateDefaultSubobject<UTPStatusValueController>(TEXT("HealthStatus"));
+	if (HealthStatus)
+	{
+
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("HealthStatus is null, character name: %s"), *Name.ToString());
+	}
+}
+
+void ATopDownCharacter::InitializeEnergyStatus()
+{
+	EnergyStatus = CreateDefaultSubobject<UTPStatusValueController>(TEXT("EnergyStatus"));
+	if (EnergyStatus)
+	{
+
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("EnergyStatus is null, character name: %s"), *Name.ToString());
+	}
 }
 
 void ATopDownCharacter::BeginPlay()
