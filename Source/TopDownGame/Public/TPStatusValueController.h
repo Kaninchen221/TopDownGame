@@ -7,6 +7,8 @@
 #include "TPStatusValueController.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewCurrentValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewMinimumValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewMaximumValue);
 
 /**
  * 
@@ -41,10 +43,18 @@ public:
 	UPROPERTY(Category = "ValueController|Event", BlueprintAssignable)
 	FOnNewCurrentValue OnNewCurrentValue;
 
+	UPROPERTY(Category = "ValueController|Event", BlueprintAssignable)
+	FOnNewMinimumValue OnNewMinimumValue;
+
+	UPROPERTY(Category = "ValueController|Event", BlueprintAssignable)
+	FOnNewMaximumValue OnNewMaximumValue;
+
 private:
 
 	void ValidateCurrentValue();
 	void BroadcastNewCurrentValue();
+	void BroadcastNewMinimumValue();
+	void BroadcastNewMaximumValue();
 
 	int32 MinimumValue;
 	int32 CurrentValue;

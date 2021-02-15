@@ -22,6 +22,7 @@ void UTPStatusValueController::SetMaximumValue(int32 NewMaximumValue) noexcept
 		MaximumValue = MinimumValue;
 	}
 
+	BroadcastNewMaximumValue();
 	ValidateCurrentValue();
 }
 
@@ -41,6 +42,7 @@ void UTPStatusValueController::SetMinimumValue(int32 NewMinimumValue) noexcept
 		MinimumValue = MaximumValue;
 	}
 
+	BroadcastNewMinimumValue();
 	ValidateCurrentValue();
 }
 
@@ -77,4 +79,14 @@ void UTPStatusValueController::ValidateCurrentValue()
 void UTPStatusValueController::BroadcastNewCurrentValue()
 {
 	OnNewCurrentValue.Broadcast();
+}
+
+void UTPStatusValueController::BroadcastNewMinimumValue()
+{
+	OnNewMinimumValue.Broadcast();
+}
+
+void UTPStatusValueController::BroadcastNewMaximumValue()
+{
+	OnNewMaximumValue.Broadcast();
 }
