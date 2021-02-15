@@ -83,9 +83,11 @@ void UVanishingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	}
 }
 
-void UVanishingComponent::SetControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept
+void UVanishingComponent::SetupControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept
 {
 	ControlledSpriteComponent = Component;
+
+	SetupCorrectMobilityType(Component);
 }
 
 UPaperSpriteComponent* UVanishingComponent::GetControlledSpriteComponent() const noexcept
@@ -134,6 +136,14 @@ void UVanishingComponent::BeginUnhide()
 {
 	bShouldUpdate = true;
 	bShouldHide = false;
+}
+
+void UVanishingComponent::SetupCorrectMobilityType(UPaperSpriteComponent* Component)
+{
+	TEnumAsByte<EComponentMobility::Type> SpriteMobility = Component->Mobility;
+	if (SpriteMobility == EComponentMobility::Static) {
+		Component->Mobility = EComponentMobility::Stationary;
+	}
 }
 
 void UVanishingComponent::Hide(float DeltaSeconds)

@@ -33,10 +33,15 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 		UVanishingComponent* Component = CreateVanishingComponent();
 		UPaperSpriteComponent* ExpectedSpriteComponent = CreateSpriteComponent();
 
-		Component->SetControlledSpriteComponent(ExpectedSpriteComponent);
+		Component->SetupControlledSpriteComponent(ExpectedSpriteComponent);
 		UPaperSpriteComponent* ActualSpriteComponent = Component->GetControlledSpriteComponent();
 
 		TestEqual("Expected and Actual sprite components must be equal", ActualSpriteComponent, ExpectedSpriteComponent);
+
+		EComponentMobility::Type NotExpectedMobilityType = EComponentMobility::Static;
+		EComponentMobility::Type ActualMobilityType = Component->Mobility;
+
+		TestNotEqual("Component mobility type can't be Static at this stage", ActualMobilityType, NotExpectedMobilityType);
 	}
 
 	{

@@ -55,7 +55,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
-	void SetControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept;
+	void SetupControlledSpriteComponent(UPaperSpriteComponent* Component) noexcept;
 
 	UFUNCTION(BlueprintCallable)
 	UPaperSpriteComponent* GetControlledSpriteComponent() const noexcept;
@@ -85,6 +85,8 @@ public:
 	void BeginUnhide();
 
 private:
+
+	void SetupCorrectMobilityType(UPaperSpriteComponent* Component);
 
 	void Hide(float DeltaSeconds);
 
