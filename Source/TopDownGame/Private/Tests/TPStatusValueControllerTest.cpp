@@ -25,7 +25,7 @@ bool FTPStatusValueControllerTest::RunTest(const FString& Parameters)
 	{
 		UTPStatusValueController* StatusValueController = CreateStatusValueController();
 
-		int32 ExpectedMaximumValue = 0;
+		int32 ExpectedMaximumValue = 200;
 		int32 ActualMaximumValue = StatusValueController->GetMaximumValue();
 		TestEqual("Actual and Expected MaximumValue must be equal", ActualMaximumValue, ExpectedMaximumValue);
 
@@ -33,7 +33,7 @@ bool FTPStatusValueControllerTest::RunTest(const FString& Parameters)
 		int32 ActualMinimumValue = StatusValueController->GetMinimumValue();
 		TestEqual("Actual and Expected MinimumValue must be equal", ActualMinimumValue, ExpectedMinimumValue);
 
-		int32 ExpectedCurrentValue = 0;
+		int32 ExpectedCurrentValue = 100;
 		int32 ActualCurrentValue = StatusValueController->GetCurrentValue();
 		TestEqual("Actual and Expected CurrentValue must be equal", ActualCurrentValue, ExpectedCurrentValue);
 	}
