@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TopDownPlayerCharacter.h"
+#include "TPPlayerCharacter.h"
 
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -14,14 +14,14 @@
 #include "TopDownNonPlayerCharacter.h"
 #include "StackBasedStateMachine.h"
 
-ATopDownPlayerCharacter::ATopDownPlayerCharacter()
+ATPPlayerCharacter::ATPPlayerCharacter()
 {
 	InitializeCameraArmComponent();
 	InitializeCameraComponent();
 	InitializePlayerStateMachine();
 }
 
-void ATopDownPlayerCharacter::InitializeCameraArmComponent()
+void ATPPlayerCharacter::InitializeCameraArmComponent()
 {
 	CameraArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraArm"));
 	if (CameraArmComponent) {
@@ -32,7 +32,7 @@ void ATopDownPlayerCharacter::InitializeCameraArmComponent()
 	}
 }
 
-void ATopDownPlayerCharacter::SetupCameraArmComponent()
+void ATPPlayerCharacter::SetupCameraArmComponent()
 {
 	CameraArmComponent->SetupAttachment(RootComponent);
 	CameraArmComponent->TargetArmLength = 260.0f;
@@ -41,7 +41,7 @@ void ATopDownPlayerCharacter::SetupCameraArmComponent()
 	CameraArmComponent->SetUsingAbsoluteLocation(false);
 }
 
-void ATopDownPlayerCharacter::InitializeCameraComponent()
+void ATPPlayerCharacter::InitializeCameraComponent()
 {
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	if (CameraComponent) {
@@ -52,7 +52,7 @@ void ATopDownPlayerCharacter::InitializeCameraComponent()
 	}
 }
 
-void ATopDownPlayerCharacter::SetupCameraComponent()
+void ATPPlayerCharacter::SetupCameraComponent()
 {
 	CameraComponent->ProjectionMode = ECameraProjectionMode::Orthographic;
 	CameraComponent->OrthoWidth = 2048.0f;
@@ -61,7 +61,7 @@ void ATopDownPlayerCharacter::SetupCameraComponent()
 	CameraComponent->bAutoActivate = true;
 }
 
-void ATopDownPlayerCharacter::InitializePlayerStateMachine()
+void ATPPlayerCharacter::InitializePlayerStateMachine()
 {
 	PlayerStateMachine = CreateDefaultSubobject<UStackBasedStateMachine>(TEXT("PlayerStateMachine"));
 	if (PlayerStateMachine) {
@@ -72,39 +72,39 @@ void ATopDownPlayerCharacter::InitializePlayerStateMachine()
 	}
 }
 
-void ATopDownPlayerCharacter::SetupPlayerStateMachine()
+void ATPPlayerCharacter::SetupPlayerStateMachine()
 {
 	PlayerStateMachine->SetControledObject(this);
 }
 
-void ATopDownPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ATPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	UE_LOG(LogTemp, Log, TEXT("SetupPlayerInputComponent"));
 
 	InputComponent = PlayerInputComponent;
 
-	PlayerInputComponent->BindAxis("MoveVertical", this, &ATopDownPlayerCharacter::MoveVertical);
-	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATopDownPlayerCharacter::MoveHorizontal);
+	PlayerInputComponent->BindAxis("MoveVertical", this, &ATPPlayerCharacter::MoveVertical);
+	PlayerInputComponent->BindAxis("MoveHorizontal", this, &ATPPlayerCharacter::MoveHorizontal);
 }
 
-void ATopDownPlayerCharacter::PostInitializeComponents()
+void ATPPlayerCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 }
 
-void ATopDownPlayerCharacter::BeginPlay()
+void ATPPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void ATopDownPlayerCharacter::Tick(float DeltaSeconds)
+void ATPPlayerCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
 	PlayerStateMachine->Tick(DeltaSeconds);
 }
 
-void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredFlipbook)
+void ATPPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredFlipbook)
 {
 	UPaperFlipbook* CurrentFlipbook = CurrentAnimationComponent->GetFlipbook();
 
@@ -116,14 +116,14 @@ void ATopDownPlayerCharacter::ChangeCurrentAnimation(UPaperFlipbook* DesiredFlip
 	}
 }
 
-void ATopDownPlayerCharacter::MoveVertical(float Value)
+void ATPPlayerCharacter::MoveVertical(float Value)
 {
 	MoveVerticalValue = Value;
 
 	PlayerStateMachine->Update();
 }
 
-void ATopDownPlayerCharacter::MoveHorizontal(float Value)
+void ATPPlayerCharacter::MoveHorizontal(float Value)
 {
 	MoveHorizontalValue = Value;
 

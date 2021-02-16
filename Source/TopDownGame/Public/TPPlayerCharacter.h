@@ -8,7 +8,7 @@
 #include "Containers/Array.h"
 #include "Templates/SharedPointer.h"
 
-#include "TopDownPlayerCharacter.generated.h"
+#include "TPPlayerCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -22,13 +22,13 @@ class UStackBasedStateMachine;
  * 
  */
 UCLASS(config = PlayerCharacter, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API ATopDownPlayerCharacter : public ATopDownCharacter
+class TOPDOWNGAME_API ATPPlayerCharacter : public ATopDownCharacter
 {
 	GENERATED_BODY()
 
 public:
 
-	ATopDownPlayerCharacter();
+	ATPPlayerCharacter();
 
 private:
 

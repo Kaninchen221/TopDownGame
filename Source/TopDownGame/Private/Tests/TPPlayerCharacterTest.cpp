@@ -5,16 +5,16 @@
 #include "UObject/UObjectGlobals.h"
 #include "Misc/AutomationTest.h"
 
-#include "../Public/TopDownPlayerCharacter.h"
+#include "../Public/TPPlayerCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FATopDownPlayerCharacterTest, "Project.UnitTests.ATopDownPlayerCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FATPPlayerCharacterTest, "Project.UnitTests.ATPPlayerCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FATopDownPlayerCharacterTest::RunTest(const FString& Parameters)
+bool FATPPlayerCharacterTest::RunTest(const FString& Parameters)
 {
-    auto CreatePlayerCharacter = [&]() -> ATopDownPlayerCharacter* {
-        auto PlayerCharacter = NewObject<ATopDownPlayerCharacter>();
+    auto CreatePlayerCharacter = [&]() -> ATPPlayerCharacter* {
+        auto PlayerCharacter = NewObject<ATPPlayerCharacter>();
         TestNotNull("PlayerCharacter must be initialized", PlayerCharacter);
         return PlayerCharacter;
     };
