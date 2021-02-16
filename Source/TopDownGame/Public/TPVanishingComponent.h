@@ -5,19 +5,19 @@
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
 #include "Components/SphereComponent.h"
-#include "VanishingComponent.generated.h"
+#include "TPVanishingComponent.generated.h"
 
 class UPaperSpriteComponent;
 class USphereComponent;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class TOPDOWNGAME_API UVanishingComponent : public USceneComponent
+class TOPDOWNGAME_API UTPVanishingComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 
-	UVanishingComponent();
+	UTPVanishingComponent();
 
 private:
 

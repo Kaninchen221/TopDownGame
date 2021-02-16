@@ -3,18 +3,18 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../Public/VanishingComponent.h"
+#include "../Public/TPVanishingComponent.h"
 
 #include "PaperSpriteComponent.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVanishingComponentTest, "Project.UnitTests.Components.UVanishingComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVanishingComponentTest, "Project.UnitTests.Components.UTPVanishingComponent", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FVanishingComponentTest::RunTest(const FString& Parameters)
 {
-	auto CreateVanishingComponent = [&]() -> UVanishingComponent* {
-		UVanishingComponent* VanishingComponent = NewObject<UVanishingComponent>();
+	auto CreateVanishingComponent = [&]() -> UTPVanishingComponent* {
+		UTPVanishingComponent* VanishingComponent = NewObject<UTPVanishingComponent>();
 		TestNotNull("VanishingComponent can't be null", VanishingComponent);
 		return VanishingComponent;
 	};
@@ -26,11 +26,11 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 	};
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 		UPaperSpriteComponent* ExpectedSpriteComponent = CreateSpriteComponent();
 
 		Component->SetupControlledSpriteComponent(ExpectedSpriteComponent);
@@ -45,7 +45,7 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 
 		float ExpectedMinAlphaChannelValue = 0.65f;
 		Component->SetMinAlphaChannelValue(ExpectedMinAlphaChannelValue);
@@ -55,14 +55,14 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 
 		USphereComponent* CollisionComponent = Component->GetCollisionComponent();
 		TestNotNull("CollisionComponent can't be null", CollisionComponent);
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 
 		const float ExpectedMaxAlphaChannelValue = 1.0f;
 		float ActualMaxAlphaChannelValue = Component->GetMaxAlphaChannelValue();
@@ -71,14 +71,14 @@ bool FVanishingComponentTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 
 		bool bShouldUpdate = Component->GetShouldUpdate();
 		TestFalse("ShouldUpdate should be default false", bShouldUpdate);
 	}
 
 	{
-		UVanishingComponent* Component = CreateVanishingComponent();
+		UTPVanishingComponent* Component = CreateVanishingComponent();
 
 		bool bShouldHide = Component->GetShouldHide();
 		TestFalse("ShouldHide should be default false", bShouldHide);
