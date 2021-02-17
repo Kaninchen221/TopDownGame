@@ -11,7 +11,7 @@
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 
-#include "TopDownNonPlayerCharacter.h"
+#include "TPNonPlayerCharacter.h"
 #include "StackBasedStateMachine.h"
 
 ATPPlayerCharacter::ATPPlayerCharacter()

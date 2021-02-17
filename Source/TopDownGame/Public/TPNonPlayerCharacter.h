@@ -7,7 +7,7 @@
 
 #include "TPCharacter.h"
 
-#include "TopDownNonPlayerCharacter.generated.h"
+#include "TPNonPlayerCharacter.generated.h"
 
 class UDialogComponent;
 
@@ -15,13 +15,13 @@ class UDialogComponent;
  * 
  */
 UCLASS(config = NonPlayerCharacter, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API ATopDownNonPlayerCharacter : public ATPCharacter
+class TOPDOWNGAME_API ATPNonPlayerCharacter : public ATPCharacter
 {
 	GENERATED_BODY()
 	
 public:
 
-	ATopDownNonPlayerCharacter();
+	ATPNonPlayerCharacter();
 
 private:
 
