@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TopDownCharacter.h"
+#include "TPCharacter.h"
 
 #include "PaperFlipbookComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -12,12 +12,12 @@
 
 #include "Engine/CollisionProfile.h"
 
-void ATopDownCharacter::Tick(float DeltaSeconds) {
+void ATPCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 }
 
-ATopDownCharacter::ATopDownCharacter()
+ATPCharacter::ATPCharacter()
 {
 	ControllerDoNotUseAnyRotation();
 
@@ -29,7 +29,7 @@ ATopDownCharacter::ATopDownCharacter()
 	InitializeEnergyStatus();
 }
 
-void ATopDownCharacter::InitializeCapsuleComponent()
+void ATPCharacter::InitializeCapsuleComponent()
 {
 	static FName CapsuleComponentName(TEXT("Capsule"));
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(CapsuleComponentName);
@@ -41,7 +41,7 @@ void ATopDownCharacter::InitializeCapsuleComponent()
 	}
 }
 
-void ATopDownCharacter::SetupCapsuleComponentProperties()
+void ATPCharacter::SetupCapsuleComponentProperties()
 {
 	CapsuleComponent->InitCapsuleSize(60.0f, 60.0f);
 	CapsuleComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
@@ -53,7 +53,7 @@ void ATopDownCharacter::SetupCapsuleComponentProperties()
 	RootComponent = CapsuleComponent;
 }
 
-void ATopDownCharacter::InitializeCurrentAnimationComponent()
+void ATPCharacter::InitializeCurrentAnimationComponent()
 {
 	CurrentAnimationComponent = CreateOptionalDefaultSubobject<UPaperFlipbookComponent>(TEXT("CharacterCurrentAnimation"));
 	if (CurrentAnimationComponent)
@@ -66,7 +66,7 @@ void ATopDownCharacter::InitializeCurrentAnimationComponent()
 
 }
 
-void ATopDownCharacter::SetupCurrentAnimationComponent()
+void ATPCharacter::SetupCurrentAnimationComponent()
 {
 	CurrentAnimationComponent->AlwaysLoadOnClient = true;
 	CurrentAnimationComponent->AlwaysLoadOnServer = true;
@@ -82,7 +82,7 @@ void ATopDownCharacter::SetupCurrentAnimationComponent()
 	CurrentAnimationComponent->SetUsingAbsoluteLocation(false);
 }
 
-void ATopDownCharacter::InitializeInteractionComponent()
+void ATPCharacter::InitializeInteractionComponent()
 {
 	static FName InteractionComponentName(TEXT("InteractionComponent"));
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(InteractionComponentName);
@@ -94,12 +94,12 @@ void ATopDownCharacter::InitializeInteractionComponent()
 	}
 }
 
-void ATopDownCharacter::SetupInteractionComponent()
+void ATPCharacter::SetupInteractionComponent()
 {
 	InteractionComponent->SetupAttachment(RootComponent);
 }
 
-void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
+void ATPCharacter::InitializeFloatingPawnMovementComponent()
 {
 	FloatingPawnMovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
 	if (FloatingPawnMovementComponent)
@@ -111,7 +111,7 @@ void ATopDownCharacter::InitializeFloatingPawnMovementComponent()
 	}
 }
 
-void ATopDownCharacter::SetupFloatingPawnMovementComponent()
+void ATPCharacter::SetupFloatingPawnMovementComponent()
 {
 	FloatingPawnMovementComponent->UpdatedComponent = CapsuleComponent;
 	FloatingPawnMovementComponent->MaxSpeed = 200.f;
@@ -119,14 +119,14 @@ void ATopDownCharacter::SetupFloatingPawnMovementComponent()
 	FloatingPawnMovementComponent->SetPlaneConstraintNormal(FVector(0.0f, -1.0f, 0.0f));
 }
 
-void ATopDownCharacter::ControllerDoNotUseAnyRotation()
+void ATPCharacter::ControllerDoNotUseAnyRotation()
 {
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 }
 
-void ATopDownCharacter::InitializeHealthStatus()
+void ATPCharacter::InitializeHealthStatus()
 {
 	HealthStatus = CreateDefaultSubobject<UTPStatusValueController>(TEXT("HealthStatus"));
 	if (HealthStatus)
@@ -138,7 +138,7 @@ void ATopDownCharacter::InitializeHealthStatus()
 	}
 }
 
-void ATopDownCharacter::InitializeEnergyStatus()
+void ATPCharacter::InitializeEnergyStatus()
 {
 	EnergyStatus = CreateDefaultSubobject<UTPStatusValueController>(TEXT("EnergyStatus"));
 	if (EnergyStatus)
@@ -150,19 +150,19 @@ void ATopDownCharacter::InitializeEnergyStatus()
 	}
 }
 
-void ATopDownCharacter::BeginPlay()
+void ATPCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-void ATopDownCharacter::PostInitializeComponents() 
+void ATPCharacter::PostInitializeComponents() 
 {
 	Super::PostInitializeComponents();
 
 }
 
-void ATopDownCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ATPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

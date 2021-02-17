@@ -4,7 +4,7 @@
 #include "Misc/AutomationTest.h"
 
 #include "../Public/InteractionComponent.h"
-#include "../Public/TopDownCharacter.h"
+#include "../Public/TPCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -18,8 +18,8 @@ bool FUInteractionComponentTest::RunTest(const FString& Parameters)
         return InteractionComponent;
     };
 
-    auto CreateCharacter = []() -> ATopDownCharacter* {
-        ATopDownCharacter* Character = NewObject<ATopDownCharacter>();
+    auto CreateCharacter = []() -> ATPCharacter* {
+        ATPCharacter* Character = NewObject<ATPCharacter>();
         return Character;
     };
 

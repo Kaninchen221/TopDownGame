@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "CharacterDirection.h"
 
-#include "TopDownCharacter.generated.h"
+#include "TPCharacter.generated.h"
 
 class UPaperFlipbookComponent;
 class UCapsuleComponent;
@@ -19,13 +19,13 @@ class UInputComponent;
 class UTPStatusValueController;
 
 UCLASS(config = Character, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API ATopDownCharacter : public APawn
+class TOPDOWNGAME_API ATPCharacter : public APawn
 {
 	GENERATED_BODY()
 
 public:
 
-	ATopDownCharacter();
+	ATPCharacter();
 
 private:
 

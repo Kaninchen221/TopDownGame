@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TopDownCharacter.h"
+#include "TPCharacter.h"
 #include "UObject/SoftObjectPtr.h"
 #include "Containers/Array.h"
 #include "Templates/SharedPointer.h"
@@ -22,7 +22,7 @@ class UStackBasedStateMachine;
  * 
  */
 UCLASS(config = PlayerCharacter, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API ATPPlayerCharacter : public ATopDownCharacter
+class TOPDOWNGAME_API ATPPlayerCharacter : public ATPCharacter
 {
 	GENERATED_BODY()
 

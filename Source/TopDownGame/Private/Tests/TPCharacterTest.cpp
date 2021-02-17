@@ -3,16 +3,16 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../Public/TopDownCharacter.h"
+#include "../Public/TPCharacter.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FATopDownCharacterTest, "Project.UnitTests.ATopDownCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPCharacterTest, "Project.UnitTests.ATPCharacter", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FATopDownCharacterTest::RunTest(const FString& Parameters)
+bool FTPCharacterTest::RunTest(const FString& Parameters)
 {
-    auto CreateCharacter = [&]() -> ATopDownCharacter* {
-        auto Character = NewObject<ATopDownCharacter>();
+    auto CreateCharacter = [&]() -> ATPCharacter* {
+        auto Character = NewObject<ATPCharacter>();
         TestNotNull("Character must be initialized", Character);
         return Character;
     };

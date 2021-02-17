@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Containers/UnrealString.h"
 
-#include "TopDownCharacter.h"
+#include "TPCharacter.h"
 
 #include "TopDownNonPlayerCharacter.generated.h"
 
@@ -15,7 +15,7 @@ class UDialogComponent;
  * 
  */
 UCLASS(config = NonPlayerCharacter, BlueprintType, Blueprintable)
-class TOPDOWNGAME_API ATopDownNonPlayerCharacter : public ATopDownCharacter
+class TOPDOWNGAME_API ATopDownNonPlayerCharacter : public ATPCharacter
 {
 	GENERATED_BODY()
 	
