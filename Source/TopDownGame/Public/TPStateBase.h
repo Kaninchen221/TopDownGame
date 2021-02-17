@@ -4,19 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "StateBase.generated.h"
+#include "TPStateBase.generated.h"
 
 /**
  * 
  */
 UCLASS(Category = "State", ClassGroup = "States", Blueprintable)
-class TOPDOWNGAME_API UStateBase : public UObject
+class TOPDOWNGAME_API UTPStateBase : public UObject
 {
 	GENERATED_BODY()
 
 public:
 
-	UStateBase() = default;
+	UTPStateBase() = default;
 
 	UFUNCTION(Category = "State", BlueprintCallable, BlueprintImplementableEvent, meta = (DisplayName = "OnSetControledObject"))
 	void OnSetControledObject(UObject* Object);

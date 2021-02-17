@@ -2,10 +2,10 @@
 #include "../Public/StackBasedStateMachine.h"
 
 
-UStateBase* UStackBasedStateMachine::AddState(FString Key, UStateBase* State)
+UTPStateBase* UStackBasedStateMachine::AddState(FString Key, UTPStateBase* State)
 {
 	if (State) {
-		UStateBase* AddedState = States.Add(Key, State);
+		UTPStateBase* AddedState = States.Add(Key, State);
 		AddedState->OnSetControledObject(ControledObject);
 		return AddedState;
 	}
@@ -20,7 +20,7 @@ bool UStackBasedStateMachine::PushState(FString Key)
 	auto FindResult = States.Find(Key);
 	if (FindResult) {
 		StatesStack.Push(*FindResult);
-		UStateBase* TopState = StatesStack.Top();
+		UTPStateBase* TopState = StatesStack.Top();
 		if (TopState) {
 			TopState->OnEnter();
 		}
@@ -32,7 +32,7 @@ bool UStackBasedStateMachine::PushState(FString Key)
 	}
 }
 
-UStateBase* UStackBasedStateMachine::TopState()
+UTPStateBase* UStackBasedStateMachine::TopState()
 {
 	int32 StatesOnStack = StatesStack.Num();
 	if (StatesOnStack == 0) {
@@ -43,7 +43,7 @@ UStateBase* UStackBasedStateMachine::TopState()
 	}
 }
 
-UStateBase* UStackBasedStateMachine::CurrentState()
+UTPStateBase* UStackBasedStateMachine::CurrentState()
 {
 	int32 StatesOnStack = StatesStack.Num();
 	if (StatesOnStack == 0) {
@@ -58,7 +58,7 @@ void UStackBasedStateMachine::PopState()
 {
 	int32 NumOfStatesOnStack = StatesStack.Num();
 	if (NumOfStatesOnStack > 0) {
-		UStateBase* TopState = StatesStack.Top();
+		UTPStateBase* TopState = StatesStack.Top();
 		if (TopState) {
 			TopState->OnExit();
 		}
@@ -87,14 +87,14 @@ void UStackBasedStateMachine::SetControledObject(UObject* NewControledObject)
 	ControledObject = NewControledObject;
 
 	for (auto& Pair : States) {
-		UStateBase*& State = Pair.Value;
+		UTPStateBase*& State = Pair.Value;
 		State->OnSetControledObject(ControledObject);
 	}
 }
 
 bool UStackBasedStateMachine::SetDefaultState(FString Key)
 {
-	UStateBase** State = States.Find(Key);
+	UTPStateBase** State = States.Find(Key);
 	if (State) {
 		DefaultState = *State;
 		return true;
@@ -113,7 +113,7 @@ void UStackBasedStateMachine::Update()
 		}
 	}
 	else {
-		UStateBase* TopState = StatesStack.Top();
+		UTPStateBase* TopState = StatesStack.Top();
 		if (TopState) {
 			TopState->OnUpdate();
 		}
@@ -128,16 +128,16 @@ void UStackBasedStateMachine::Tick(float DeltaSeconds)
 		}
 	}
 	else {
-		UStateBase* TopState = StatesStack.Top();
+		UTPStateBase* TopState = StatesStack.Top();
 		TopState->OnTick(DeltaSeconds);
 	}
 }
 
 void UStackBasedStateMachine::ChangeCurrentState(FString Key)
 {
-	UStateBase** State = States.Find(Key);
+	UTPStateBase** State = States.Find(Key);
 	if (State) {
-		UStateBase* ActualTopState = TopState();
+		UTPStateBase* ActualTopState = TopState();
 		if (ActualTopState) {
 			ActualTopState->OnExit();
 			PopState();

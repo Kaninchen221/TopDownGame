@@ -3,54 +3,54 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "../Public/StateBase.h"
+#include "../Public/TPStateBase.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUStateBaseTypeTest, "Project.UnitTests.UStateBase", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPStateBaseTest, "Project.UnitTests.UTPStateBase", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FUStateBaseTypeTest::RunTest(const FString& Parameters)
+bool FTPStateBaseTest::RunTest(const FString& Parameters)
 {
 
     auto CreateState = [&]() {
-        UStateBase* State = NewObject<UStateBase>();
+        UTPStateBase* State = NewObject<UTPStateBase>();
         TestNotNull("Created Statet can't be null", State);
         return State;
     };
 
     {
-        UStateBase* State = CreateState();
+        UTPStateBase* State = CreateState();
     }
 
     {
-        UStateBase* State = CreateState();
-        UObject* Object = NewObject<UStateBase>();
+        UTPStateBase* State = CreateState();
+        UObject* Object = NewObject<UTPStateBase>();
 
         State->OnSetControledObject(Object);
    
     }
 
     {
-        UStateBase* State = CreateState();
+        UTPStateBase* State = CreateState();
 
         State->OnEnter();
     }
 
     {
-        UStateBase* State = CreateState();
+        UTPStateBase* State = CreateState();
 
         State->OnUpdate();
     }
 
     {
-        UStateBase* State = CreateState();
+        UTPStateBase* State = CreateState();
 
         float DeltaSeconds = 34.f;
         State->OnTick(DeltaSeconds);
     }
 
     {
-        UStateBase* State = CreateState();
+        UTPStateBase* State = CreateState();
 
         State->OnExit();
     }

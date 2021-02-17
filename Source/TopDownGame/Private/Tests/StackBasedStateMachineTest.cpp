@@ -18,16 +18,16 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
          return StateMachine;
     };
 
-    auto AddStateToStateMachine = [&](UStackBasedStateMachine* StateMachine, const FString& Key) -> UStateBase* {
-        UStateBase* State = NewObject<UStateBase>();
+    auto AddStateToStateMachine = [&](UStackBasedStateMachine* StateMachine, const FString& Key) -> UTPStateBase* {
+        UTPStateBase* State = NewObject<UTPStateBase>();
         TestNotNull("State can't be null", State);
 
-        UStateBase* AddStateResult = StateMachine->AddState(Key, State);
+        UTPStateBase* AddStateResult = StateMachine->AddState(Key, State);
         return AddStateResult;
     }; 
     
-    auto AddInvalidStateToStateMachine = [&](UStackBasedStateMachine* StateMachine, const FString& Key) -> UStateBase* {
-        UStateBase* AddStateResult = StateMachine->AddState(Key, (UStateBase*)nullptr);
+    auto AddInvalidStateToStateMachine = [&](UStackBasedStateMachine* StateMachine, const FString& Key) -> UTPStateBase* {
+        UTPStateBase* AddStateResult = StateMachine->AddState(Key, (UTPStateBase*)nullptr);
         return AddStateResult;
     };
 
@@ -45,12 +45,12 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
         UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
     
         FString StateName = "State_1";
-        UStateBase* ExpectedTopState = AddStateToStateMachine(StateMachine, "State_1");
+        UTPStateBase* ExpectedTopState = AddStateToStateMachine(StateMachine, "State_1");
 
         bool PushedState = StateMachine->PushState(StateName);
         TestTrue("State must be pushed", PushedState);
 
-        UStateBase* ActualTopState = StateMachine->TopState();
+        UTPStateBase* ActualTopState = StateMachine->TopState();
         TestNotNull("TopState", ActualTopState);
         TestEqual("ActualTopState address and ExpectedTopState address must be equal", ActualTopState, ExpectedTopState);
     }
@@ -64,7 +64,7 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
         StateMachine->PushState(StateName);
         StateMachine->PopState();
 
-        UStateBase* ActualTopState = StateMachine->TopState();
+        UTPStateBase* ActualTopState = StateMachine->TopState();
         TestNull("Actual top state must be null", ActualTopState);
     }
 
@@ -77,7 +77,7 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
     {
         UStackBasedStateMachine* StateMachine = CreateStackBasedStateMachine();
 
-        UObject* ControledObject = NewObject<UStateBase>();
+        UObject* ControledObject = NewObject<UTPStateBase>();
 
         StateMachine->SetControledObject(ControledObject);
     }
@@ -139,14 +139,14 @@ bool FTStackBasedStateMachineTest::RunTest(const FString& Parameters)
 
         FString Key1 = "Key1";
         StateMachine->ChangeCurrentState(Key1);
-        UStateBase* ExpectedState = AddStateToStateMachine(StateMachine, Key1);
+        UTPStateBase* ExpectedState = AddStateToStateMachine(StateMachine, Key1);
 
         FString Key2 = "Key2";
         AddStateToStateMachine(StateMachine, Key2);
 
         StateMachine->ChangeCurrentState(Key1);
 
-        UStateBase* ActualState = StateMachine->TopState();
+        UTPStateBase* ActualState = StateMachine->TopState();
         TestEqual("Top State must be same as Expected State", ActualState, ExpectedState);
     }
 

@@ -7,7 +7,7 @@
 #include "Containers/Map.h"
 #include "Containers/Array.h"
 #include "Containers/ChunkedArray.h"
-#include "StateBase.h"
+#include "TPStateBase.h"
 #include "StackBasedStateMachine.generated.h"
 
 /**
@@ -22,16 +22,16 @@ public:
 	UStackBasedStateMachine() = default;
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
-	UStateBase* AddState(FString Key, UStateBase* State);
+	UTPStateBase* AddState(FString Key, UTPStateBase* State);
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	bool PushState(FString Key);
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
-	UStateBase* TopState();
+	UTPStateBase* TopState();
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
-	UStateBase* CurrentState();
+	UTPStateBase* CurrentState();
 
 	UFUNCTION(Category = "StateMachine", BlueprintCallable)
 	void PopState();
@@ -62,9 +62,9 @@ private:
 	UObject* ControledObject = nullptr;
 
 	UPROPERTY()
-	TMap<FString, UStateBase*> States;
+	TMap<FString, UTPStateBase*> States;
 
-	TArray<UStateBase*> StatesStack;
+	TArray<UTPStateBase*> StatesStack;
 
-	UStateBase* DefaultState = nullptr;
+	UTPStateBase* DefaultState = nullptr;
 };
