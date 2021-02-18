@@ -1,9 +1,9 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "TopDownGameGameMode.h"
+#include "TPGameMode.h"
 #include "TPPlayerCharacter.h"
 
-ATopDownGameGameMode::ATopDownGameGameMode()
+ATPGameMode::ATPGameMode()
 {
 	// Set default pawn class to our character
 	DefaultPawnClass = ATPPlayerCharacter::StaticClass();	

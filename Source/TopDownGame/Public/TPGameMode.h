@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "TopDownGameGameMode.generated.h"
+#include "TPGameMode.generated.h"
 
 /**
  * The GameMode defines the game being played. It governs the game rules, scoring, what actors
@@ -13,9 +13,9 @@
  * This game mode just sets the default pawn to be the MyCharacter asset, which is a subclass of TopDownGameCharacter
  */
 UCLASS(minimalapi)
-class ATopDownGameGameMode : public AGameModeBase
+class ATPGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
-	ATopDownGameGameMode();
+	ATPGameMode();
 };
