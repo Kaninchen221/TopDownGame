@@ -1,7 +1,7 @@
 #include "DialogEditor.h"
 #include "Modules/ModuleManager.h"
 #include "Modules/ModuleInterface.h"
-#include "DialogAssetActions.h"
+#include "AssetTools/DialogAssetActions.h"
 
 IMPLEMENT_GAME_MODULE(DialogEditorModule, DialogEditor);
 
