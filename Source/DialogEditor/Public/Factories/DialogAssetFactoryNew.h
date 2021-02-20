@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Factories/Factory.h"
-#include "DialogFactoryNew.generated.h"
+#include "DialogAssetFactoryNew.generated.h"
 
 /**
  * 
