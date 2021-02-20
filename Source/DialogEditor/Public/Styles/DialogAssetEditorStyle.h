@@ -25,8 +25,18 @@ public:
 		const FVector2D Icon20x20(20.0f, 20.0f);
 		const FVector2D Icon40x40(40.0f, 40.0f);
 
-		const FString BaseDir = IPluginManager::Get().FindPlugin("TextAsset")->GetBaseDir();
-		SetContentRoot(BaseDir / TEXT("Content"));
+		IPluginManager& PluginManager = IPluginManager::Get(); //.FindPlugin("TextAsset")->GetBaseDir();
+		const FString ThisPluginName = "DialogEditor";
+		TSharedPtr<IPlugin> ThisPlugin = PluginManager.FindPlugin(ThisPluginName);
+		if (ThisPlugin.IsValid()) 
+		{
+			const FString PluginBaseDir = ThisPlugin->GetBaseDir();
+			SetContentRoot(PluginBaseDir / TEXT("Content"));
+		}
+		else 
+		{
+			UE_LOG(DialogEditor, Log, TEXT("Can't find plugin with name: %s"), *ThisPluginName);
+		}
 
 		//Set("TextAssetEditor.FancyButton", new IMAGE_BRUSH("icon_forward_40x", Icon40x40));
 
