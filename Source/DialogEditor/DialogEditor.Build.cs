@@ -14,7 +14,8 @@ public class DialogEditor : ModuleRules
 			"InputCore", 
 			"Slate",
 			"SlateCore",
-			"EditorStyle"
+			"EditorStyle",
+			"Projects"
 		});
 
         PrivateDependencyModuleNames.AddRange(new string[] {  });
