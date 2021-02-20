@@ -5,7 +5,17 @@ public class DialogEditor : ModuleRules
     public DialogEditor(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UnrealEd" });
+        PublicDependencyModuleNames.AddRange(new string[] { 
+			"Core", 
+			"CoreUObject", 
+			"Engine", 
+			"InputCore", 
+			"UnrealEd", 
+			"InputCore", 
+			"Slate",
+			"SlateCore",
+			"EditorStyle"
+		});
 
         PrivateDependencyModuleNames.AddRange(new string[] {  });
 
