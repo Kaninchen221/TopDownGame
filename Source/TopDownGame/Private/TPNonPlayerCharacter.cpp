@@ -5,8 +5,6 @@
 
 #include "Engine/CollisionProfile.h"
 
-#include "DialogEditor/Public/DialogComponent.h"
-
 ATPNonPlayerCharacter::ATPNonPlayerCharacter()
 {
 }

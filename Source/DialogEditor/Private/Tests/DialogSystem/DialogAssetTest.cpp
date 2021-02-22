@@ -11,25 +11,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUDialogAssetTest, "Project.UnitTests.DialogSys
 
 bool FUDialogAssetTest::RunTest(const FString& Parameters)
 {
-	auto CreateDialogAsset = [&]() {
-		auto DialogAsset = NewObject<UDialogAsset>();
-		TestNotNull("DialogAsset must be initialized", DialogAsset);
-		return DialogAsset;
-	};
-
-	{
-		CreateDialogAsset();
-	}
-
-	{
-		auto Dialog = CreateDialogAsset();
-
-		auto ExpectedTopic = FText::FromString("Placeholder");
-		Dialog->SetTopic(ExpectedTopic);
-
-		auto ActualTopic = Dialog->GetTopic();
-		TestTrue("ActualTopic and ExpectedTopic must be equal", ActualTopic.EqualTo(ExpectedTopic));
-	}
+	
 
 	return true;
 }
