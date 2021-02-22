@@ -6,9 +6,11 @@
 #include "DialogNode.generated.h"
 
 
-UCLASS(config = Dialog, BlueprintType, Blueprintable)
-class DIALOGEDITOR_API UDialogNode : public UObject
+USTRUCT(Category = "DialogEditor")
+struct DIALOGEDITOR_API FDialogNode
 {
 	GENERATED_BODY()
-	
+
+
+
 };
