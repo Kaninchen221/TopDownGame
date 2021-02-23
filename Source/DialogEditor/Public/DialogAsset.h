@@ -6,6 +6,7 @@
 #include "Containers/Array.h"
 
 #include "DialogEditor/Public/DialogNode.h"
+#include "DialogEditor/Public/DialogOption.h"
 
 #include "DialogAsset.generated.h"
 
@@ -22,6 +23,9 @@ protected:
 	UPROPERTY(Category = "DialogEditor", VisibleAnywhere)
 	TArray<FDialogNode> DialogNodes;
 
+	UPROPERTY(Category = "DialogEditor", VisibleAnywhere)
+	TArray<FDialogOption> DialogOptions;
+
 public:
 
 	void SetTopic(const FText& Text);
@@ -32,4 +36,16 @@ public:
 
 	FDialogNode* GetDialogNode(int32 DialogNodeIndex);
 
+	int32 CreateDialogOption();
+
+	FDialogOption* GetDialogOption(int DialogOptionIndex);
+
+	template<typename InArray>
+	static int32 GetLastIndexOf(const InArray& Array);
 };
+
+template<typename InArray>
+int32 UDialogAsset::GetLastIndexOf(const InArray& Array)
+{
+	return Array.Num() - 1;
+}

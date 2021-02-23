@@ -60,6 +60,44 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 		TestNull("GetDialogNode invoked with invalid index must return nullptr", DialogNode);
 	}
 
+	{
+		UDialogAsset* DialogAsset = CreateDialogAsset();
+
+		int32 ActualDialogOptionIndex = DialogAsset->CreateDialogOption();
+		int32 ExpectedDialogOptionIndex = 0;
+		TestEqual("First created dialog option must have index 0", ActualDialogOptionIndex, ExpectedDialogOptionIndex);
+
+		ActualDialogOptionIndex = DialogAsset->CreateDialogOption();
+		ExpectedDialogOptionIndex = 1;
+		TestEqual("Second created dialog option must have index 1", ActualDialogOptionIndex, ExpectedDialogOptionIndex);
+	}
+
+	{
+		UDialogAsset* DialogAsset = CreateDialogAsset();
+
+		int DialogOptionIndex = DialogAsset->CreateDialogOption();
+		FDialogOption* DialogOption = DialogAsset->GetDialogOption(DialogOptionIndex);
+	}
+
+	{
+		UDialogAsset* DialogAsset = CreateDialogAsset();
+
+		int32 InvalidDialogOptionIndex = 10;
+		FDialogOption* DialogOption = DialogAsset->GetDialogOption(InvalidDialogOptionIndex);
+		TestNull("GetDialogOption invoked with invalid index must return nullptr", DialogOption);
+	}
+
+	{
+		TArray<int> Array;
+		int32 Size = 5;
+		Array.Init(0, Size);
+
+		int32 ExpectedLastIndex = Size - 1;
+		int32 ActualLastIndex = UDialogAsset::GetLastIndexOf(Array);
+
+		TestEqual("LastIndex must be equal: SizeOfArray - 1", ActualLastIndex, ExpectedLastIndex);
+	}
+
 	return true;
 }
 

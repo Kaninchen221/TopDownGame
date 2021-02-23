@@ -18,16 +18,34 @@ FText UDialogAsset::GetTopic() const
 int32 UDialogAsset::CreateDialogNode()
 {
 	DialogNodes.Emplace();
-	return DialogNodes.Num() - 1;
+	return GetLastIndexOf(DialogNodes);
 }
 
 FDialogNode* UDialogAsset::GetDialogNode(int32 DialogNodeIndex)
 {
-	if (0 < DialogNodeIndex && DialogNodeIndex < DialogNodes.Num())
+	if (DialogNodes.IsValidIndex(DialogNodeIndex))
 	{
 		return &(DialogNodes[DialogNodeIndex]);
 	}
 	else 
+	{
+		return nullptr;
+	}
+}
+
+int32 UDialogAsset::CreateDialogOption()
+{
+	DialogOptions.Emplace();
+	return GetLastIndexOf(DialogOptions);
+}
+
+FDialogOption* UDialogAsset::GetDialogOption(int DialogOptionIndex)
+{
+	if (DialogOptions.IsValidIndex(DialogOptionIndex))
+	{
+		return &(DialogOptions[DialogOptionIndex]);
+	}
+	else
 	{
 		return nullptr;
 	}
