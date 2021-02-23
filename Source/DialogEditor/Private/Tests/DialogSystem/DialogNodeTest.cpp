@@ -12,7 +12,23 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogNodeTest, "Project.UnitTests.DialogSyste
 
 bool FDialogNodeTest::RunTest(const FString& Parameters)
 {
-    
+    {
+        FDialogNode DialogNode;
+
+        FText ExpectedText = FText::FromString("Placeholder");
+        DialogNode.SetText(ExpectedText);
+        FText ActualText = DialogNode.GetText();
+
+        TestTrue("Setted text must be equal to getted text", ActualText.EqualTo(ExpectedText));
+    }
+
+    {
+        FDialogNode DialogNode;
+
+        int32 IndexOfDialogOption = 0;
+        DialogNode.AddDialogOption(IndexOfDialogOption);
+        const TArray<int32>& DialogOptions = DialogNode.GetDialogOptions();
+    }
 
     return true;
 }
