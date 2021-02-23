@@ -95,7 +95,7 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 		int32 ExpectedLastIndex = Size - 1;
 		int32 ActualLastIndex = UDialogAsset::GetLastIndexOf(Array);
 
-		TestEqual("LastIndex must be equal: SizeOfArray - 1", ActualLastIndex, ExpectedLastIndex);
+		TestEqual("LastIndex must be equal: NumberOfElemtsInArray - 1", ActualLastIndex, ExpectedLastIndex);
 	}
 
 	return true;
