@@ -20,7 +20,7 @@ protected:
 	FText Topic;
 
 	UPROPERTY(Category = "DialogEditor", VisibleAnywhere)
-	TArray<FDialogNode> Nodes;
+	TArray<FDialogNode> DialogNodes;
 
 public:
 
@@ -30,6 +30,6 @@ public:
 
 	int32 CreateDialogNode();
 
-	
+	FDialogNode* GetDialogNode(int32 DialogNodeIndex);
 
 };

@@ -17,6 +17,18 @@ FText UDialogAsset::GetTopic() const
 
 int32 UDialogAsset::CreateDialogNode()
 {
-	Nodes.Emplace();
-	return Nodes.Num() - 1;
+	DialogNodes.Emplace();
+	return DialogNodes.Num() - 1;
+}
+
+FDialogNode* UDialogAsset::GetDialogNode(int32 DialogNodeIndex)
+{
+	if (0 < DialogNodeIndex && DialogNodeIndex < DialogNodes.Num())
+	{
+		return &(DialogNodes[DialogNodeIndex]);
+	}
+	else 
+	{
+		return nullptr;
+	}
 }

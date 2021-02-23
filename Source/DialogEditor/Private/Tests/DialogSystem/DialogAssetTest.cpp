@@ -45,6 +45,21 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 		TestEqual("Next added dialog node must have index increased by one", ActualDialogNodeIdex, 1);
 	}
 
+	{
+		UDialogAsset* DialogAsset = CreateDialogAsset();
+
+		int32 DialogNodeIdex = DialogAsset->CreateDialogNode();
+		FDialogNode* DialogNode = DialogAsset->GetDialogNode(DialogNodeIdex);
+	}
+
+	{
+		UDialogAsset* DialogAsset = CreateDialogAsset();
+
+		int32 InvalidDialogNodeIndex = 10;
+		FDialogNode* DialogNode = DialogAsset->GetDialogNode(InvalidDialogNodeIndex);
+		TestNull("GetDialogNode invoked with invalid index must return nullptr", DialogNode);
+	}
+
 	return true;
 }
 
