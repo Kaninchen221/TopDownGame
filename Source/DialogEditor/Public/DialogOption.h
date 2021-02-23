@@ -6,9 +6,11 @@
 #include "DialogOption.generated.h"
 
 
-UCLASS(config = Dialog, BlueprintType, Blueprintable)
-class DIALOGEDITOR_API UDialogOption : public UObject
+USTRUCT(Category = "DialogEditor")
+struct DIALOGEDITOR_API FDialogOption
 {
 	GENERATED_BODY()
-	
+
+
+
 };
