@@ -8,11 +8,27 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUDialogOptionTest, "Project.UnitTests.DialogSystem.UDialogOption", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogOptionTest, "Project.UnitTests.DialogSystem.UDialogOption", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FUDialogOptionTest::RunTest(const FString& Parameters)
+bool FDialogOptionTest::RunTest(const FString& Parameters)
 {
-    
+    {
+        FDialogOption DialogOption;
+
+        FText ExpectedText = FText::FromString("Placeholder");
+        DialogOption.SetText(ExpectedText);
+        FText ActualText = DialogOption.GetText();
+        TestTrue("Setted text must be equal to getted text", ActualText.EqualTo(ExpectedText));
+    }
+
+    {
+        FDialogOption DialogOption;
+
+        int32 ExpectedResultNodeIndex = 3;
+        DialogOption.SetResultNode(ExpectedResultNodeIndex);
+        int32 ActualResultNodeIndex = DialogOption.GetResultNode();
+        TestEqual("Setted index must be equal to getted index", ActualResultNodeIndex, ExpectedResultNodeIndex);
+    }
 
     return true;
 }
