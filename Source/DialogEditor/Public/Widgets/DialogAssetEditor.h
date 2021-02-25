@@ -5,10 +5,10 @@
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/Input/SMultiLineEditableTextBox.h"
 
-class FText;
+class FDialogAsset;
 class ISlateStyle;
 class UDialogAsset;
-
+class UDialogGraph;
 
 /**
  * Implements the UDialogAsset asset editor widget.
@@ -36,6 +36,9 @@ public:
 
 private:
 
+	void InitializeDialogGraph();
+	void SetupDialogGraph();
+
 	/** Callback for text changes in the editable text box. */
 	void HandleEditableTextBoxTextChanged(const FText& NewText);
 
@@ -52,4 +55,8 @@ private:
 
 	/** Pointer to the text asset that is being edited. */
 	UDialogAsset* DialogAsset;
+
+	TSharedPtr<SGraphEditor> DialogGraphEditor;
+
+	UDialogGraph* DialogGraph;
 };

@@ -8,7 +8,9 @@
 #include "Widgets/Input/SMultiLineEditableTextBox.h"
 
 #include "DialogEditor/Public/Shared/DialogAssetEditorSettings.h"
-
+#include "DialogEditor/Public/DialogGraphEditor.h"
+#include "DialogEditor/Public/DialogGraphSchema.h"
+#include "DialogEditor/Public/DialogGraph.h"
 
 #define LOCTEXT_NAMESPACE "SDialogAssetEditor"
 
@@ -24,6 +26,8 @@ SDialogAssetEditor::~SDialogAssetEditor()
 
 void SDialogAssetEditor::Construct(const FArguments& InArgs, UDialogAsset* InDialogAsset, const TSharedRef<ISlateStyle>& InStyle)
 {
+	InitializeDialogGraph();
+
 	DialogAsset = InDialogAsset;
 
 	auto Settings = GetDefault<UDialogAssetEditorSettings>();
@@ -31,31 +35,56 @@ void SDialogAssetEditor::Construct(const FArguments& InArgs, UDialogAsset* InDia
 	FText Text = FText::FromString(FString("Hello World!"));
 
 	ChildSlot
+	[
+		SNew(SVerticalBox)
+		+ SVerticalBox::Slot()
+		.HAlign(HAlign_Fill)
+		.VAlign(VAlign_Fill)
 		[
-			SNew(STextBlock)
-			.Text(Text)
+			SNew(SSplitter)
+			.Orientation(Orient_Horizontal)
 
-		//+ SetText(TEXT("Hello World!"));
+			/// DialogGraph
+			+ SSplitter::Slot()
+			[
+				SNew(SDialogGraphEditor)
 
-		//SNew(SVerticalBox)
-		//
-		//+ SVerticalBox::Slot()
-		//	.FillHeight(1.0f)
-		//	[
-		//		SAssignNew(EditableTextBox, SMultiLineEditableTextBox)
-		//			.BackgroundColor((Settings != nullptr) ? Settings->BackgroundColor : FLinearColor::White)
-		//			.Font((Settings != nullptr) ? Settings->Font : FSlateFontInfo())
-		//			.ForegroundColor((Settings != nullptr) ? Settings->ForegroundColor : FLinearColor::Black)
-		//			.Margin((Settings != nullptr) ? Settings->Margin : 4.0f)
-		//			.OnTextChanged(this, &SDialogAssetEditor::HandleEditableTextBoxTextChanged)
-		//			.OnTextCommitted(this, &SDialogAssetEditor::HandleEditableTextBoxTextCommitted)
-		//			//.Text(DialogAsset->Text)
-		//	]
+				
+			]
+
+			/// Properties
+			+ SSplitter::Slot()
+			[
+				SNew(SBorder)
+				.HAlign(HAlign_Right)
+				.VAlign(VAlign_Fill)
+			]
+
+		]
+
 	];
 
 	FCoreUObjectDelegates::OnObjectPropertyChanged.AddSP(this, &SDialogAssetEditor::HandleDialogAssetPropertyChanged);
 }
 
+
+void SDialogAssetEditor::InitializeDialogGraph()
+{
+	DialogGraph = NewObject<UDialogGraph>();
+	if (DialogGraph) 
+	{
+		SetupDialogGraph();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("DialogGraph is null"));
+	}
+}
+
+void SDialogAssetEditor::SetupDialogGraph()
+{
+	DialogGraph->Schema = TSubclassOf<UDialogGraphSchema>();
+}
 
 /* SDialogAssetEditor callbacks
  *****************************************************************************/
