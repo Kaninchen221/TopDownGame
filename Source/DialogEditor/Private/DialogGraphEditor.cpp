@@ -2,6 +2,8 @@
 #include "DialogEditor/Public/DialogGraph.h"
 #include "DialogEditor/Public/DialogAsset.h"
 
+#include "Widgets/Layout/SBox.h"
+
 void SDialogGraphEditor::Construct(const FArguments& InArgs)
 {
 	EdGraphObj = NewObject<UDialogGraph>();
@@ -11,6 +13,7 @@ void SDialogGraphEditor::Construct(const FArguments& InArgs)
 		SNew(SBox)
 		.AddMetaData<FTagMetaData>(FTagMetaData(TEXT("GraphEditorPanel")))
 		
+
 	];
 
 	//EdGraphObj = InArgs._GraphToEdit;
