@@ -6,7 +6,7 @@
 #include "DialogNode.generated.h"
 
 
-USTRUCT(Category = "DialogEditor")
+USTRUCT(Category = "DialogEditor|Node")
 struct DIALOGEDITOR_API FDialogNode
 {
 	GENERATED_BODY()
