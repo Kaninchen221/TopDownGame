@@ -6,7 +6,7 @@
 
 void SDialogGraphEditor::Construct(const FArguments& InArgs)
 {
-	EdGraphObj = NewObject<UDialogGraph>();
+//	EdGraphObj = NewObject<UDialogGraph>();
 
 	this->ChildSlot
 	[

@@ -83,7 +83,7 @@ void SDialogAssetEditor::InitializeDialogGraph()
 
 void SDialogAssetEditor::SetupDialogGraph()
 {
-	DialogGraph->Schema = TSubclassOf<UDialogGraphSchema>();
+	//DialogGraph->Schema = TSubclassOf<UDialogGraphSchema>();
 }
 
 /* SDialogAssetEditor callbacks
