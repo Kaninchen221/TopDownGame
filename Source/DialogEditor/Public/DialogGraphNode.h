@@ -15,28 +15,27 @@ public:
 	UDialogGraphNode();
 
 
-	UFUNCTION(BlueprintPure, Category = "Node Data")
+	UFUNCTION(BlueprintPure, Category = "DialogEditor")
 	TArray<UDialogGraphNode*> GetChildren();
 
-	UFUNCTION(BlueprintPure, Category = "Node Data")
+	UFUNCTION(BlueprintPure, Category = "DialogEditor")
 	TArray<UDialogGraphNode*> GetParents();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "Node Data")
+	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "DialogEditor")
 	FText GetNodeTitle();
 
 	virtual FText GetNodeTitle_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "Node Data")
+	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "DialogEditor")
 	bool HasInputPins();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "Node Data")
+	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "DialogEditor")
 	bool HasOutputPins();
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Node Data")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "DialogEditor")
 	UDialogGraphNode* GetNodePointer();
 
 	virtual UDialogGraphNode* GetNodePointer_Implementation();
-
 
 	virtual void SetGraph(UDialogGraph* InGraph);
 	virtual UDialogGraph* GetGraph();
