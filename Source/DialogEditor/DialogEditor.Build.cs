@@ -7,16 +7,8 @@ public class DialogEditor : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new string[] { 
 			"Core", 
-			"CoreUObject", 
-			"Engine", 
-			"InputCore", 
-			"UnrealEd", 
-			"InputCore", 
-			"Slate",
-			"SlateCore",
-			"EditorStyle",
-			"Projects",
-			"BlueprintGraph"
+			"CoreUObject",
+			"UnrealEd"
 		});
 
         PrivateDependencyModuleNames.AddRange(new string[] {  });
