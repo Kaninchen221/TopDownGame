@@ -5,6 +5,9 @@ Open source small TopDown 2D game in UE4
 Target is 15m - 30m of gameplay  
 I am currently creating gameplay mechanics  
 
+## Install
+Run init.bat script file  
+
 ## Technology
 + Unreal Engine 4.26
 + Paper2D module
