@@ -16,7 +16,7 @@
 		},
 		{
 			"Name": "DialogEditor",
-			"Type": "Runtime",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}
 	],
