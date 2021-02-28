@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "Containers/Array.h"
 
-#include "DialogEditor/Public/DialogNode.h"
-#include "DialogEditor/Public/DialogOption.h"
+#include "TPDialogNode.h"
+#include "TPDialogOption.h"
 
-#include "DialogAsset.generated.h"
+#include "TPDialogAsset.generated.h"
 
 UCLASS(Category = "DialogEditor")
-class DIALOGEDITOR_API UDialogAsset : public UObject
+class TOPDOWNGAME_API UTPDialogAsset : public UObject
 {
 	GENERATED_BODY()
 
@@ -21,10 +21,10 @@ protected:
 	FText Topic;
 
 	UPROPERTY(Category = "DialogEditor", VisibleAnywhere)
-	TArray<FDialogNode> DialogNodes;
+	TArray<FTPDialogNode> DialogNodes;
 
 	UPROPERTY(Category = "DialogEditor", VisibleAnywhere)
-	TArray<FDialogOption> DialogOptions;
+	TArray<FTPDialogOption> DialogOptions;
 
 public:
 
@@ -34,18 +34,18 @@ public:
 
 	int32 CreateDialogNode();
 
-	FDialogNode* GetDialogNode(int32 DialogNodeIndex);
+	FTPDialogNode* GetDialogNode(int32 DialogNodeIndex);
 
 	int32 CreateDialogOption();
 
-	FDialogOption* GetDialogOption(int DialogOptionIndex);
+	FTPDialogOption* GetDialogOption(int DialogOptionIndex);
 
 	template<typename InArray>
 	static int32 GetLastIndexOf(const InArray& Array);
 };
 
 template<typename InArray>
-int32 UDialogAsset::GetLastIndexOf(const InArray& Array)
+int32 UTPDialogAsset::GetLastIndexOf(const InArray& Array)
 {
 	return Array.Num() - 1;
 }

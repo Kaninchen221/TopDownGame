@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "DialogNode.generated.h"
+#include "TPDialogNode.generated.h"
 
 
 USTRUCT(Category = "DialogEditor|Node")
-struct DIALOGEDITOR_API FDialogNode
+struct TOPDOWNGAME_API FTPDialogNode
 {
 	GENERATED_BODY()
 

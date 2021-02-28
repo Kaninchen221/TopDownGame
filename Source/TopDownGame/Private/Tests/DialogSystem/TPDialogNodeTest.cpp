@@ -4,16 +4,16 @@
 #include "Misc/AutomationTest.h"
 #include "Internationalization/Text.h"
 
-#include "DialogEditor/Public/DialogNode.h"
+#include "DialogSystem/TPDialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogNodeTest, "Project.UnitTests.DialogSystem.UDialogNode", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogNodeTest, "Project.UnitTests.DialogSystem.UTPDialogNode", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FDialogNodeTest::RunTest(const FString& Parameters)
 {
     {
-        FDialogNode DialogNode;
+        FTPDialogNode DialogNode;
 
         FText ExpectedText = FText::FromString("Placeholder");
         DialogNode.SetText(ExpectedText);
@@ -23,7 +23,7 @@ bool FDialogNodeTest::RunTest(const FString& Parameters)
     }
 
     {
-        FDialogNode DialogNode;
+        FTPDialogNode DialogNode;
 
         int32 IndexOfDialogOption = 0;
         DialogNode.AddDialogOption(IndexOfDialogOption);

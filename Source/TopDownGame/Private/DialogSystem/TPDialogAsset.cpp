@@ -1,27 +1,27 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DialogEditor/Public/DialogAsset.h"
-#include "DialogEditor/Public/DialogOption.h"
-#include "DialogEditor/Public/DialogNode.h"
+#include "DialogSystem/TPDialogAsset.h"
+#include "DialogSystem/TPDialogOption.h"
+#include "DialogSystem/TPDialogNode.h"
 
-void UDialogAsset::SetTopic(const FText& Text)
+void UTPDialogAsset::SetTopic(const FText& Text)
 {
 	Topic = Text;
 }
 
-FText UDialogAsset::GetTopic() const
+FText UTPDialogAsset::GetTopic() const
 {
 	return Topic;
 }
 
-int32 UDialogAsset::CreateDialogNode()
+int32 UTPDialogAsset::CreateDialogNode()
 {
 	DialogNodes.Emplace();
 	return GetLastIndexOf(DialogNodes);
 }
 
-FDialogNode* UDialogAsset::GetDialogNode(int32 DialogNodeIndex)
+FTPDialogNode* UTPDialogAsset::GetDialogNode(int32 DialogNodeIndex)
 {
 	if (DialogNodes.IsValidIndex(DialogNodeIndex))
 	{
@@ -33,13 +33,13 @@ FDialogNode* UDialogAsset::GetDialogNode(int32 DialogNodeIndex)
 	}
 }
 
-int32 UDialogAsset::CreateDialogOption()
+int32 UTPDialogAsset::CreateDialogOption()
 {
 	DialogOptions.Emplace();
 	return GetLastIndexOf(DialogOptions);
 }
 
-FDialogOption* UDialogAsset::GetDialogOption(int DialogOptionIndex)
+FTPDialogOption* UTPDialogAsset::GetDialogOption(int DialogOptionIndex)
 {
 	if (DialogOptions.IsValidIndex(DialogOptionIndex))
 	{

@@ -3,29 +3,29 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "DialogEditor/Public/DialogAsset.h"
-#include "DialogEditor/Public/DialogNode.h"
+#include "DialogSystem/TPDialogAsset.h"
+#include "DialogSystem/TPDialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogAssetTest, "Project.UnitTests.DialogSystem.UDialogAsset", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPDialogAssetTest, "Project.UnitTests.DialogSystem.UTPDialogAsset", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FDialogAssetTest::RunTest(const FString& Parameters)
+bool FTPDialogAssetTest::RunTest(const FString& Parameters)
 {
 	
-	auto CreateDialogAsset = [&]() -> UDialogAsset*
+	auto CreateDialogAsset = [&]() -> UTPDialogAsset*
 	{
-		UDialogAsset* DialogAsset = NewObject<UDialogAsset>();
+		UTPDialogAsset* DialogAsset = NewObject<UTPDialogAsset>();
 		TestNotNull("After created DialogAsset can't be null", DialogAsset);
 		return DialogAsset;
 	};
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		FText ExpectedTopic = FText::FromString("Placeholder");
 
@@ -36,7 +36,7 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int32 ActualDialogNodeIdex = DialogAsset->CreateDialogNode();
 		TestEqual("First added dialog node must have 0 index", ActualDialogNodeIdex, 0);
@@ -46,22 +46,22 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int32 DialogNodeIdex = DialogAsset->CreateDialogNode();
-		FDialogNode* DialogNode = DialogAsset->GetDialogNode(DialogNodeIdex);
+		FTPDialogNode* DialogNode = DialogAsset->GetDialogNode(DialogNodeIdex);
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int32 InvalidDialogNodeIndex = 10;
-		FDialogNode* DialogNode = DialogAsset->GetDialogNode(InvalidDialogNodeIndex);
+		FTPDialogNode* DialogNode = DialogAsset->GetDialogNode(InvalidDialogNodeIndex);
 		TestNull("GetDialogNode invoked with invalid index must return nullptr", DialogNode);
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int32 ActualDialogOptionIndex = DialogAsset->CreateDialogOption();
 		int32 ExpectedDialogOptionIndex = 0;
@@ -73,17 +73,17 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int DialogOptionIndex = DialogAsset->CreateDialogOption();
-		FDialogOption* DialogOption = DialogAsset->GetDialogOption(DialogOptionIndex);
+		FTPDialogOption* DialogOption = DialogAsset->GetDialogOption(DialogOptionIndex);
 	}
 
 	{
-		UDialogAsset* DialogAsset = CreateDialogAsset();
+		UTPDialogAsset* DialogAsset = CreateDialogAsset();
 
 		int32 InvalidDialogOptionIndex = 10;
-		FDialogOption* DialogOption = DialogAsset->GetDialogOption(InvalidDialogOptionIndex);
+		FTPDialogOption* DialogOption = DialogAsset->GetDialogOption(InvalidDialogOptionIndex);
 		TestNull("GetDialogOption invoked with invalid index must return nullptr", DialogOption);
 	}
 
@@ -93,7 +93,7 @@ bool FDialogAssetTest::RunTest(const FString& Parameters)
 		Array.Init(0, Size);
 
 		int32 ExpectedLastIndex = Size - 1;
-		int32 ActualLastIndex = UDialogAsset::GetLastIndexOf(Array);
+		int32 ActualLastIndex = UTPDialogAsset::GetLastIndexOf(Array);
 
 		TestEqual("LastIndex must be equal: NumberOfElemtsInArray - 1", ActualLastIndex, ExpectedLastIndex);
 	}

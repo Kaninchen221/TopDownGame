@@ -3,17 +3,17 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "DialogEditor/Public/DialogOption.h"
-#include "DialogEditor/Public/DialogNode.h"
+#include "DialogSystem/TPDialogOption.h"
+#include "DialogSystem/TPDialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogOptionTest, "Project.UnitTests.DialogSystem.UDialogOption", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPDialogOptionTest, "Project.UnitTests.DialogSystem.UTPDialogOption", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
-bool FDialogOptionTest::RunTest(const FString& Parameters)
+bool FTPDialogOptionTest::RunTest(const FString& Parameters)
 {
     {
-        FDialogOption DialogOption;
+        FTPDialogOption DialogOption;
 
         FText ExpectedText = FText::FromString("Placeholder");
         DialogOption.SetText(ExpectedText);
@@ -22,7 +22,7 @@ bool FDialogOptionTest::RunTest(const FString& Parameters)
     }
 
     {
-        FDialogOption DialogOption;
+        FTPDialogOption DialogOption;
 
         int32 ExpectedResultNodeIndex = 3;
         DialogOption.SetResultNode(ExpectedResultNodeIndex);
