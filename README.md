@@ -6,7 +6,9 @@ Target is 15m - 30m of gameplay
 I am currently creating gameplay mechanics  
 
 ## Install
-Run init.bat script file  
++ Run init.bat script file  
++ Generate project files  
++ Compile project  
 
 ## Technology
 + Unreal Engine 4.26
