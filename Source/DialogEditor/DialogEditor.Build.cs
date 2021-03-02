@@ -7,11 +7,14 @@ public class DialogEditor : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new string[] { 
 			"Core", 
-			"CoreUObject",
-			"UnrealEd"
+			"CoreUObject"
 		});
 
-        PrivateDependencyModuleNames.AddRange(new string[] {  });
+        PrivateDependencyModuleNames.AddRange(new string[] { 
+			"UnrealEd",
+			"GenericGraphRuntime",
+			"TopDownGame"
+		});
 
         //Only if you created the Public and Private folder paths
         PublicIncludePaths.AddRange(
