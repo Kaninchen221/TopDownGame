@@ -4,7 +4,7 @@
 #include "GenericGraphNode.h"
 #include "TPDialogGraphNode.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(NotBlueprintable, Abstract)
 class TOPDOWNGAME_API UTPDialogGraphNode : public UGenericGraphNode
 {
 	GENERATED_BODY()

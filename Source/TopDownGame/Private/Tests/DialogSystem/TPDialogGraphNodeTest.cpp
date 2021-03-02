@@ -12,15 +12,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogGraphNodeTest, "Project.UnitTests.Dialog
 
 bool FDialogGraphNodeTest::RunTest(const FString& Parameters)
 {
-    auto CreateGraphNode = [&]() -> UTPDialogGraphNode* {
-        UTPDialogGraphNode* DialogGraphNode = NewObject<UTPDialogGraphNode>();
-        TestNotNull("DialogGraphNode can't be null", DialogGraphNode);
-        return DialogGraphNode;
-    };
 
-    {
-        UTPDialogGraphNode* DialogGraphNode = CreateGraphNode();
-        FLinearColor BackgroundColor = DialogGraphNode->GetBackgroundColor();
+	{
     }
 
     return true;
