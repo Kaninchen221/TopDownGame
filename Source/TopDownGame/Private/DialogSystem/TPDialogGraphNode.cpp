@@ -8,7 +8,7 @@ UTPDialogGraphNode::UTPDialogGraphNode()
 
 		CompatibleGraphType = UTPDialogGraph::StaticClass();
 
-		ContextMenuName = FText::FromString("Dialog Context Menu");
+		ContextMenuName = FText::FromString("Dialog Node");
 
 	#endif
 
