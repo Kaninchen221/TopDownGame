@@ -5,7 +5,7 @@
 #include "Internationalization/Text.h"
 
 #include "DialogSystem/TPDialogGraph.h"
-#include "DialogSystem/TPDialogGraphNode.h"
+#include "DialogSystem/TPDialogGraphNodeBase.h"
 #include "DialogSystem/TPDialogGraphEdge.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -23,9 +23,9 @@ bool FDialogGraphTest::RunTest(const FString& Parameters)
     {
         UTPDialogGraph* DialogGraph = CreateDialogGraph();
 
-        TSubclassOf<UGenericGraphNode> ExpectedGraphNodeType = UTPDialogGraphNode::StaticClass();
+        TSubclassOf<UGenericGraphNode> ExpectedGraphNodeType = UTPDialogGraphNodeBase::StaticClass();
         TSubclassOf<UGenericGraphNode> ActualGraphNodeType =  DialogGraph->NodeType;
-        TestEqual("NodeType must be equal to UTPDialogGraphNode", ActualGraphNodeType, ExpectedGraphNodeType);
+        TestEqual("NodeType must be equal to UTPDialogGraphNodeBase", ActualGraphNodeType, ExpectedGraphNodeType);
 	}
 
 	{
@@ -39,8 +39,8 @@ bool FDialogGraphTest::RunTest(const FString& Parameters)
     {
         UTPDialogGraph* DialogGraph = CreateDialogGraph();
 
-        FString ActualName = DialogGraph->Name;
-        TestTrue("ActualName can't be empty", ActualName.IsEmpty());
+        FString Name = DialogGraph->Name;
+        TestFalse("Name can't be empty", Name.IsEmpty());
     }
 
     return true;
