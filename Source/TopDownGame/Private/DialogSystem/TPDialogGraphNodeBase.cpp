@@ -1,7 +1,7 @@
-#include "DialogSystem/TPDialogGraphNode.h"
+#include "DialogSystem/TPDialogGraphNodeBase.h"
 #include "DialogSystem/TPDialogGraph.h"
 
-UTPDialogGraphNode::UTPDialogGraphNode()
+UTPDialogGraphNodeBase::UTPDialogGraphNodeBase()
 {
 
 	#if WITH_EDITORONLY_DATA
@@ -16,7 +16,7 @@ UTPDialogGraphNode::UTPDialogGraphNode()
 
 #if WITH_EDITOR
 
-FLinearColor UTPDialogGraphNode::GetBackgroundColor() const
+FLinearColor UTPDialogGraphNodeBase::GetBackgroundColor() const
 {
 	return FLinearColor::Black;
 }

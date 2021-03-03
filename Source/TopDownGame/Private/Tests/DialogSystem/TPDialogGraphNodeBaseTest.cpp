@@ -4,11 +4,11 @@
 #include "Misc/AutomationTest.h"
 #include "Internationalization/Text.h"
 
-#include "DialogSystem/TPDialogGraphNode.h"
+#include "DialogSystem/TPDialogGraphNodeBase.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogGraphNodeTest, "Project.UnitTests.DialogSystem.UTPDialogGraphNode", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDialogGraphNodeTest, "Project.UnitTests.DialogSystem.UTPDialogGraphNodeBase", EAutomationTestFlags::EditorContext | EAutomationTestFlags::SmokeFilter)
 
 bool FDialogGraphNodeTest::RunTest(const FString& Parameters)
 {

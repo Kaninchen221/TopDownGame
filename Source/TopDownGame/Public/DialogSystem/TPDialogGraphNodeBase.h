@@ -2,14 +2,14 @@
 
 #include "CoreMinimal.h"
 #include "GenericGraphNode.h"
-#include "TPDialogGraphNode.generated.h"
+#include "TPDialogGraphNodeBase.generated.h"
 
 UCLASS(NotBlueprintable, Abstract)
-class TOPDOWNGAME_API UTPDialogGraphNode : public UGenericGraphNode
+class TOPDOWNGAME_API UTPDialogGraphNodeBase : public UGenericGraphNode
 {
 	GENERATED_BODY()
 public:
-	UTPDialogGraphNode();
+	UTPDialogGraphNodeBase();
 
 #if WITH_EDITOR
 
