@@ -11,6 +11,10 @@ class TOPDOWNGAME_API UTPDialogGraphNode : public UTPDialogGraphNodeBase
 public:
 	UTPDialogGraphNode();
 
+	UPROPERTY(EditDefaultsOnly, Category = "DialogGraphNode")
+	FText Text;
+
+
 #if WITH_EDITOR
 
 	virtual bool CanCreateConnection(UGenericGraphNode* Other, FText& ErrorMessage) override;
