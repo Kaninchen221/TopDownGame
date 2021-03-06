@@ -6,7 +6,8 @@ UTPDialogGraphOption::UTPDialogGraphOption()
 
 	#if WITH_EDITORONLY_DATA
 
-		ContextMenuName = FText::FromString("Dialog Option");
+	ContextMenuName = FText::FromString("Dialog Option");
+	NodeTitle = FText::FromString("Dialog Option");
 
 	#endif
 
