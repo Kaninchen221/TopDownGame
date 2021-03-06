@@ -11,6 +11,9 @@ class TOPDOWNGAME_API UTPDialogGraphNodeBase : public UGenericGraphNode
 public:
 	UTPDialogGraphNodeBase();
 
+	UPROPERTY(EditDefaultsOnly, Category = "DialogGraphNodeBase")
+	FText Text;
+
 #if WITH_EDITOR
 
 	virtual FLinearColor GetBackgroundColor() const override;
