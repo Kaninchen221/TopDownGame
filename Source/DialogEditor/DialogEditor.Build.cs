@@ -13,6 +13,8 @@ public class DialogEditor : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] { 
 			"UnrealEd",
 			"GenericGraphRuntime",
+			"GenericGraphEditor",
+			"AssetTools",
 			"TopDownGame"
 		});
 
