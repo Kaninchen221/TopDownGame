@@ -15,10 +15,10 @@ UObject* UTPDialogFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FN
 
 FText UTPDialogFactory::GetDisplayName() const
 {
-	return FText::FromString("Dialog Graph Factory");
+	return FText::FromString("Dialog Graph");
 }
 
 FString UTPDialogFactory::GetDefaultNewAssetName() const
 {
-	return "DialogueSession";
+	return "Dialogue Graph";
 }
