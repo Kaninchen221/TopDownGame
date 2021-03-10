@@ -3,10 +3,10 @@
 #include "CoreMinimal.h"
 #include "AssetTypeActions_Base.h"
 
-class FAssetTypeActions_DialogGraph : public FAssetTypeActions_Base
+class FTPAssetTypeActions_DialogGraph : public FAssetTypeActions_Base
 {
 public:
-	FAssetTypeActions_DialogGraph();
+	FTPAssetTypeActions_DialogGraph();
 
 	virtual FText GetName() const override;
 	virtual FColor GetTypeColor() const override;

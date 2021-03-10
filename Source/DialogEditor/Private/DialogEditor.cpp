@@ -1,7 +1,7 @@
 #include "DialogEditor.h"
 #include "Modules/ModuleManager.h"
 #include "Modules/ModuleInterface.h"
-#include "AssetTypeActions_DialogGraph.h"
+#include "TPAssetTypeActions_DialogGraph.h"
 
 IMPLEMENT_GAME_MODULE(DialogEditorModule, DialogEditor);
 
@@ -15,7 +15,7 @@ void DialogEditorModule::StartupModule()
 
 	IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
 
-	RegisterAssetTypeAction(AssetTools, MakeShareable(new FAssetTypeActions_DialogGraph()));
+	RegisterAssetTypeAction(AssetTools, MakeShareable(new FTPAssetTypeActions_DialogGraph()));
 	
 }
 
