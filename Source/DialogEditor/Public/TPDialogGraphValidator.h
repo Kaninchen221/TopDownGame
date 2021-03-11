@@ -1,12 +1,16 @@
 #pragma once
 
+class UGenericGraphNode;
+
 class UTPDialogGraph;
 
-class TPDialogGraphValidator
+class FTPDialogGraphValidator
 {
 
 public:
 
-	void Validate(UTPDialogGraph* DialogGraph);
+	void ValidateGraph(UTPDialogGraph* DialogGraph);
+
+	FText ValidateRootNode(UGenericGraphNode* GraphNode);
 
 };
