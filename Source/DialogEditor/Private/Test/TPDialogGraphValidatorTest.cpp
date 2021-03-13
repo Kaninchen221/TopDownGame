@@ -7,6 +7,7 @@
 #include "DialogSystem/TPDialogGraph.h"
 #include "DialogSystem/TPDialogGraphNode.h"
 #include "DialogSystem/TPDialogGraphOption.h"
+#include "TPDialogGraphNodeMock.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -37,9 +38,57 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
         return DialogOption;
     };
 
+	auto CreateDialogGraphNodeMock = [&]() -> UTPDialogGraphNodeMock*
+	{
+		UTPDialogGraphNodeMock* DialogNodeMock = NewObject<UTPDialogGraphNodeMock>();
+		TestNotNull("DialogGraphNodeMock can't be null", DialogNodeMock);
+		return DialogNodeMock;
+	};
+
+	auto FillDialogGraphWithValidData = [&](UTPDialogGraph* DialogGraph)
+	{
+		UTPDialogGraphNodeMock* RootNode = CreateDialogGraphNodeMock();
+        RootNode->SetNodeTitle(FText::FromString("EndOption"));
+		DialogGraph->RootNodes.Add(RootNode);
+		DialogGraph->RootNodes.Add(RootNode);
+		DialogGraph->AllNodes.Add(RootNode);
+
+		UTPDialogGraphOption* DialogOptionNode = CreateDialogGraphOption();
+		RootNode->ChildrenNodes.Add(DialogOptionNode);
+		DialogOptionNode->ParentNodes.Add(RootNode);
+		DialogGraph->AllNodes.Add(DialogOptionNode);
+
+		UTPDialogGraphNode* DialogNode = CreateDialogGraphNode();
+		DialogOptionNode->ChildrenNodes.Add(DialogNode);
+		DialogNode->ParentNodes.Add(DialogOptionNode);
+		DialogGraph->AllNodes.Add(DialogNode);
+
+		UTPDialogGraphOption* DialogEndOptionNode = CreateDialogGraphOption();
+        DialogEndOptionNode->SetNodeTitle(FText::FromString("EndOption"));
+		DialogNode->ChildrenNodes.Add(DialogEndOptionNode);
+		DialogEndOptionNode->ParentNodes.Add(DialogNode);
+		DialogGraph->AllNodes.Add(DialogEndOptionNode);
+	};
+
+    {
+        UTPDialogGraph* DialogGraph = nullptr;
+        FText Result = DialogGraphValidator.ValidateGraph(DialogGraph);
+
+        TestFalse("ValidateGraph: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
+    }
+
     {
         UTPDialogGraph* DialogGraph = CreateEmptyDialogGraph();
-        DialogGraphValidator.ValidateGraph(DialogGraph);
+        
+        FillDialogGraphWithValidData(DialogGraph);
+
+        FText Result = DialogGraphValidator.ValidateGraph(DialogGraph);
+        TestTrue("ValidateDialogGraph: UTPDialogGraph should return EMPTY Result text: " + Result.ToString(), Result.IsEmpty());
+
+		UTPDialogGraphNodeMock* RootNode = Cast<UTPDialogGraphNodeMock>(*DialogGraph->RootNodes.begin());
+		int32 ActualCanCreateConnectionCallCount = RootNode->GetCanCreateConnectionCallCount();
+		int32 ExpectedCanCreateConnectionCallCount = 1;
+		TestEqual("Actual and Expected CanCreateConnectionCallCount must be equal", ActualCanCreateConnectionCallCount, ExpectedCanCreateConnectionCallCount);
     }
 
     {
@@ -72,24 +121,18 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 	}
 
  	{
- 	    UTPDialogGraphNode* DialogNode = CreateDialogGraphNode();
+ 	    UTPDialogGraphNodeMock* DialogNodeMock = CreateDialogGraphNodeMock();
  	    UTPDialogGraphOption* DialogOption = CreateDialogGraphOption();
-        DialogNode->ChildrenNodes.Add(DialogOption);
-        DialogOption->ParentNodes.Add(DialogNode);
+        DialogNodeMock->ChildrenNodes.Add(DialogOption);
+        DialogOption->ParentNodes.Add(DialogNodeMock);
 
- 	    FText Result = DialogGraphValidator.ValidateNode(DialogNode);
- 	    TestTrue("ValidateNode: DialogOption(Child) - DialogNode(Parent) should return EMPTY Result text", Result.IsEmpty());
+ 	    FText Result = DialogGraphValidator.ValidateNode(DialogNodeMock);
+ 	    TestTrue("ValidateNode: DialogOption(Child) - DialogNodeMock(Parent) should return EMPTY Result text", Result.IsEmpty());
+
+        int32 ActualCanCreateConnectionCallCount = DialogNodeMock->GetCanCreateConnectionCallCount();
+        int32 ExpectedCanCreateConnectionCallCount = 1;
+        TestEqual("Actual and Expected CanCreateConnectionCallCount must be equal", ActualCanCreateConnectionCallCount, ExpectedCanCreateConnectionCallCount);
  	}
-	
-	{
-	    UTPDialogGraphNode* ParentDialogNode = CreateDialogGraphNode();
-	    UTPDialogGraphNode* ChildDialogNode = CreateDialogGraphNode();
-        ParentDialogNode->ChildrenNodes.Add(ChildDialogNode);
-        ChildDialogNode->ParentNodes.Add(ParentDialogNode);
-	
-	    FText Result = DialogGraphValidator.ValidateNode(ParentDialogNode);
-        TestFalse("ValidateNode: DialogNode(Child) - DialogNode(Parent) should return NOT EMPTY Result text", Result.IsEmpty());
-	}
 
     return true;
 }
