@@ -12,6 +12,15 @@ FText FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
 		return FText::FromString(ResultPrefix + "DialogGraph is nullptr");
 	}
 
+	for (UGenericGraphNode* RootNode : DialogGraph->RootNodes)
+	{
+		FText Result = ValidateRootNode(RootNode);
+		if (!Result.IsEmpty())
+		{
+			return FText::FromString(ResultPrefix + Result.ToString());
+		}
+	}
+
 	for (UGenericGraphNode* GraphNode : DialogGraph->AllNodes)
 	{
 		TArray<UGenericGraphNode*> NodeChildrenNodes = GraphNode->ChildrenNodes;
@@ -31,13 +40,13 @@ FText FTPDialogGraphValidator::ValidateRootNode(UGenericGraphNode* GraphNode)
 
 	if (!GraphNode)
 	{
-		return FText::FromString(ResultPrefix + "GraphNode is nullptr");
+		return FText::FromString(ResultPrefix + "Node is nullptr");
 	}
 
 	bool IsTypeValid = GraphNode->IsA<UTPDialogGraphNode>();
 	if (!IsTypeValid)
 	{
-		return FText::FromString(ResultPrefix + "GraphNode is not a UTPDialogGraphNode type");
+		return FText::FromString(ResultPrefix + "Node is not a UTPDialogGraphNode type");
 	}
 
 	return FText::GetEmpty();

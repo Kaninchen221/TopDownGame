@@ -90,6 +90,14 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
     }
 
     {
+        UTPDialogGraph* DialogGraph = CreateEmptyDialogGraph();
+        UTPDialogGraphOption* InvalidRootNode = CreateDialogGraphOption();
+
+		FText Result = FTPDialogGraphValidator::ValidateRootNode(InvalidRootNode);
+		TestFalse("ValidateRootNode: InvalidRootNode(UTPDialogGraphOption) should return NOT EMPTY Result text", Result.IsEmpty());
+    }
+
+    {
         UTPDialogGraphNode* DialogNode = CreateDialogGraphNode();
         FText Result = FTPDialogGraphValidator::ValidateRootNode(DialogNode);
 
