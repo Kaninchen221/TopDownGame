@@ -15,8 +15,6 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTPDialogGraphValidatorTest, "Project.UnitTests
 
 bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 {
-	FTPDialogGraphValidator DialogGraphValidator;
-
     auto CreateEmptyDialogGraph = [&]() -> UTPDialogGraph*
     {
         UTPDialogGraph* DialogGraph = NewObject<UTPDialogGraph>();
@@ -72,7 +70,7 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 
     {
         UTPDialogGraph* DialogGraph = nullptr;
-        FText Result = DialogGraphValidator.ValidateGraph(DialogGraph);
+        FText Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
 
         TestFalse("ValidateGraph: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
     }
@@ -82,7 +80,7 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
         
         FillDialogGraphWithValidData(DialogGraph);
 
-        FText Result = DialogGraphValidator.ValidateGraph(DialogGraph);
+        FText Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
         TestTrue("ValidateDialogGraph: UTPDialogGraph should return EMPTY Result text: " + Result.ToString(), Result.IsEmpty());
 
 		UTPDialogGraphNodeMock* RootNode = Cast<UTPDialogGraphNodeMock>(*DialogGraph->RootNodes.begin());
@@ -93,21 +91,21 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 
     {
         UTPDialogGraphNode* DialogNode = CreateDialogGraphNode();
-        FText Result = DialogGraphValidator.ValidateRootNode(DialogNode);
+        FText Result = FTPDialogGraphValidator::ValidateRootNode(DialogNode);
 
         TestTrue("ValidateRootNode: UTPDialogGraphNode should return EMPTY Result text", Result.IsEmpty());
     }
 
 	{
         UTPDialogGraphNode* DialogNode = nullptr;
-		FText Result = DialogGraphValidator.ValidateRootNode(DialogNode);
+		FText Result = FTPDialogGraphValidator::ValidateRootNode(DialogNode);
 
 		TestFalse("ValidateRootNode: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
 	}
 
     {
         UTPDialogGraphOption* DialogOption = CreateDialogGraphOption();
-        FText Result = DialogGraphValidator.ValidateRootNode(DialogOption);
+        FText Result = FTPDialogGraphValidator::ValidateRootNode(DialogOption);
 
         TestFalse("ValidateRootNode: UTPDialogGraphOption should return NOT EMPTY Result text", Result.IsEmpty());
     }
@@ -115,7 +113,7 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 	{
         UGenericGraphNode* Node = nullptr;
 
-		FText Result = DialogGraphValidator.ValidateNode(Node);
+		FText Result = FTPDialogGraphValidator::ValidateNode(Node);
 
         TestFalse("ValidateNode: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
 	}
@@ -126,7 +124,7 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
         DialogNodeMock->ChildrenNodes.Add(DialogOption);
         DialogOption->ParentNodes.Add(DialogNodeMock);
 
- 	    FText Result = DialogGraphValidator.ValidateNode(DialogNodeMock);
+ 	    FText Result = FTPDialogGraphValidator::ValidateNode(DialogNodeMock);
  	    TestTrue("ValidateNode: DialogOption(Child) - DialogNodeMock(Parent) should return EMPTY Result text", Result.IsEmpty());
 
         int32 ActualCanCreateConnectionCallCount = DialogNodeMock->GetCanCreateConnectionCallCount();

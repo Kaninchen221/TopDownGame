@@ -9,12 +9,12 @@ class FTPDialogGraphValidator
 
 public:
 
-	FText ValidateGraph(UTPDialogGraph* DialogGraph);
+	static FText ValidateGraph(UTPDialogGraph* DialogGraph);
 
-	FText ValidateRootNode(UGenericGraphNode* GraphNode);
+	static FText ValidateRootNode(UGenericGraphNode* GraphNode);
 
-	FText ValidateNode(UGenericGraphNode* GraphNode);
+	static FText ValidateNode(UGenericGraphNode* GraphNode);
 
-	FText CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes);
+	static FText CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes);
 
 };
