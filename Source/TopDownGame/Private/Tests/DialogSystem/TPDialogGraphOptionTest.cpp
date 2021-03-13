@@ -55,8 +55,8 @@ bool FDialogGraphOptionTest::RunTest(const FString& Parameters)
         FText ErrorMessage;
         bool bCanCreateConnection = DialogOption->CanCreateConnection(DialogNode, ErrorMessage);
 
-        TestFalse("DialogOption can have only one ChildrenNode", bCanCreateConnection);
-        TestFalse("ErrorMessage shouldn't be empty", ErrorMessage.IsEmpty());
+        TestTrue("DialogOption can create connection with already connected node", bCanCreateConnection);
+        TestTrue("ErrorMessage should be empty", ErrorMessage.IsEmpty());
     }
 
     return true;

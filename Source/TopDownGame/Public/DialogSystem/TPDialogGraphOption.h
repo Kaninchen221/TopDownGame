@@ -15,7 +15,7 @@ public:
 
 	virtual bool CanCreateConnection(UGenericGraphNode* Other, FText& ErrorMessage) override;
 
-	bool IsHaveEnoughNodes() const;
+	bool IsHaveEnoughNodes(UGenericGraphNode* Other) const;
 
 	bool IsAcceptableNodeType(UGenericGraphNode* Node);
 

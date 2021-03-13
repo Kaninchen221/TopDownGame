@@ -17,12 +17,12 @@ UTPDialogGraphOption::UTPDialogGraphOption()
 
 bool UTPDialogGraphOption::CanCreateConnection(UGenericGraphNode* Other, FText& ErrorMessage)
 {
-	bool bIsHaveEnoughNodes = IsHaveEnoughNodes();
+	bool bIsHaveEnoughNodes = IsHaveEnoughNodes(Other);
 	bool bCanCreateConnection = !bIsHaveEnoughNodes;
 
 	if (!bCanCreateConnection)
 	{
-		ErrorMessage = FText::FromString("DialogOption can't have more than 1 nodes");
+		ErrorMessage = FText::FromString(NodeTitle.ToString() + " DialogOption can't have more than 1 nodes");
 		return bCanCreateConnection;
 	}
 
@@ -31,13 +31,13 @@ bool UTPDialogGraphOption::CanCreateConnection(UGenericGraphNode* Other, FText& 
 
 	if (!bCanCreateConnection)
 	{
-		ErrorMessage = FText::FromString("Can't create connection with other DialogOption");
+		ErrorMessage = FText::FromString(NodeTitle.ToString() + " Can't create connection with other DialogOption");
 	}
 
 	return bCanCreateConnection;
 }
 
-bool UTPDialogGraphOption::IsHaveEnoughNodes() const
+bool UTPDialogGraphOption::IsHaveEnoughNodes(UGenericGraphNode* Other) const
 {
 	size_t ChildrenNodesCount = ChildrenNodes.Num();
 	if (ChildrenNodesCount < 1)
@@ -46,7 +46,14 @@ bool UTPDialogGraphOption::IsHaveEnoughNodes() const
 	}
 	else
 	{
-		return true;
+		if (ChildrenNodes[0] == Other)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }
 
