@@ -53,7 +53,7 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
         UTPDialogGraphNode* DialogNode = nullptr;
 		FText Result = DialogGraphValidator.ValidateRootNode(DialogNode);
 
-		TestFalse("ValidateRootNode: UTPDialogGraphNode should return NOT EMPTY Result text", Result.IsEmpty());
+		TestFalse("ValidateRootNode: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
 	}
 
     {
@@ -62,6 +62,34 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
 
         TestFalse("ValidateRootNode: UTPDialogGraphOption should return NOT EMPTY Result text", Result.IsEmpty());
     }
+
+	{
+        UGenericGraphNode* Node = nullptr;
+
+		FText Result = DialogGraphValidator.ValidateNode(Node);
+
+        TestFalse("ValidateNode: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
+	}
+
+ 	{
+ 	    UTPDialogGraphNode* DialogNode = CreateDialogGraphNode();
+ 	    UTPDialogGraphOption* DialogOption = CreateDialogGraphOption();
+        DialogNode->ChildrenNodes.Add(DialogOption);
+        DialogOption->ParentNodes.Add(DialogNode);
+
+ 	    FText Result = DialogGraphValidator.ValidateNode(DialogNode);
+ 	    TestTrue("ValidateNode: DialogOption(Child) - DialogNode(Parent) should return EMPTY Result text", Result.IsEmpty());
+ 	}
+	
+	{
+	    UTPDialogGraphNode* ParentDialogNode = CreateDialogGraphNode();
+	    UTPDialogGraphNode* ChildDialogNode = CreateDialogGraphNode();
+        ParentDialogNode->ChildrenNodes.Add(ChildDialogNode);
+        ChildDialogNode->ParentNodes.Add(ParentDialogNode);
+	
+	    FText Result = DialogGraphValidator.ValidateNode(ParentDialogNode);
+        TestFalse("ValidateNode: DialogNode(Child) - DialogNode(Parent) should return NOT EMPTY Result text", Result.IsEmpty());
+	}
 
     return true;
 }

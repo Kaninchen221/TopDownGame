@@ -13,4 +13,6 @@ public:
 
 	FText ValidateRootNode(UGenericGraphNode* GraphNode);
 
+	FText ValidateNode(UGenericGraphNode* GraphNode);
+
 };
