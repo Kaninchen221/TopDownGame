@@ -13,11 +13,6 @@
 				"Engine",
 				"UnrealEd"
 			]
-		},
-		{
-			"Name": "DialogEditor",
-			"Type": "Editor",
-			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [

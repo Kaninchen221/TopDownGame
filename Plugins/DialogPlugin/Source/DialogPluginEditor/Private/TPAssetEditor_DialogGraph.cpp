@@ -1,5 +1,4 @@
 #include "TPAssetEditor_DialogGraph.h"
-#include "DialogEditor.h"
 #include "TPDialogGraphValidator.h"
 #include "DialogSystem/TPDialogGraph.h"
 

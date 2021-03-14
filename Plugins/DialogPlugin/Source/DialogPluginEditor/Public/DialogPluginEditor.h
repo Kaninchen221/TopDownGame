@@ -10,9 +10,9 @@
 #include "IAssetTools.h"
 #include "Templates/SharedPointer.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(DialogEditor, All, All)
+DECLARE_LOG_CATEGORY_EXTERN(DialogPluginEditor, All, All)
 
-class DialogEditorModule : public IModuleInterface
+class DialogPluginEditorModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;

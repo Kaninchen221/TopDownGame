@@ -9,6 +9,6 @@ public class TopDownGameTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange(new string[] { "TopDownGame", "DialogEditor", "CISQLite3" });
+		ExtraModuleNames.AddRange(new string[] { "TopDownGame", "CISQLite3" });
 	}
 }

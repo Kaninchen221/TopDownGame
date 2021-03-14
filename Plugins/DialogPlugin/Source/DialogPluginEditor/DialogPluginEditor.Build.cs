@@ -1,8 +1,8 @@
 using UnrealBuildTool;
 
-public class DialogEditor : ModuleRules
+public class DialogPluginEditor : ModuleRules
 {
-    public DialogEditor(ReadOnlyTargetRules Target) : base(Target)
+    public DialogPluginEditor(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new string[] { 
@@ -22,13 +22,13 @@ public class DialogEditor : ModuleRules
         PublicIncludePaths.AddRange(
             new string[]
             {
-                "DialogEditor/Public"
+                "DialogPluginEditor/Public"
             });
 
         PrivateIncludePaths.AddRange(
             new string[]
             {
-				"DialogEditor/Private"
+				"DialogPluginEditor/Private"
             });
     }
 }
