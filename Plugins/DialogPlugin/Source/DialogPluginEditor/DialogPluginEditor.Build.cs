@@ -22,13 +22,13 @@ public class DialogPluginEditor : ModuleRules
         PublicIncludePaths.AddRange(
             new string[]
             {
-                "DialogPluginEditor/Public"
-            });
+            }
+        );
 
         PrivateIncludePaths.AddRange(
             new string[]
             {
-				"DialogPluginEditor/Private"
-            });
+            }
+        );
     }
 }
