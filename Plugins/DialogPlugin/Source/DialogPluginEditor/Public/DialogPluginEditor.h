@@ -12,7 +12,7 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(DialogPluginEditor, All, All)
 
-class DialogPluginEditorModule : public IModuleInterface
+class FDialogPluginEditorModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;

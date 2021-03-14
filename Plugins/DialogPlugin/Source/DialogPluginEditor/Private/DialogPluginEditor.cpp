@@ -9,7 +9,7 @@ IMPLEMENT_GAME_MODULE(DialogPluginEditorModule, DialogPluginEditor);
 
 DEFINE_LOG_CATEGORY(DialogPluginEditor);
 
-void DialogPluginEditorModule::StartupModule()
+void FDialogPluginEditorModule::StartupModule()
 {
 	UE_LOG(DialogPluginEditor, Log, TEXT("DialogEditor: Log Started"));
 
@@ -19,13 +19,13 @@ void DialogPluginEditorModule::StartupModule()
 	
 }
 
-void DialogPluginEditorModule::RegisterAssetTypeAction(IAssetTools& AssetTools, TSharedRef<IAssetTypeActions> Action)
+void FDialogPluginEditorModule::RegisterAssetTypeAction(IAssetTools& AssetTools, TSharedRef<IAssetTypeActions> Action)
 {
 	AssetTools.RegisterAssetTypeActions(Action);
 	CreatedAssetTypeActions.Add(Action);
 }
 
-void DialogPluginEditorModule::ShutdownModule()
+void FDialogPluginEditorModule::ShutdownModule()
 {
     UE_LOG(DialogPluginEditor, Log, TEXT("DialogEditor: Log Ended"));
 }
