@@ -6,7 +6,7 @@
 #include "TPDialogGraph.generated.h"
 
 UCLASS(Blueprintable)
-class TOPDOWNGAME_API UTPDialogGraph : public UGenericGraph
+class DIALOGPLUGINRUNTIME_API UTPDialogGraph : public UGenericGraph
 {
 	GENERATED_BODY()
 

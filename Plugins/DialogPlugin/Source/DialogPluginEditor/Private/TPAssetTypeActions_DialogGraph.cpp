@@ -1,6 +1,6 @@
 #include "TPAssetTypeActions_DialogGraph.h"
 #include "TPAssetEditor_DialogGraph.h"
-#include "DialogSystem/TPDialogGraph.h"
+#include "TPDialogGraph.h"
 
 FTPAssetTypeActions_DialogGraph::FTPAssetTypeActions_DialogGraph()
 {

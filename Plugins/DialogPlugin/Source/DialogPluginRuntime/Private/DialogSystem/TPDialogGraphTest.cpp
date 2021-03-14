@@ -4,9 +4,9 @@
 #include "Misc/AutomationTest.h"
 #include "Internationalization/Text.h"
 
-#include "DialogSystem/TPDialogGraph.h"
-#include "DialogSystem/TPDialogGraphNodeBase.h"
-#include "DialogSystem/TPDialogGraphEdge.h"
+#include "TPDialogGraph.h"
+#include "TPDialogGraphNodeBase.h"
+#include "TPDialogGraphEdge.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

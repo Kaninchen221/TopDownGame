@@ -3,7 +3,7 @@
 #include "Modules/ModuleInterface.h"
 #include "TPAssetTypeActions_DialogGraph.h"
 
-IMPLEMENT_GAME_MODULE(DialogPluginEditorModule, DialogPluginEditor);
+IMPLEMENT_GAME_MODULE(FDialogPluginEditorModule, DialogPluginEditor);
 
 #define LOCTEXT_NAMESPACE "DialogEditor"
 

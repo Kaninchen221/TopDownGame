@@ -6,7 +6,7 @@
 
 
 UCLASS(Blueprintable)
-class TOPDOWNGAME_API UTPDialogGraphEdge : public UGenericGraphEdge
+class DIALOGPLUGINRUNTIME_API UTPDialogGraphEdge : public UGenericGraphEdge
 {
 	GENERATED_BODY()
 

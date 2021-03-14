@@ -7,7 +7,7 @@
 
 
 USTRUCT(Category = "DialogEditor|Node")
-struct TOPDOWNGAME_API FTPDialogNode
+struct DIALOGPLUGINRUNTIME_API FTPDialogNode
 {
 	GENERATED_BODY()
 

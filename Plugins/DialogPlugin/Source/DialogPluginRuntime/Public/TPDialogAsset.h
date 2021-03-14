@@ -11,7 +11,7 @@
 #include "TPDialogAsset.generated.h"
 
 UCLASS(Category = "DialogEditor")
-class TOPDOWNGAME_API UTPDialogAsset : public UObject
+class DIALOGPLUGINRUNTIME_API UTPDialogAsset : public UObject
 {
 	GENERATED_BODY()
 

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "DialogSystem/TPDialogGraphNodeBase.h"
+#include "TPDialogGraphNodeBase.h"
 #include "TPDialogGraphOption.generated.h"
 
 UCLASS(Blueprintable)
-class TOPDOWNGAME_API UTPDialogGraphOption : public UTPDialogGraphNodeBase
+class DIALOGPLUGINRUNTIME_API UTPDialogGraphOption : public UTPDialogGraphNodeBase
 {
 	GENERATED_BODY()
 public:

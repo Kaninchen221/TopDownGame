@@ -4,9 +4,9 @@
 #include "Misc/AutomationTest.h"
 
 #include "TPDialogGraphValidator.h"
-#include "DialogSystem/TPDialogGraph.h"
-#include "DialogSystem/TPDialogGraphNode.h"
-#include "DialogSystem/TPDialogGraphOption.h"
+#include "TPDialogGraph.h"
+#include "TPDialogGraphNode.h"
+#include "TPDialogGraphOption.h"
 #include "TPDialogGraphNodeMock.h"
 
 #if WITH_DEV_AUTOMATION_TESTS

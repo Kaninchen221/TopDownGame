@@ -15,7 +15,8 @@ public class DialogPluginEditor : ModuleRules
 			"GenericGraphRuntime",
 			"GenericGraphEditor",
 			"AssetTools",
-			"TopDownGame"
+			"TopDownGame",
+			"DialogPluginRuntime"
 		});
 
         //Only if you created the Public and Private folder paths

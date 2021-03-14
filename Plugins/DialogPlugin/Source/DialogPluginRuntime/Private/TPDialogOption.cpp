@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DialogSystem/TPDialogOption.h"
+#include "TPDialogOption.h"
 
 void FTPDialogOption::SetText(const FText& InText)
 {

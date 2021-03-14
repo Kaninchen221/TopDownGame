@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DialogSystem/TPDialogAsset.h"
-#include "DialogSystem/TPDialogOption.h"
-#include "DialogSystem/TPDialogNode.h"
+#include "TPDialogAsset.h"
+#include "TPDialogOption.h"
+#include "TPDialogNode.h"
 
 void UTPDialogAsset::SetTopic(const FText& Text)
 {

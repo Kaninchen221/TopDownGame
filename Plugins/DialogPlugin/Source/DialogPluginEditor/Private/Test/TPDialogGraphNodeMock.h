@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DialogSystem/TPDialogGraphNode.h"
+#include "TPDialogGraphNode.h"
 #include "TPDialogGraphNodeMock.generated.h"
 
 UCLASS()

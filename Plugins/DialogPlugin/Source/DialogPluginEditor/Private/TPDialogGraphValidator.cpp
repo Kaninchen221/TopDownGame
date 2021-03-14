@@ -1,7 +1,7 @@
 #include "TPDialogGraphValidator.h"
 
-#include "DialogSystem/TPDialogGraph.h"
-#include "DialogSystem/TPDialogGraphNode.h"
+#include "TPDialogGraph.h"
+#include "TPDialogGraphNode.h"
 
 FString FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
 {

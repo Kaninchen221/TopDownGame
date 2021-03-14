@@ -1,5 +1,5 @@
-#include "DialogSystem/TPDialogGraphNodeBase.h"
-#include "DialogSystem/TPDialogGraph.h"
+#include "TPDialogGraphNodeBase.h"
+#include "TPDialogGraph.h"
 
 UTPDialogGraphNodeBase::UTPDialogGraphNodeBase()
 {

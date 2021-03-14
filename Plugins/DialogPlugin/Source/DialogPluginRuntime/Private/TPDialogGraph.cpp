@@ -1,6 +1,6 @@
-#include "DialogSystem/TPDialogGraph.h"
-#include "DialogSystem/TPDialogGraphNodeBase.h"
-#include "DialogSystem/TPDialogGraphEdge.h"
+#include "TPDialogGraph.h"
+#include "TPDialogGraphNodeBase.h"
+#include "TPDialogGraphEdge.h"
 
 UTPDialogGraph::UTPDialogGraph()
 {

@@ -3,8 +3,8 @@
 #include "CoreTypes.h"
 #include "Misc/AutomationTest.h"
 
-#include "DialogSystem/TPDialogAsset.h"
-#include "DialogSystem/TPDialogNode.h"
+#include "TPDialogAsset.h"
+#include "TPDialogNode.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

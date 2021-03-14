@@ -1,5 +1,5 @@
-#include "DialogSystem/TPDialogGraphOption.h"
-#include "DialogSystem/TPDialogGraph.h"
+#include "TPDialogGraphOption.h"
+#include "TPDialogGraph.h"
 
 UTPDialogGraphOption::UTPDialogGraphOption()
 {

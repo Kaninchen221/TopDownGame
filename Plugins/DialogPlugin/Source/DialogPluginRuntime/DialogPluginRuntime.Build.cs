@@ -34,7 +34,8 @@ public class DialogPluginRuntime : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"Slate",
-				"SlateCore"
+				"SlateCore",
+				"GenericGraphRuntime"
 			}
 		);
 		
