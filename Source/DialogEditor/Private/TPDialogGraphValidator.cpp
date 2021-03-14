@@ -3,21 +3,19 @@
 #include "DialogSystem/TPDialogGraph.h"
 #include "DialogSystem/TPDialogGraphNode.h"
 
-FText FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
+FString FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
 {
-	const FString ResultPrefix = "FTPDialogGraphValidator::ValidateGraph: ";
-
 	if (!DialogGraph)
 	{
-		return FText::FromString(ResultPrefix + "DialogGraph is nullptr");
+		return FString(__FUNCTION__) + " DialogGraph is nullptr";
 	}
 
 	for (UGenericGraphNode* RootNode : DialogGraph->RootNodes)
 	{
-		FText Result = ValidateRootNode(RootNode);
+		FString Result = ValidateRootNode(RootNode);
 		if (!Result.IsEmpty())
 		{
-			return FText::FromString(ResultPrefix + Result.ToString());
+			return FString(__FUNCTION__) + " " + Result;
 		}
 	}
 
@@ -27,48 +25,44 @@ FText FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
 		FText Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
 		if (!Result.IsEmpty())
 		{
-			return FText::FromString(ResultPrefix + Result.ToString());
+			return FString(__FUNCTION__) + " " + Result.ToString();
 		}
 	}
 
-	return FText::GetEmpty();
+	return FString();
 }
 
-FText FTPDialogGraphValidator::ValidateRootNode(UGenericGraphNode* GraphNode)
+FString FTPDialogGraphValidator::ValidateRootNode(UGenericGraphNode* GraphNode)
 {
-	const FString ResultPrefix = "FTPDialogGraphValidator::ValidateRootNode: ";
-
 	if (!GraphNode)
 	{
-		return FText::FromString(ResultPrefix + "Node is nullptr");
+		return FString(__FUNCTION__) + " Node is nullptr";
 	}
 
 	bool IsTypeValid = GraphNode->IsA<UTPDialogGraphNode>();
 	if (!IsTypeValid)
 	{
-		return FText::FromString(ResultPrefix + "Node is not a UTPDialogGraphNode type");
+		return FString(__FUNCTION__) + " Node is not a UTPDialogGraphNode type";
 	}
 
-	return FText::GetEmpty();
+	return FString();
 }
 
-FText FTPDialogGraphValidator::ValidateNode(UGenericGraphNode* GraphNode)
+FString FTPDialogGraphValidator::ValidateNode(UGenericGraphNode* GraphNode)
 {
-	const FString ResultPrefix = "FTPDialogGraphValidator::ValidateNode: ";
-
 	if (!GraphNode)
 	{
-		return FText::FromString(ResultPrefix + "GrapNode is nullptr");
+		return FString(__FUNCTION__) + " GrapNode is nullptr";
 	}
 
 	TArray<UGenericGraphNode*> NodeChildrenNodes = GraphNode->ChildrenNodes;
 	FText Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
 	if (!Result.IsEmpty())
 	{
-		return FText::FromString(ResultPrefix + Result.ToString());
+		return FString(__FUNCTION__) + " " + Result.ToString();
 	}
 
-	return FText::GetEmpty();
+	return FString();
 }
 
 FText FTPDialogGraphValidator::CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes)

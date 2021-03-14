@@ -12,18 +12,18 @@ void FTPAssetEditor_DialogGraph::SaveAsset_Execute()
 	{
 		RebuildGenericGraph();
 
-		FText Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
+		FString Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
 		if (Result.IsEmpty())
 		{
 			FAssetEditorToolkit::SaveAsset_Execute();
 		}
 		else
 		{
-			FMessageDialog::Open(EAppMsgType::Ok, Result);
+			FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(Result));
 		}
 	}
 	else
 	{
-		FMessageDialog::Open(EAppMsgType::Ok, FText::FromString("FTPAssetEditor_DialogGraph::SaveAsset_Execute EditingGraph is not a UTPDialogGraph type"));
+		FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(FString(__FUNCTION__) + " EditingGraph is not a UTPDialogGraph type"));
 	}
 }
