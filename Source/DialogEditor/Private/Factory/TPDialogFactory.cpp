@@ -1,4 +1,4 @@
-#include "TPDialogFactory.h"
+#include "Factory/TPDialogFactory.h"
 #include "DialogSystem/TPDialogGraph.h"
 
 UTPDialogFactory::UTPDialogFactory()
