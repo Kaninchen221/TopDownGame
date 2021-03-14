@@ -16,6 +16,11 @@
 	"Installed": false,
 	"Modules": [
 		{
+			"Name": "DialogPluginRuntime",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "DialogPluginEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
