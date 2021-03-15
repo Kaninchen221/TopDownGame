@@ -15,6 +15,6 @@ public:
 
 	static FString ValidateNode(UGenericGraphNode* GraphNode);
 
-	static FText CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes);
+	static FString CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes);
 
 };

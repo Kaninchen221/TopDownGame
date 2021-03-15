@@ -75,19 +75,19 @@ bool FTPDialogGraphValidatorTest::RunTest(const FString& Parameters)
         TestFalse("ValidateGraph: nullptr should return NOT EMPTY Result text", Result.IsEmpty());
     }
     
-    //{
-    //    UTPDialogGraph* DialogGraph = CreateEmptyDialogGraph();
-    //    
-    //    FillDialogGraphWithValidData(DialogGraph);
-    //
-    //    FText Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
-    //    TestTrue("ValidateDialogGraph: UTPDialogGraph should return EMPTY Result text: " + Result.ToString(), Result.IsEmpty());
-    //
-	//	UTPDialogGraphNodeMock* RootNode = Cast<UTPDialogGraphNodeMock>(*DialogGraph->RootNodes.begin());
-	//	int32 ActualCanCreateConnectionCallCount = RootNode->GetCanCreateConnectionCallCount();
-	//	int32 ExpectedCanCreateConnectionCallCount = 1;
-	//	TestEqual("Actual and Expected CanCreateConnectionCallCount must be equal", ActualCanCreateConnectionCallCount, ExpectedCanCreateConnectionCallCount);
-    //}
+    {
+        UTPDialogGraph* DialogGraph = CreateEmptyDialogGraph();
+        
+        FillDialogGraphWithValidData(DialogGraph);
+    
+        FString Result = FTPDialogGraphValidator::ValidateGraph(DialogGraph);
+        TestTrue("ValidateDialogGraph: UTPDialogGraph should return EMPTY Result text: " + Result, Result.IsEmpty());
+    
+		UTPDialogGraphNodeMock* RootNode = Cast<UTPDialogGraphNodeMock>(*DialogGraph->RootNodes.begin());
+		int32 ActualCanCreateConnectionCallCount = RootNode->GetCanCreateConnectionCallCount();
+		int32 ExpectedCanCreateConnectionCallCount = 1;
+		TestEqual("Actual and Expected CanCreateConnectionCallCount must be equal", ActualCanCreateConnectionCallCount, ExpectedCanCreateConnectionCallCount);
+    }
     
     {
         UTPDialogGraph* DialogGraph = CreateEmptyDialogGraph();

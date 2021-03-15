@@ -22,10 +22,10 @@ FString FTPDialogGraphValidator::ValidateGraph(UTPDialogGraph* DialogGraph)
 	for (UGenericGraphNode* GraphNode : DialogGraph->AllNodes)
 	{
 		TArray<UGenericGraphNode*> NodeChildrenNodes = GraphNode->ChildrenNodes;
-		FText Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
+		FString Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
 		if (!Result.IsEmpty())
 		{
-			return FString(__FUNCTION__) + " " + Result.ToString();
+			return FString(__FUNCTION__) + " " + Result;
 		}
 	}
 
@@ -56,16 +56,16 @@ FString FTPDialogGraphValidator::ValidateNode(UGenericGraphNode* GraphNode)
 	}
 
 	TArray<UGenericGraphNode*> NodeChildrenNodes = GraphNode->ChildrenNodes;
-	FText Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
+	FString Result = CanCreateConnection(GraphNode, NodeChildrenNodes);
 	if (!Result.IsEmpty())
 	{
-		return FString(__FUNCTION__) + " " + Result.ToString();
+		return FString(__FUNCTION__) + " " + Result;
 	}
 
 	return FString();
 }
 
-FText FTPDialogGraphValidator::CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes)
+FString FTPDialogGraphValidator::CanCreateConnection(UGenericGraphNode* ParentNode, const TArray<UGenericGraphNode*>& ChildrenNodes)
 {
 	for (UGenericGraphNode* ChildNode : ChildrenNodes)
 	{
@@ -74,9 +74,9 @@ FText FTPDialogGraphValidator::CanCreateConnection(UGenericGraphNode* ParentNode
 
 		if (!bCanCreateConnection)
 		{
-			return FText::FromString(ErrorMessage.ToString());
+			return ErrorMessage.ToString();
 		}
 	}
 
-	return FText::GetEmpty();
+	return FString();
 }
